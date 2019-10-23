@@ -23,9 +23,10 @@
         </div><!--/.NavbarInner-->
     </nav><!--/.NavbarOuter-->
 
-    <div class="RenderBody">
-        @RenderBody()
-    </div>
+    @RenderBody()
+
+    @Html.Partial("_FooterPartial")
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

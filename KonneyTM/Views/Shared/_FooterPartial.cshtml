@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNet.Identity
+
+<div class="Footer d-flex w-100 justify-content-between">
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right ml-auto align-self-end" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item "><a class="nav-link text-light" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>
+        }
+    }
+    else
+    {
+        <div class="FooterLeft d-inline-block text-center">
+            <h3>Disclaimer</h3>
+            <p>This is a Demo Application created <br />
+                for a software engineering portfolio.</p>
+        </div>
+        <div class="FooterRight d-inline-block text-center">
+            <h3>Links</h3>
+            <a href="#"><u>Code for this Demo</u></a> <br />
+            <a href="#"><u>Portfolio Landing Page</u></a>
+        </div>
+    }
+</div>

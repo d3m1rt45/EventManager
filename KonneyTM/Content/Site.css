@@ -8,6 +8,9 @@
     }
 }
 
+section {
+    min-height: 75vh;
+}
 
 /* NAVBAR */
 .Brand h1 {
@@ -36,4 +39,23 @@
 
 .nav-link {
     padding: 0;
+}
+
+
+/* FOOTER */
+.Footer h3 {
+    font-family: 'Overlock SC', sans-serif;
+    font-size: 25pt;
+}
+
+.Footer a {
+    font-family: 'Overlock SC', sans-serif;
+    font-size: 18pt;
+    color: #0F410D;
+    text-decoration: underline 1rem #0F410D;
+}
+
+.Footer p {
+    font-family: Overlock, sans-serif;
+    font-size: 18pt;
 }
