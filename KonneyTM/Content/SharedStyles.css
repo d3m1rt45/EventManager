@@ -13,6 +13,10 @@ section {
 }
 
 /* NAVBAR */
+nav {
+    margin-bottom: 1.5rem;
+}
+
 .Brand h1 {
     font-family: Oregano, cursive;
     color: #0F410D;
@@ -45,14 +49,14 @@ section {
 /* FOOTER */
 .Footer h3 {
     font-family: 'Overlock SC', sans-serif;
-    font-size: 25pt;
+    font-weight: 700;
+    font-size: 20pt;
 }
 
 .Footer a {
     font-family: 'Overlock SC', sans-serif;
     font-size: 18pt;
     color: #0F410D;
-    text-decoration: underline 1rem #0F410D;
 }
 
 .Footer p {

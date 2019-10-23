@@ -1,9 +1,21 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
 
-<section class="Home-Index">
+@Styles.Render("~/HomeStyles")
 
+<section class="HomeIndex container-fluid">
 
+    <article class="Welcome row">
+        <div class="col-6 text-center d-flex align-items-center justify-content-center text-light">
+            <div>
+                <h2 class="d-block">Welcome!</h2>
+                <u>Konney</u><span>™</span> is a
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="WelcomePic"></div>
+        </div>
+    </article>
 
 </section>

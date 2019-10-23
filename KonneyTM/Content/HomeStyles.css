@@ -1,0 +1,22 @@
+﻿article.Welcome {
+    height: 25rem;
+    width: 100%;
+    border-top-left-radius: 24rem;
+    border-bottom-right-radius: 24rem;
+    background: rgb(15,65,13);
+    background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(0,0,0,1) 100%);
+    background-color: #0F410D;
+}
+
+.WelcomePic {
+    height:90%;
+    margin-top: 1.2rem;
+    margin-right: 0.3rem;
+    background-image: url("../Images/Welcome.jpg");
+    background-position: center;
+    background-size: contain;
+    align-self: center;
+    justify-self: start;
+    border-bottom-right-radius: 30rem;
+    box-shadow: inset black;
+}
