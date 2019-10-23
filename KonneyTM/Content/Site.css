@@ -1,8 +1,12 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    background-color: #EEFBEE;
+    padding: 0 10rem 0 10rem;
 }
-
+@media only screen and (max-width: 768px) {
+    body {
+        padding: 0 3rem 0 3rem;
+    }
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
