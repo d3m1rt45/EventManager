@@ -11,12 +11,29 @@
 
 /* NAVBAR */
 .Brand h1 {
-    font-family: Oregano;
+    font-family: Oregano, cursive;
     color: #0F410D;
     font-weight: 700;
 }
 .Brand span {
     font-weight: 400;
     font-size: 20pt;
-    font-family: Oregano;
+    font-family: Oregano, cursive;
+}
+
+.nav-item {
+    font-family: 'Overlock SC', sans-serif;
+    margin: 0 0.5rem 0 0.5rem;
+    border: #00EBC3 0.2rem solid;
+    width: 10rem;
+    height: 2.7rem;
+    text-align: center;
+    font-size: 19pt;
+    background-color: #0F410D;
+    border-bottom-right-radius: 3rem;
+    border-top-left-radius: 3rem;
+}
+
+.nav-link {
+    padding: 0;
 }
