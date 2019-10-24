@@ -55,6 +55,18 @@ nav {
     padding: 0;
 }
 
+@media only screen and (max-width: 992px) {
+    .nav-item {
+        margin: 0.5rem auto 0.5rem auto;
+        width: 40%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .nav-item {
+        width: 60%;
+    }
+}
+
 
 /* FOOTER STARTS */
 .Footer {
