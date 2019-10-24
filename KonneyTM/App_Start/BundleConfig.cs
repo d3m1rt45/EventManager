@@ -28,6 +28,9 @@ namespace KonneyTM
 
             bundles.Add(new StyleBundle("~/HomeStyles").Include(
                       "~/Content/HomeStyles.css"));
+
+            bundles.Add(new StyleBundle("~/AccountStyles").Include(
+                      "~/Content/AccountStyles.css"));
         }
     }
 }

@@ -1,19 +1,30 @@
 ﻿body {
     background-color: #EEFBEE;
+    padding-bottom: 10rem;
 }
 
 .ExceptFooter {
     padding: 0 10rem 0 10rem;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
+    body {
+        padding-bottom: 8rem;
+    }
     .ExceptFooter {
-        padding: 0 3rem 0 3rem;
+        padding: 0 1rem 0 1rem;
     }
 }
 
 /* NAVBAR */
 nav {
     margin-bottom: 2.5rem;
+}
+
+@media only screen and (max-width: 992px)
+{
+    nav {
+        margin-bottom: 1rem;
+    }
 }
 
 .Brand h1 {
@@ -53,22 +64,43 @@ nav {
     border-top: black solid 0.4rem;
 }
 
+
     .Footer h3 {
         font-family: 'Overlock SC', sans-serif;
         font-weight: 700;
-        font-size: 20pt;
+        font-size: 18pt;
         color: #EEFBEE;
     }
 
     .Footer a {
         font-family: 'Overlock SC', sans-serif;
-        font-size: 18pt;
+        font-size: 14pt;
         color: #EEFBEE;
     }
 
     .Footer p {
         font-family: Overlock, sans-serif;
-        font-size: 18pt;
+        font-size: 14pt;
         color: #EEFBEE
     }
+.LogOff {
+    margin-bottom: 1rem;
+}
+.LogOff li {
+    background-color: darkolivegreen;
+}
+
+@media only screen and (max-width: 992px) {
+    .Footer {
+        padding: 1rem 1rem 0 1rem;
+    }
+
+    .Footer h3 {
+        font-size: 14pt;
+    }
+
+    .Footer a, .Footer p {
+        font-size: 12pt;
+    }
+}
 /* FOOTER ENDS */

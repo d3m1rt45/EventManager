@@ -27,13 +27,17 @@
     font-family: Overlock, sans-serif;
 }
 
-.WelcomeText span {
-    margin-right: 0.5rem;
+
+.Logo {
+    font-family: Oregano, cursive;
+    font-size: 120%;
 }
 
-.WelcomeLogo {
+.tm {
     font-family: Oregano, cursive;
-    font-size: 27pt;
+    font-size: 90%;
+    margin-right: 0.2rem;
+    margin-left: 0.1rem;
 }
 
 .WelcomePic {
