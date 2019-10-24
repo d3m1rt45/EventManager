@@ -9,21 +9,23 @@
 
 </head>
 <body>
-    <nav class="NavbarOuter navbar navbar-expand-lg navbar-light">
-        <a class="Brand navbar-brand d-flex" href="#">
-            <h1 class="d-inline"><u>Konney</u></h1><span class="align-self-start">™</span>
-        </a><!--/.Brand-->
-        <button class="NavbarToggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button><!--/.NavbarToggler-->
-        <div class="NavbarInner collapse navbar-collapse" id="navbarNav">
-            <ul class="ml-auto navbar-nav">
-                @Html.Partial("_LoginPartial")
-            </ul>
-        </div><!--/.NavbarInner-->
-    </nav><!--/.NavbarOuter-->
+    <div class="ExceptFooter">
+        <nav class="NavbarOuter navbar navbar-expand-lg navbar-light">
+            <a class="Brand navbar-brand d-flex" href="#">
+                <h1 class="d-inline"><u>Konney</u></h1><span class="align-self-start">™</span>
+            </a><!--/.Brand-->
+            <button class="NavbarToggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button><!--/.NavbarToggler-->
+            <div class="NavbarInner collapse navbar-collapse" id="navbarNav">
+                <ul class="ml-auto navbar-nav">
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </div><!--/.NavbarInner-->
+        </nav><!--/.NavbarOuter-->
 
-    @RenderBody()
+        @RenderBody()
+    </div><!--/.ExceptFooter-->
 
     @Html.Partial("_FooterPartial")
 

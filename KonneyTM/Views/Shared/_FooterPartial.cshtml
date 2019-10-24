@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 
-<div class="Footer d-flex w-100 justify-content-between">
+<div class="Footer d-flex w-100 justify-content-between fixed-bottom">
     @if (Request.IsAuthenticated)
     {
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right ml-auto align-self-end" }))

@@ -4,18 +4,32 @@
 
 @Styles.Render("~/HomeStyles")
 
-<section class="HomeIndex container-fluid">
+    <section class="HomeIndex container-fluid">
 
-    <article class="Welcome row">
-        <div class="col-6 text-center d-flex align-items-center justify-content-center text-light">
-            <div>
-                <h2 class="d-block">Welcome!</h2>
-                <u>Konney</u><span>™</span> is a
+        <article class="WelcomePane row">
+            <div class="WelcomeLeft col-6 text-center d-flex align-items-center justify-content-center text-light">
+                <div class="AlignmentDiv">
+                    <h2 class="WelcomeHeader d-block">
+                        Welcome!
+                    </h2><!--/.WelcomeHeader-->
+                    <p class="WelcomeText">
+                        <u class="WelcomeLogo">Konney</u><span>™</span> is a free event management tool <br />
+                        that helps you organize professional and <br />
+                        casual events of any size!
+                    </p><!--/.WelcomeText-->
+                </div><!--/.AlignmentDiv-->
+            </div><!--/.WelcomePaneLeft-->
+            <div class="WelcomeRight col-6">
+                <div class="WelcomePic"></div>
+            </div><!--/.WelcomePaneRight-->
+        </article><!--/.WelcomePane-->
+
+        <article class="Navigate row">
+            <div class="NavigateInner col-12 text-center">
+                <h3 class="Text"><a href="#">Run a Demo</a> to See Whether We're the Right Fit for You!</h3>
+                <h3 class="Text">...or <a href="#">Log In</a> to your account.</h3>
+                <h3 class="Text">Don't have an account yet? <a href="#">Register</a>.</h3>
             </div>
-        </div>
-        <div class="col-6">
-            <div class="WelcomePic"></div>
-        </div>
-    </article>
+        </article>
 
-</section>
+    </section><!--/.HomeIndex-->

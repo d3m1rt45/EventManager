@@ -1,4 +1,5 @@
-﻿article.Welcome {
+﻿/* WELCOME PANE STARTS */
+.WelcomePane {
     height: 25rem;
     width: 100%;
     border-top-left-radius: 24rem;
@@ -6,10 +7,37 @@
     background: rgb(15,65,13);
     background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(0,0,0,1) 100%);
     background-color: #0F410D;
+    margin-bottom: 6rem;
+    border: solid black 0.2rem;
+}
+
+.WelcomeLeft .AlignmentDiv {
+    padding-left: 6rem;
+    padding-top: 2rem;
+}
+
+.WelcomeHeader {
+    font-family: 'Overlock SC', sans-serif;
+    font-size: 30pt;
+    font-weight: 700;
+}
+
+.WelcomeText {
+    font-size: 20pt;
+    font-family: Overlock, sans-serif;
+}
+
+.WelcomeText span {
+    margin-right: 0.5rem;
+}
+
+.WelcomeLogo {
+    font-family: Oregano, cursive;
+    font-size: 27pt;
 }
 
 .WelcomePic {
-    height:90%;
+    height: 90%;
     margin-top: 1.2rem;
     margin-right: 0.3rem;
     background-image: url("../Images/Welcome.jpg");
@@ -18,5 +46,23 @@
     align-self: center;
     justify-self: start;
     border-bottom-right-radius: 30rem;
-    box-shadow: inset black;
+    box-shadow: inset 0.3rem 0.3rem 0.3rem black;
 }
+/* WELCOME PANE ENDS */
+
+
+/* NAVIGATE STARTS */
+.Navigate .Text {
+    font-family: Overlock, sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #0F410D;
+}
+    .Navigate .Text a {
+        text-decoration: underline;
+        font-size: 25pt;
+        font-family: 'Overlock SC', sans-serif;
+        color: #0F410D;
+        margin-right: 0.2rem;
+    }
+/* NAVIGATE ENDS */
