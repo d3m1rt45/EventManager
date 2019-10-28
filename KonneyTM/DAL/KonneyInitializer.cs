@@ -6,9 +6,9 @@ using System.Web;
 
 namespace KonneyTM.DAL
 {
-    public class PanelInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<PanelContext>
+    public class KonneyInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<KonneyContext>
     {
-        protected override void Seed(PanelContext context)
+        protected override void Seed(KonneyContext context)
         {
             var people = new List<Person>
             {
