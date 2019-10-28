@@ -23,7 +23,8 @@ namespace KonneyTM
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/SharedStyles").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/Bootstrap/bootstrap.css",
+                      "~/Content/Fontawesome/all.css",
                       "~/Content/SharedStyles.css"));
 
             bundles.Add(new StyleBundle("~/HomeStyles").Include("~/Content/HomeStyles.css"));

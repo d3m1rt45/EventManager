@@ -2,7 +2,7 @@
     width: 100%;
     background: rgb(15,65,13);
     background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(238,251,238,1) 100%);
-    margin: -1rem 0 1rem 1rem;
+    margin: -1rem 0 2rem 1rem;
 }
 
 .Header h2 {
@@ -16,6 +16,9 @@
     padding: 1rem 1rem 1rem 1rem;
     background: rgb(15,65,13);
     background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(12,53,11,1) 64%, rgba(0,0,0,1) 100%);
+    margin-bottom: 3rem;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
 }
 
 .EventCard h3 {
@@ -64,4 +67,36 @@ span {
     background-size: cover;
     height: 100%;
     width: 100%;
+}
+
+.NewEventColumn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.NewEvent {
+    height: 13rem;
+    width: 13rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background: rgb(15,65,13);
+    background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(12,53,11,1) 64%, rgba(0,0,0,1) 100%);
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+    transition-duration: 0.5s;
+}
+    .NewEvent:hover {
+        margin-top: -0.4rem;
+        transition-duration: 0.5s;
+    }
+
+.NewEventLink {
+    text-decoration: none !important;
+}
+
+.NewEvent i {
+    color: #EEFBEE;
 }

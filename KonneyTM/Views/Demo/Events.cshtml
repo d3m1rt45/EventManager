@@ -42,7 +42,13 @@
                         </div><!--/.EventCard-->
                     </div><!--/.OuterColumn-->
                 }
-            @Html.ActionLink("Create New", "Create")
+            <div class="NewEventColumn col-6">
+                <a class="NewEventLink" href="@Url.Action("NewEvent", "Demo")">
+                    <div class="NewEvent">
+                        <i class="fas fa-plus fa-9x"></i>
+                    </div>
+                </a>
+            </div>
             </div><!--/.OuterRow-->
         </article><!--/.EventsContainer-->
 
