@@ -46,7 +46,7 @@
     margin-right: 0.3rem;
     background-image: url("../Images/Welcome.jpg");
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     align-self: center;
     justify-self: start;
     border-bottom-right-radius: 30rem;

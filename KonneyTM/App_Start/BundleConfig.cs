@@ -22,15 +22,15 @@ namespace KonneyTM
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/SharedStyles").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/SharedStyles.css"));
 
-            bundles.Add(new StyleBundle("~/HomeStyles").Include(
-                      "~/Content/HomeStyles.css"));
+            bundles.Add(new StyleBundle("~/HomeStyles").Include("~/Content/HomeStyles.css"));
 
-            bundles.Add(new StyleBundle("~/AccountStyles").Include(
-                      "~/Content/AccountStyles.css"));
+            bundles.Add(new StyleBundle("~/AccountStyles").Include("~/Content/AccountStyles.css"));
+
+            bundles.Add(new StyleBundle("~/PanelStyles").Include("~/Content/PanelStyles.css"));
         }
     }
 }

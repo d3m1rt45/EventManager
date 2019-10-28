@@ -4,23 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Konney™ Event Manager</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/SharedStyles")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
     <div class="ExceptFooter">
         <nav class="NavbarOuter navbar navbar-expand-lg navbar-light">
-            <a class="Brand navbar-brand d-flex" href="#">
+            <a class="Brand navbar-brand d-flex" href="@Url.Action("Index", "Home")">
                 <h1 class="d-inline"><u>Konney</u></h1><span class="align-self-start">™</span>
             </a><!--/.Brand-->
             <button class="NavbarToggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button><!--/.NavbarToggler-->
             <div class="NavbarInner collapse navbar-collapse" id="navbarNav">
-                <ul class="ml-auto navbar-nav">
-                    @Html.Partial("_LoginPartial")
-                </ul>
+                <ul class="ml-auto navbar-nav">@Html.Partial("_LoginPartial")</ul>
             </div><!--/.NavbarInner-->
         </nav><!--/.NavbarOuter-->
 
