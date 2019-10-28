@@ -4,43 +4,46 @@
 }
 @Styles.Render("~/PanelStyles")
 
-<section class="Demo-Events">
+    <section class="Demo-Events">
 
-    <div class="Header">
-        <h2>Events</h2>
-    </div>
+        <div class="Header">
+            <h2>Events</h2>
+        </div><!--/.Header-->
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Time)
-            </th>
-            <th></th>
-        </tr>
+        <article class="EventsContainer container-fluid">
+            <div class="OuterRow row gutter">
+                @foreach (var item in Model)
+                {
+                    <div class="OuterColumn col-6">
+                        <div class="EventCard">
+                            <div class="InnerRow row">
+                                <div class="InnerColumn col-7">
+                                    <h3>@item.Title</h3>
+                                    <div class="Info">
+                                        <h4>Venue:</h4><span>@item.Place.Name</span> <br />
+                                        <h4>Date:</h4><span>@item.Time.ToLongDateString()</span> <br />
+                                        <h4>Time:</h4><span>@item.Time.ToShortTimeString()</span> <br />
+                                    </div><!--/.Info-->
+                                    <div class="Controls">
+                                        <div class="Left mr-auto">
+                                            @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                        </div><!--/.Left-->
+                                        <div class="Right">
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                        </div><!--/.Right-->
+                                    </div><!--/.Controls-->
+                                </div><!--/.InnerColumn-->
+                                <div class="PictureColumn col-5">
+                                    <div class="Picture">
+                                    </div><!--/.Picture-->
+                                </div><!--/.PictureColumn-->
+                            </div><!--/.InnerRow-->
+                        </div><!--/.EventCard-->
+                    </div><!--/.OuterColumn-->
+                }
+            @Html.ActionLink("Create New", "Create")
+            </div><!--/.OuterRow-->
+        </article><!--/.EventsContainer-->
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-        }
-
-    </table>
-
-</section>
+    </section>

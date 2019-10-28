@@ -1,2 +1,67 @@
-﻿body {
+﻿.Header {
+    width: 100%;
+    background: rgb(15,65,13);
+    background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(238,251,238,1) 100%);
+    margin: -1rem 0 1rem 1rem;
+}
+
+.Header h2 {
+    margin-left: 0.3rem;
+    color: #EEFBEE;
+}
+
+.EventCard {
+    height: 15rem;
+    border-radius: 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    background: rgb(15,65,13);
+    background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(12,53,11,1) 64%, rgba(0,0,0,1) 100%);
+}
+
+.EventCard h3 {
+    color: #EEFBEE;
+    margin-bottom: 2rem;
+}
+
+h4 {
+    color: #EEFBEE;
+    display: inline;
+    margin-right: 1rem;
+}
+
+span {
+    color: #EEFBEE;
+    font-family: Overlock, sans-serif;
+    font-size: 15pt;
+}
+
+
+.InnerRow {
+    height: 100%;
+}
+
+.Info {
+    margin-bottom: 1rem;
+}
+
+.Controls > .Left, .Right {
+    display: inline-block;
+}
+
+.Controls a {
+    color: #EEFBEE;
+    font-family: 'Overlock', sans-serif;
+    font-weight: 700;
+    font-size: 13pt;
+    margin-right: 0.5rem;
+    text-decoration: underline;
+}
+
+.Picture {
+    border-radius: 0.5rem;
+    background-image: url("../Images/Welcome.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
 }
