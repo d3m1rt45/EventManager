@@ -1,4 +1,5 @@
-﻿.Header {
+﻿/* EVENTS */
+.Header {
     width: 100%;
     background: rgb(15,65,13);
     background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(238,251,238,1) 100%);
@@ -100,3 +101,5 @@ span {
 .NewEvent i {
     color: #EEFBEE;
 }
+
+/* NEW EVENT */
