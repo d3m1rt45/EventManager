@@ -113,6 +113,10 @@ span {
     border-top-left-radius: 3rem;
 }
 
+.form-group {
+    margin-bottom: 2rem;
+}
+
 .ButtonIn {
     font-family: 'Overlock SC', sans-serif;
     font-size: 19pt;
