@@ -62,7 +62,7 @@ namespace KonneyTM.Controllers
         [HttpPost]
         public ActionResult NewEvent(NewEventViewModel nevm)
         {
-            return View("Events.cshtml", db.Events);
+            return View("Events", db.Events);
         }
 
 

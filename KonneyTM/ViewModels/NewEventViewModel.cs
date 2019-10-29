@@ -10,7 +10,8 @@ namespace KonneyTM.Models
     public class NewEventViewModel
     {
         public string Title { get; set; }
-        public DateTime Time { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
         public virtual List<Person> PeopleAttending { get; set; }
         public virtual Venue Place { get; set; }
 
