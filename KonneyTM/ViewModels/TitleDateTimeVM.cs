@@ -8,7 +8,7 @@ using System.Web;
 
 namespace KonneyTM.Models
 {
-    public class NewEventViewModel
+    public class TitleDateTimeVM
     {
         [Required]
         [StringLength(30)]
@@ -23,15 +23,5 @@ namespace KonneyTM.Models
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:hh-mm}", ApplyFormatInEditMode = true)]
         public DateTime Time { get; set; }
-
-        [Required]
-        public List<PersonViewModel> People { get; set; } //If we populate this directly, it takes all we pass in.
-
-        public List<PersonViewModel> PeopleAttending { get; set; }
-
-        [Required]
-        public VenueViewModel Place { get; set; }
-
-        public List<VenueViewModel> Venues { get; set; }
     }
 }

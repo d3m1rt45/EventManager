@@ -15,117 +15,40 @@ namespace KonneyTM.Controllers
     {
         private KonneyContext db = new KonneyContext();
 
-        public ActionResult Events()
+        public ActionResult Index()
         {
             var events = db.Events;
             return View(events);
         }
 
-        public ActionResult NewEvent()
+        public ActionResult SetTitleDateTime()
         {
-            var peopleList = new List<PersonViewModel>();
-            foreach (var p in db.People)
-            {
-                peopleList.Add(new PersonViewModel
-                {
-                    ID = p.ID,
-                    FirstName = p.FirstName,
-                    LastName = p.LastName,
-                    Email = p.Email,
-                    PhoneNumber = p.PhoneNumber,
-                    Attending = false
-                });
-            }
-
-            var venueList = new List<VenueViewModel>();
-            foreach (var v in db.Venues)
-            {
-                venueList.Add(new VenueViewModel
-                {
-                    ID = v.ID,
-                    Name = v.Name,
-                    PhoneNumber = v.PhoneNumber,
-                    Address = v.Address,
-                    PostCode = v.PostCode,
-                    Checked = false
-                });
-            }
-
-            var newEvent = new NewEventViewModel
-            {
-                People = peopleList,
-                Venues = venueList
-            };
-
-            return View(newEvent);
+            var nevm = new TitleDateTimeVM();
+            
+            return View(nevm);
         }
 
         [HttpPost]
-        public ActionResult NewEvent(NewEventViewModel nevm)
+        public ActionResult SetTitleDateTime(TitleDateTimeVM nevm)
         {
-            if (!ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                var peopleList = new List<PersonViewModel>();
-                foreach (var p in db.People)
-                {
-                    peopleList.Add(new PersonViewModel
-                    {
-                        FirstName = p.FirstName,
-                        LastName = p.LastName,
-                        Email = p.Email,
-                        PhoneNumber = p.PhoneNumber,
-                        Attending = false
-                    });
-                }
-
-                var venueList = new List<VenueViewModel>();
-                foreach (var v in db.Venues)
-                {
-                    venueList.Add(new VenueViewModel
-                    {
-                        Name = v.Name,
-                        PhoneNumber = v.PhoneNumber,
-                        Address = v.Address,
-                        PostCode = v.PostCode,
-                        Checked = false
-                    });
-                }
-
-                nevm.People = peopleList;
-                nevm.Venues = venueList;
-                
-                return View(nevm);
-            }
-            else
-            {
-                var arrangedVenue = new Venue();
-                foreach (var v in nevm.Venues)
-                {
-                    if (v.Checked)
-                    {
-                        arrangedVenue = db.Venues.First(o => o.ID == v.ID);
-                    }
-                }
-
-                var peopleAttending = new List<Person>();
-                foreach (var p in nevm.PeopleAttending)
-                {
-                    peopleAttending = db.People.Where(o => o.ID == p.ID).ToList();
-                }
-
-                db.Events.Add(new Event
+                var newEvent = new Event
                 {
                     Title = nevm.Title,
-                    Place = arrangedVenue,
-                    PeopleAttending = peopleAttending,
                     Date = nevm.Date,
                     Time = nevm.Time
-                });
+                };
 
-                db.SaveChanges();
-
-                return View("Events", db.Events);
+                return RedirectToAction("SetVenue", "Demo", newEvent);
             }
+
+            return View(nevm);
+        }
+
+        public ActionResult SetVenue(Event newEvent)
+        {
+            return View();
         }
 
 
