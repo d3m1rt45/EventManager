@@ -41,7 +41,7 @@
                         @for (var i = 0; i < Model.Venues.Count; i++)
                         {
                             <h6 class="col-3">
-                                @Html.RadioButtonFor(model => model.Place, Model.Venues[i].Name)&emsp;
+                                @Html.RadioButtonFor(model => model.Place, Model.Venues[i].Checked)&emsp;
                                 @Html.DisplayFor(model => model.Venues[i].Name)
                             </h6>
                         }

@@ -21,7 +21,6 @@ namespace KonneyTM.Controllers
             return View(events);
         }
 
-        [HttpGet]
         public ActionResult NewEvent()
         {
             var peopleList = new List<PersonViewModel>();
@@ -62,7 +61,14 @@ namespace KonneyTM.Controllers
         [HttpPost]
         public ActionResult NewEvent(NewEventViewModel nevm)
         {
-            return View("Events", db.Events);
+            if (!ModelState.IsValid)
+            {
+                return View(nevm);
+            }
+            else
+            {
+                return View("Events", db.Events);
+            }
         }
 
 
