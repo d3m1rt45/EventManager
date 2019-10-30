@@ -21,15 +21,15 @@ namespace KonneyTM.Controllers
             return View(events);
         }
 
-        public ActionResult SetTitleDateTime()
+        public ActionResult NewEvent()
         {
-            var nevm = new TitleDateTimeVM();
+            var nevm = new NewEventViewModel();
             
             return View(nevm);
         }
 
         [HttpPost]
-        public ActionResult SetTitleDateTime(TitleDateTimeVM nevm)
+        public ActionResult NewEvent(NewEventViewModel nevm)
         {
             if(ModelState.IsValid)
             {
@@ -37,20 +37,17 @@ namespace KonneyTM.Controllers
                 {
                     Title = nevm.Title,
                     Date = nevm.Date,
-                    Time = nevm.Time
+                    Time = nevm.Time,
+                    Place = db.Venues.First(v => v.ID == nevm.SelectedVenueID)
                 };
 
-                return RedirectToAction("SetVenue", "Demo", newEvent);
+                return RedirectToAction("Index");
             }
-
-            return View(nevm);
+            else
+            {
+                return View(nevm);
+            }
         }
-
-        public ActionResult SetVenue(Event newEvent)
-        {
-            return View();
-        }
-
 
         public ActionResult People()
         {

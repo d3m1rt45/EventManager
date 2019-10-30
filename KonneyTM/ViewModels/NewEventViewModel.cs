@@ -8,7 +8,7 @@ using System.Web;
 
 namespace KonneyTM.Models
 {
-    public class TitleDateTimeVM
+    public class NewEventViewModel
     {
         [Required]
         [StringLength(30)]
@@ -23,5 +23,15 @@ namespace KonneyTM.Models
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:hh-mm}", ApplyFormatInEditMode = true)]
         public DateTime Time { get; set; }
+
+        public int SelectedVenueID { get; set; }
+
+        public List<Venue> VenueList { get; set; }
+
+        public NewEventViewModel()
+        {
+            var db = new KonneyContext();
+            this.VenueList = db.Venues.ToList();
+        }
     }
 }
