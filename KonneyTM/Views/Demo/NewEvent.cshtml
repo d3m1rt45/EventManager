@@ -41,7 +41,7 @@
                         @for (var i = 0; i < Model.Venues.Count; i++)
                         {
                             <h6 class="col-3">
-                                @Html.RadioButtonFor(model => model.Place, Model.Venues[i].Checked)&emsp;
+                                @Html.RadioButton("Place", Model.Venues[i].Checked)&emsp;
                                 @Html.DisplayFor(model => model.Venues[i].Name)
                             </h6>
                         }
@@ -49,6 +49,7 @@
                             <a href="@Url.Action("NewVenue", "Demo")">Add Venue</a>
                         </h5>
                     </div>
+                    @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -68,6 +69,7 @@
                             <a href="@Url.Action("NewPerson", "Demo")">Add Person</a>
                         </h5>
                     </div>
+                    @Html.ValidationMessageFor(model => model.PeopleAttending, "", new { @class = "text-danger" })
                 </div>
             </div>
 

@@ -17,20 +17,38 @@ namespace KonneyTM.Models
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:hh-mm}", ApplyFormatInEditMode = true)]
-        public string Time { get; set; }
+        public DateTime Time { get; set; }
 
         [Required]
-        public virtual List<PersonViewModel> PeopleAttending { get; set; }
+        public List<PersonViewModel> People { get; set; } //If we populate this directly, it takes all we pass in.
+
+        public List<PersonViewModel> PeopleAttending //If we populate this, it will indirectly populate People property with only those checked.
+        { 
+            get
+            {
+                return People;
+            }
+            set
+            {
+                foreach (var p in value)
+                {
+                    if (p.Attending)
+                    {
+                        People.Add(p);
+                    }
+                }
+            }
+        }
+
 
         [Required]
-        public virtual VenueViewModel Place { get; set; }
+        public VenueViewModel Place { get; set; }
 
-        public List<PersonViewModel> People { get; set; }
         public List<VenueViewModel> Venues { get; set; }
     }
 }
