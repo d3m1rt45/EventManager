@@ -11,8 +11,8 @@ namespace KonneyTM.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public string Title { get; set; }
+        public DateTime Date { get; set; }
         public DateTime Time { get; set; }
-
         public virtual ICollection<Person> PeopleAttending { get; set; }
         public virtual Venue Place { get; set; }
     }

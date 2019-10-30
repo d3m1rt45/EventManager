@@ -21,7 +21,7 @@ namespace KonneyTM.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("KonneyContext", throwIfV1Schema: false)
         {
         }
 

@@ -7,6 +7,7 @@ namespace KonneyTM.Models
 {
     public class PersonViewModel
     {
+        public int ID { get; set; }
         public bool Attending { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
