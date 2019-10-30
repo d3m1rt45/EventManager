@@ -107,11 +107,17 @@ namespace KonneyTM.Controllers
                     }
                 }
 
+                var peopleAttending = new List<Person>();
+                foreach (var p in nevm.PeopleAttending)
+                {
+                    peopleAttending = db.People.Where(o => o.ID == p.ID).ToList();
+                }
+
                 db.Events.Add(new Event
                 {
                     Title = nevm.Title,
                     Place = arrangedVenue,
-                    PeopleAttending = nevm.People,
+                    PeopleAttending = peopleAttending,
                     Date = nevm.Date,
                     Time = nevm.Time
                 });

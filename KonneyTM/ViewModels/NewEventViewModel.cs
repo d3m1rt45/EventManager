@@ -27,24 +27,7 @@ namespace KonneyTM.Models
         [Required]
         public List<PersonViewModel> People { get; set; } //If we populate this directly, it takes all we pass in.
 
-        public List<PersonViewModel> PeopleAttending //If we populate this, it will indirectly populate People property with only those checked.
-        { 
-            get
-            {
-                return People;
-            }
-            set
-            {
-                foreach (var p in value)
-                {
-                    if (p.Attending)
-                    {
-                        People.Add(p);
-                    }
-                }
-            }
-        }
-
+        public List<PersonViewModel> PeopleAttending { get; set; }
 
         [Required]
         public VenueViewModel Place { get; set; }
