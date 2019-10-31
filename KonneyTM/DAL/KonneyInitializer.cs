@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KonneyTM.DAL
 {
-    public class KonneyInitializer : System.Data.Entity.CreateDatabaseIfNotExists<KonneyContext>
+    public class KonneyInitializer : System.Data.Entity.DropCreateDatabaseAlways<KonneyContext>
     {
         protected override void Seed(KonneyContext context)
         {
@@ -39,8 +39,8 @@ namespace KonneyTM.DAL
 
             var events = new List<Event>
             {
-                new Event{Title="Oxford Law (17-18) Reunion", PeopleAttending=people, Place=venues[0], Time=DateTime.Now.AddDays(24)},
-                new Event{Title="Party!! For like... No reason!", PeopleAttending=people, Place=venues[1], Time=DateTime.Now.AddDays(7)},
+                new Event{Title="Oxford Law (17-18) Reunion", PeopleAttending=people, Place=venues[0], Date=DateTime.Now.AddDays(24), Time = DateTime.UtcNow},
+                new Event{Title="Party!! For like... No reason!", PeopleAttending=people, Place=venues[1], Date=DateTime.Now.AddDays(7), Time = DateTime.UtcNow},
             };
 
             events.ForEach(e => context.Events.Add(e));
