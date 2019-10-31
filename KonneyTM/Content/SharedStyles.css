@@ -56,6 +56,21 @@ nav {
     border-top-left-radius: 3rem;
 }
 
+
+
+    /*.nav-item.active {
+        border: #0F410D 0.2rem solid;
+        background-color: #00EBC3;
+    }
+    .nav-item.active .nav-link
+    {
+        font-color:
+    }
+
+.nav-item.QuitDemo {
+    width:13rem;
+}*/
+
 .nav-link {
     padding: 0;
 }
@@ -85,19 +100,19 @@ nav {
     .Footer h3 {
         font-family: 'Overlock SC', sans-serif;
         font-weight: 700;
-        font-size: 18pt;
+        font-size: 15pt;
         color: #EEFBEE;
     }
 
     .Footer a {
         font-family: 'Overlock SC', sans-serif;
-        font-size: 14pt;
+        font-size: 12pt;
         color: #EEFBEE;
     }
 
     .Footer p {
         font-family: Overlock, sans-serif;
-        font-size: 14pt;
+        font-size: 12pt;
         color: #EEFBEE
     }
 .LogOff {
