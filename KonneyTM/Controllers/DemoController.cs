@@ -38,7 +38,8 @@ namespace KonneyTM.Controllers
                     Title = nevm.Title,
                     Date = nevm.Date,
                     Time = nevm.Time,
-                    Place = db.Venues.First(v => v.ID == nevm.SelectedVenueID)
+                    Place = db.Venues.First(v => v.ID == nevm.SelectedVenueID),
+                    PeopleAttending = db.People.Where(x => nevm.InvitedPeopleIDs.Contains(x.ID)).ToList()
                 };
 
                 return RedirectToAction("Index");
