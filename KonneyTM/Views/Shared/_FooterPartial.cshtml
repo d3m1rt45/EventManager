@@ -12,6 +12,12 @@
             </ul>
         }
     }
+    else if (Request.Path.Contains("Demo"))
+    {
+        <div class="nav-item">
+            @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "nav-link text-light" })
+        </div>
+    }
     else
     {
         <div class="FooterLeft d-inline-block text-center">

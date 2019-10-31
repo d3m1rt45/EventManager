@@ -56,20 +56,9 @@ nav {
     border-top-left-radius: 3rem;
 }
 
-
-
-    /*.nav-item.active {
-        border: #0F410D 0.2rem solid;
-        background-color: #00EBC3;
-    }
-    .nav-item.active .nav-link
-    {
-        font-color:
-    }
-
 .nav-item.QuitDemo {
     width:13rem;
-}*/
+}
 
 .nav-link {
     padding: 0;

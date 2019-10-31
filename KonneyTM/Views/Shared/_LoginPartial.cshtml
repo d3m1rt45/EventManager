@@ -15,14 +15,20 @@
 }
 else if (Request.Path.Contains("Demo"))
 {
-    <li class="QuitDemo nav-item">
-        @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "nav-link text-light" })
+    <li class="Events nav-item">
+        @Html.ActionLink("Events", "Events", "Demo", null, new { @class = "nav-link text-light" })
+    </li>
+    <li class="Venues nav-item">
+        @Html.ActionLink("Venues", "Venues", "Demo", null, new { @class = "nav-link text-light" })
+    </li>
+    <li class="People nav-item">
+        @Html.ActionLink("People", "People", "Demo", null, new { @class = "nav-link text-light" })
     </li>
 }
 else
 {
-    <li class="nav-item active">
-        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link text-light" })
+    <li class="nav-item">
+        @Html.ActionLink("Demo", "Index", "Demo", null, new { @class = "nav-link text-light" })
     </li>
     <li class="nav-item">
         @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-light" })

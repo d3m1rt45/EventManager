@@ -196,8 +196,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AccountStyles.css" />
-    <Content Include="Content\bootstrap-1.1.0.css" />
-    <Content Include="Content\bootstrap-1.1.0.min.css" />
     <Content Include="Content\Bootstrap\bootstrap-grid.css" />
     <Content Include="Content\Bootstrap\bootstrap-grid.min.css" />
     <Content Include="Content\Bootstrap\bootstrap-reboot.css" />
@@ -310,7 +308,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_FooterPartial.cshtml" />
-    <Content Include="Views\Demo\Index.cshtml" />
+    <Content Include="Views\Demo\Events.cshtml" />
     <Content Include="Views\Demo\NewEvent.cshtml" />
     <Content Include="Views\Demo\SetVenue.cshtml" />
   </ItemGroup>

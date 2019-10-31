@@ -15,7 +15,7 @@ namespace KonneyTM.Controllers
     {
         private KonneyContext db = new KonneyContext();
 
-        public ActionResult Index()
+        public ActionResult Events()
         {
             var events = db.Events;
             return View(events);
