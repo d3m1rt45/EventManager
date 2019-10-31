@@ -42,6 +42,9 @@ namespace KonneyTM.Controllers
                     PeopleAttending = db.People.Where(x => nevm.InvitedPeopleIDs.Contains(x.ID)).ToList()
                 };
 
+                db.Events.Add(newEvent);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             else

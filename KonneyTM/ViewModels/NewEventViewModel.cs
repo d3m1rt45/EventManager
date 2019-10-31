@@ -40,6 +40,7 @@ namespace KonneyTM.Models
             
             this.VenueList = db.Venues.ToList();
             this.PeopleList = new List<SelectListItem>();
+            this.InvitedPeopleIDs = new List<int>();
 
             foreach (var p in db.People)
             {

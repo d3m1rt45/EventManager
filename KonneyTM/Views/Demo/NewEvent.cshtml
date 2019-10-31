@@ -56,9 +56,9 @@
                         <div class="checkbox col-3">
                             <label>
                                 <input type="checkbox"
-                                        name="SelectedFruits"
+                                        name="InvitedPeopleIDs"
                                         value="@p.Value"
-                                        @if (Model.InvitedPeopleIDs.Contains(Convert.ToInt32(p.Value))) { <text> checked </text>  } /> @p.Text
+                                        @if (Model.InvitedPeopleIDs != null && Model.InvitedPeopleIDs.Contains(Convert.ToInt32(p.Value))) { <text> checked </text>  } /> @p.Text
                             </label>
                         </div>
                     }
