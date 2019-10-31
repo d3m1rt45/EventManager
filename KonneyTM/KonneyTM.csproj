@@ -175,6 +175,7 @@
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\CustomDataAnnotations.cs" />
     <Compile Include="DAL\KonneyContext.cs" />
     <Compile Include="DAL\KonneyInitializer.cs" />
     <Compile Include="Global.asax.cs">

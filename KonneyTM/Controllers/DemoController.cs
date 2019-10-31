@@ -23,33 +23,23 @@ namespace KonneyTM.Controllers
 
         public ActionResult NewEvent()
         {
-            var nevm = new NewEventViewModel();
+            var newEventVM = new NewEventViewModel();
             
-            return View(nevm);
+            return View(newEventVM);
         }
 
         [HttpPost]
-        public ActionResult NewEvent(NewEventViewModel nevm)
+        public ActionResult NewEvent(NewEventViewModel newEventVM)
         {
             if(ModelState.IsValid)
             {
-                var newEvent = new Event
-                {
-                    Title = nevm.Title,
-                    Date = nevm.Date,
-                    Time = nevm.Time,
-                    Place = db.Venues.First(v => v.ID == nevm.SelectedVenueID),
-                    PeopleAttending = db.People.Where(x => nevm.InvitedPeopleIDs.Contains(x.ID)).ToList()
-                };
-
-                db.Events.Add(newEvent);
-                db.SaveChanges();
+                newEventVM.SaveAsEvent();
 
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(nevm);
+                return View(newEventVM);
             }
         }
 

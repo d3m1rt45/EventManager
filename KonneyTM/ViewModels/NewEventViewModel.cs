@@ -1,4 +1,5 @@
 ﻿using KonneyTM.DAL;
+using KonneyTM.DAL.CustomDataAnnotations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,12 +12,28 @@ namespace KonneyTM.Models
 {
     public class NewEventViewModel
     {
+        public NewEventViewModel()
+        {
+            var db = new KonneyContext();
+            
+            this.VenueList = db.Venues.ToList();
+            this.PeopleList = new List<SelectListItem>();
+            this.InvitedPeopleIDs = new List<int>();
+
+            foreach (var p in db.People)
+            {
+                this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
+            }
+            db.Dispose();
+        }
+
         [Required]
         [StringLength(30)]
         public string Title { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
+        [CurrentDate(ErrorMessage = "Date must be after or equal to current date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
@@ -34,19 +51,23 @@ namespace KonneyTM.Models
         public List<Venue> VenueList { get; set; }
         public List<SelectListItem> PeopleList { get; set; }
 
-        public NewEventViewModel()
+
+        public void SaveAsEvent()
         {
             var db = new KonneyContext();
-            
-            this.VenueList = db.Venues.ToList();
-            this.PeopleList = new List<SelectListItem>();
-            this.InvitedPeopleIDs = new List<int>();
 
-            foreach (var p in db.People)
+            var newEvent = new Event
             {
-                this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
-            }
-        }
+                Title = this.Title,
+                Date = Convert.ToDateTime(this.Date),
+                Time = Convert.ToDateTime(this.Time),
+                Place = db.Venues.First(v => v.ID == this.SelectedVenueID),
+                PeopleAttending = db.People.Where(x => this.InvitedPeopleIDs.Contains(x.ID)).ToList()
+            };
 
+            db.Events.Add(newEvent);
+            db.SaveChanges();
+            db.Dispose();
+        }
     }
 }
