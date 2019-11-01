@@ -1,9 +1,10 @@
 ﻿@using Microsoft.AspNet.Identity
 
-<div class="Footer d-flex w-100 justify-content-between fixed-bottom">
-    @if (Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right ml-auto align-self-end" }))
+
+@if (Request.IsAuthenticated)
+{
+    <div class="Footer UserFooter d-flex w-100 justify-content-between fixed-bottom">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right ml-auto align-self-end" }))
         {
             @Html.AntiForgeryToken()
 
@@ -11,24 +12,32 @@
                 <li class="nav-item "><a class="nav-link text-light" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             </ul>
         }
-    }
-    else if (Request.Path.Contains("Demo"))
-    {
-        <div class="nav-item">
-            @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "nav-link text-light" })
-        </div>
-    }
-    else
-    {
+    </div>
+}
+else if (Request.Path.Contains("Demo"))
+{
+    <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
+        <ul class="ml-auto">
+            <li class="nav-item">
+                @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light" })
+            </li>
+        </ul>
+    </div>
+}
+else
+{
+    <div class="Footer HomeFooter d-flex w-100 justify-content-between fixed-bottom">
         <div class="FooterLeft d-inline-block text-center">
             <h3>Disclaimer</h3>
-            <p>This is a Demo Application created <br />
-                for a software engineering portfolio.</p>
+            <p>
+                This is a Demo Application created <br />
+                for a software engineering portfolio.
+            </p>
         </div>
         <div class="FooterRight d-inline-block text-center">
             <h3>Links</h3>
             <a href="#"><u>Code for this Demo</u></a> <br />
             <a href="#"><u>Portfolio Landing Page</u></a>
         </div>
-    }
-</div>
+    </div>
+}

@@ -33,7 +33,7 @@ namespace KonneyTM.Models
 
         [Required]
         [DataType(DataType.Date)]
-        [CurrentDate(ErrorMessage = "Date must be after or equal to current date")]
+        [CurrentDate(ErrorMessage = "Date must be between tomorrow and 3 years from now.")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 

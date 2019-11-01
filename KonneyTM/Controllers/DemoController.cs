@@ -35,7 +35,7 @@ namespace KonneyTM.Controllers
             {
                 newEventVM.SaveAsEvent();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Events");
             }
             else
             {

@@ -4,7 +4,7 @@
 }
 
 .ExceptFooter {
-    padding: 0 10rem 0 10rem;
+    padding: 0 2rem 0 4rem;
 }
 @media only screen and (max-width: 992px) {
     body {
@@ -56,10 +56,6 @@ nav {
     border-top-left-radius: 3rem;
 }
 
-.nav-item.QuitDemo {
-    width:13rem;
-}
-
 .nav-link {
     padding: 0;
 }
@@ -79,31 +75,32 @@ nav {
 
 /* FOOTER STARTS */
 .Footer {
-    padding: 1rem 10rem 0 10rem;
-    background-color: #0F410D;
+    padding: 1rem 4rem 0 4rem;
     width: 100vh;
+}
+.HomeFooter {
+    background-color: #0F410D;
     border-top: #00EBC3 0.2rem solid;
 }
-
-
-    .Footer h3 {
+    .HomeFooter h3 {
         font-family: 'Overlock SC', sans-serif;
         font-weight: 700;
+        font-size: 18pt;
+        color: #EEFBEE;
+    }
+
+    .HomeFooter a {
+        font-family: 'Overlock SC', sans-serif;
         font-size: 15pt;
         color: #EEFBEE;
     }
 
-    .Footer a {
-        font-family: 'Overlock SC', sans-serif;
-        font-size: 12pt;
-        color: #EEFBEE;
-    }
-
-    .Footer p {
+    .HomeFooter p {
         font-family: Overlock, sans-serif;
-        font-size: 12pt;
+        font-size: 15pt;
         color: #EEFBEE
     }
+
 .LogOff {
     margin-bottom: 1rem;
 }
@@ -124,5 +121,13 @@ nav {
     .Footer a, .Footer p {
         font-size: 12pt;
     }
+}
+
+.DemoFooter .nav-item {
+    width: 12rem;
+    list-style-type: none;
+}
+.Footer.DemoFooter {
+    background-color: none;
 }
 /* FOOTER ENDS */
