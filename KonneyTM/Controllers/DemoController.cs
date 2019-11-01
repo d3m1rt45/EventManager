@@ -17,8 +17,7 @@ namespace KonneyTM.Controllers
 
         public ActionResult Events()
         {
-            var events = db.Events;
-            return View(events);
+            return View(db.Events);
         }
 
         public ActionResult NewEvent()
@@ -45,7 +44,7 @@ namespace KonneyTM.Controllers
 
         public ActionResult People()
         {
-            return View();
+            return View(db.People);
         }
 
         public ActionResult Venues()

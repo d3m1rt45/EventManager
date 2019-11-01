@@ -17,16 +17,7 @@
 else if (Request.Path.Contains("Demo"))
 {
 <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
-
-    @if (Request.Path.Contains("Events") || Request.Path.Contains("Venues") || Request.Path.Contains("People"))
-    {
-        <ul class="Back">
-            <li class="nav-item">
-                @Html.ActionLink("Back", "Index", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
-            </li>
-        </ul>
-    }
-    else if (Request.Path.Contains("NewEvent") || Request.Path.Contains("EventDetails"))
+    @if (Request.Path.Contains("NewEvent") || Request.Path.Contains("EventDetails"))
     {
         <ul class="Back">
             <li class="nav-item">

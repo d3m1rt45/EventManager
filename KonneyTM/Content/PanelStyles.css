@@ -133,3 +133,13 @@ span {
         color: #CED9CE; 
         text-decoration: none;
     }
+
+.Panel-People .PeopleTable {
+    padding-left: 1rem;
+    padding-right: 0.8rem;
+}
+
+th {
+    font-family: 'Overlock SC', sans-serif;
+    font-size: 16pt;
+}

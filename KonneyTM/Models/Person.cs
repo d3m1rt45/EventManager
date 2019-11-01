@@ -12,9 +12,17 @@ namespace KonneyTM.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+
+        [Display(Name="First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name="Surname")]
         public string LastName { get; set; }
+
+        [Display(Name="Phone Number")]
         public string PhoneNumber { get; set; }
+
+        [Display(Name="E-mail")]
         public string Email { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
