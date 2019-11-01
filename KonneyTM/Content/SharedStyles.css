@@ -127,7 +127,9 @@ nav {
     width: 12rem;
     list-style-type: none;
 }
-.Footer.DemoFooter {
-    background-color: none;
+
+
+.DemoFooter .Back {
+    margin-left: -2rem;
 }
 /* FOOTER ENDS */

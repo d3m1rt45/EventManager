@@ -16,13 +16,21 @@
 }
 else if (Request.Path.Contains("Demo"))
 {
-    <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
-        <ul class="ml-auto">
-            <li class="nav-item">
-                @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light" })
-            </li>
-        </ul>
-    </div>
+    if (Request.Path.Contains("Events"))
+    {
+        <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
+            <ul class="Back">
+                <li class="nav-item">
+                    @Html.ActionLink("Back", "Index", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
+                </li>
+            </ul>
+            <ul class="Quit ml-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light" })
+                </li>
+            </ul>
+        </div>
+    }
 }
 else
 {
