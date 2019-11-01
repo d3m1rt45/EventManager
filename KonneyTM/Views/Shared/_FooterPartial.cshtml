@@ -16,21 +16,47 @@
 }
 else if (Request.Path.Contains("Demo"))
 {
-    if (Request.Path.Contains("Events"))
+<div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
+
+    @if (Request.Path.Contains("Events") || Request.Path.Contains("Venues") || Request.Path.Contains("People"))
     {
-        <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
-            <ul class="Back">
-                <li class="nav-item">
-                    @Html.ActionLink("Back", "Index", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
-                </li>
-            </ul>
-            <ul class="Quit ml-auto">
-                <li class="nav-item">
-                    @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light" })
-                </li>
-            </ul>
-        </div>
+        <ul class="Back">
+            <li class="nav-item">
+                @Html.ActionLink("Back", "Index", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
+            </li>
+        </ul>
     }
+    else if (Request.Path.Contains("NewEvent") || Request.Path.Contains("EventDetails"))
+    {
+        <ul class="Back">
+            <li class="nav-item">
+                @Html.ActionLink("Back", "Events", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
+            </li>
+        </ul>
+    }
+    else if (Request.Path.Contains("NewPerson") || Request.Path.Contains("PersonDetails"))
+    {
+        <ul class="Back">
+            <li class="nav-item">
+                @Html.ActionLink("Back", "People", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
+            </li>
+        </ul>
+    }
+    else if (Request.Path.Contains("NewVenue") || Request.Path.Contains("VenueDetails"))
+    {
+        <ul class="Back">
+            <li class="nav-item">
+                @Html.ActionLink("Back", "Venues", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
+            </li>
+        </ul>
+    }
+
+    <ul class="Quit ml-auto">
+        <li class="nav-item">
+            @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light" })
+        </li>
+    </ul>
+</div>
 }
 else
 {

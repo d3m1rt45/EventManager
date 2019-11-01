@@ -1,4 +1,8 @@
 ﻿/* EVENTS */
+section {
+    padding-right: 1rem;
+}
+
 .Header {
     width: 100%;
     background: rgb(15,65,13);
