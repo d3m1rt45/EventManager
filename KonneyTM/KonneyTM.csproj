@@ -315,6 +315,7 @@
     <Content Include="Views\Demo\NewPerson.cshtml" />
     <Content Include="Views\Demo\Venues.cshtml" />
     <Content Include="Views\Demo\NewVenue.cshtml" />
+    <Content Include="Views\Demo\EditVenue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

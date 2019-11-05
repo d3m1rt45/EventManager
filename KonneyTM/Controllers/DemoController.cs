@@ -106,5 +106,16 @@ namespace KonneyTM.Controllers
             //Return a view model based on the id that's being passed.
             return View(VenueViewModel.FromVenue(db.Venues.First(p => p.ID == id)));
         }
+
+        [HttpPost]
+        public ActionResult EditVenue(VenueViewModel venueVM)
+        {
+            if(ModelState.IsValid)
+            {
+                venueVM.SubmitChanges();
+                return RedirectToAction("Venues");
+            }
+            return View(venueVM);
+        }
     }
 }
