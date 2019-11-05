@@ -1,6 +1,7 @@
 namespace KonneyTM.DAL
 {
     using KonneyTM.Models;
+    using KonneyTM.ViewModels;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration.Conventions;
@@ -22,8 +23,8 @@ namespace KonneyTM.DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public System.Data.Entity.DbSet<KonneyTM.Models.PersonViewModel> PersonViewModels { get; set; }
+        public System.Data.Entity.DbSet<PersonViewModel> PersonViewModels { get; set; }
 
-        public System.Data.Entity.DbSet<KonneyTM.ViewModels.VenueViewModel> VenueViewModels { get; set; }
+        public System.Data.Entity.DbSet<VenueViewModel> VenueViewModels { get; set; }
     }
 }

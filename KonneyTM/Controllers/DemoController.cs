@@ -18,13 +18,12 @@ namespace KonneyTM.Controllers
 
         public ActionResult Events()
         {
-            return View(db.Events.OrderBy(e => e.Date).ToList());
+            return View(EventViewModel.GetAllAsOrderedList());
         }
 
         public ActionResult NewEvent()
         {
-            var eventVM = new EventViewModel();
-            return View(eventVM);
+            return View(new EventViewModel());
         }
 
         [HttpPost]
@@ -35,23 +34,19 @@ namespace KonneyTM.Controllers
                 eventVM.SaveAsEvent();
                 return RedirectToAction("Events");
             }
-            else
-            {
-                return View(eventVM);
-            }
+
+            return View(eventVM);
         }
 
         public ActionResult People()
         {
-            var peopleByName = db.People.OrderBy(p => p.FirstName).ToList();
-            return View(peopleByName);
+            //Returns a list of PersonViewModel populated by each person in db.People, ordered by their first name
+            return View(PersonViewModel.GetAllAsOrderedList());
         }
 
         public ActionResult NewPerson()
         {
-            var personVM = new PersonViewModel();
-
-            return View(personVM);
+            return View(new PersonViewModel());
         }
 
         [HttpPost]
@@ -62,15 +57,12 @@ namespace KonneyTM.Controllers
                 personVM.SaveAsPerson();
                 return RedirectToAction("People");
             }
-            else
-            {
-                return View(personVM);
-            }
+            return View(personVM);
         }
 
         public ActionResult EditPerson(int id)
         {
-            var personVM = PersonViewModel.ConvertPerson(db.People.First(p => p.ID == id));
+            var personVM = PersonViewModel.FromPerson(db.People.First(p => p.ID == id));
             return View(personVM);
         }
 
@@ -82,13 +74,12 @@ namespace KonneyTM.Controllers
                 personVM.SubmitChanges();
                 return RedirectToAction("People");
             }
-
             return View(personVM);
         }
 
         public ActionResult Venues()
         {
-            return View(db.Venues.ToList());
+            return View(VenueViewModel.GetAllAsOrderedList());
         }
 
         public ActionResult NewVenue()
@@ -108,6 +99,12 @@ namespace KonneyTM.Controllers
             }
 
             return View(venueVM);
+        }
+
+        public ActionResult EditVenue(int id)
+        {
+            //Return a view model based on the id that's being passed.
+            return View(VenueViewModel.FromVenue(db.Venues.First(p => p.ID == id)));
         }
     }
 }

@@ -11,7 +11,7 @@ namespace KonneyTM.DAL.CustomDataAnnotations
 
         public override bool IsValid(object value)
         {
-            var dt = (DateTime)value;
+            DateTime dt = (DateTime)value;
             if (dt >= DateTime.Now && dt <= DateTime.Now.AddYears(3))
             { 
                 return true;

@@ -1,4 +1,4 @@
-﻿@model KonneyTM.Models.NewEventViewModel
+﻿@model KonneyTM.ViewModels.EventViewModel
 @{
     ViewBag.Title = "New Event";
 }
@@ -40,9 +40,9 @@
                     @for (int i = 0; i < Model.VenueList.Count; i++)
                     {
                         <div class="col-3">
-                            @Html.RadioButton("SelectedVenueID", Model.VenueList[i].ID)
+                            @Html.RadioButton("PlaceID", Model.VenueList[i].ID)
                             @Html.DisplayFor(x => x.VenueList[i].Name)
-                            @Html.ValidationMessageFor(model => model.SelectedVenueID, "", new { @class = "text-danger"})
+                            @Html.ValidationMessageFor(model => model.PlaceID, "", new { @class = "text-danger"})
                         </div>
                     }
                 </div>

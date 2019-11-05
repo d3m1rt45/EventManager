@@ -42,8 +42,55 @@ namespace KonneyTM.ViewModels
             });
 
             db.SaveChanges();
+            db.Dispose();
+        }
+
+        public static VenueViewModel FromVenue(Venue venue)
+        {
+            var venueVM = new VenueViewModel
+            {
+                Name = venue.Name,
+                Address = venue.Address,
+                PostCode = venue.PostCode,
+                PhoneNumber = venue.PhoneNumber
+            };
+
+            return venueVM;
+        }
+
+        public Venue ToVenue()
+        {
+            var venue = new Venue
+            {
+                Name = this.Name,
+                Address = this.Address,
+                PostCode = this.PostCode,
+                PhoneNumber = this.PhoneNumber
+            };
+
+            return venue;
+        }
+
+        public static List<VenueViewModel> GetAllAsOrderedList()
+        {
+            var db = new KonneyContext();
+            var venues = db.Venues;
+            
+            var venuesVM = new List<VenueViewModel>();
+            foreach (var v in venues)
+            {
+                venuesVM.Add(new VenueViewModel
+                {
+                    ID = v.ID,
+                    Name = v.Name,
+                    Address = v.Address,
+                    PostCode = v.PostCode,
+                    PhoneNumber = v.PhoneNumber
+                });
+            }
 
             db.Dispose();
+            return venuesVM.OrderBy(v => v.Name).ToList();
         }
     }
 }

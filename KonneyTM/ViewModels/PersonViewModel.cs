@@ -1,4 +1,5 @@
 ﻿using KonneyTM.DAL;
+using KonneyTM.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace KonneyTM.Models
+namespace KonneyTM.ViewModels
 {
     public class PersonViewModel
     {   
@@ -30,7 +31,7 @@ namespace KonneyTM.Models
         public string Email { get; set; }
 
         
-        public static PersonViewModel ConvertPerson(Person person)
+        public static PersonViewModel FromPerson(Person person)
         {
             var personVM = new PersonViewModel
             {
@@ -42,6 +43,35 @@ namespace KonneyTM.Models
             };
             return personVM;
         }
+        public static List<PersonViewModel> GetAllAsOrderedList()
+        {
+            var db = new KonneyContext();
+            var people = db.People.ToList();
+            db.Dispose();
+            
+            var peopleVM = new List<PersonViewModel>();
+            foreach (var p in people)
+            {
+                peopleVM.Add(new PersonViewModel
+                {
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    PhoneNumber = p.PhoneNumber,
+                    Email = p.Email,
+                    ID = p.ID
+                });
+            }
+
+            return peopleVM.OrderBy(p => p.FirstName).ToList();
+        }
+        
+        public Person ToPerson()
+        {
+            var db = new KonneyContext();
+            var person = db.People.First(p => p.ID == this.ID);
+            return person;
+        }
+
         public void SaveAsPerson()
         {
             var db = new KonneyContext();
