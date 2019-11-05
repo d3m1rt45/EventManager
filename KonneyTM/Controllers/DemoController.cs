@@ -47,6 +47,37 @@ namespace KonneyTM.Controllers
             return View(db.People.OrderBy(p => p.FirstName));
         }
 
+        public ActionResult NewPerson()
+        {
+            var personVM = new PersonViewModel();
+
+            return View(personVM);
+        }
+
+        [HttpPost]
+        public ActionResult NewPerson(PersonViewModel personVM)
+        {
+            if (ModelState.IsValid)
+            { 
+                var person = new Person
+                {
+                    FirstName = personVM.FirstName,
+                    LastName = personVM.LastName,
+                    PhoneNumber = personVM.PhoneNumber,
+                    Email = personVM.Email
+                };
+
+                db.People.Add(person);
+                db.SaveChanges();
+
+                return RedirectToAction("People");
+            }
+            else
+            {
+                return View(personVM);
+            }
+        }
+
         public ActionResult EditPerson(int id)
         {
             var person = db.People.First(p => p.ID == id);

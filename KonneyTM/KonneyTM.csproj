@@ -313,6 +313,7 @@
     <Content Include="Views\Demo\SetVenue.cshtml" />
     <Content Include="Views\Demo\People.cshtml" />
     <Content Include="Views\Demo\EditPerson.cshtml" />
+    <Content Include="Views\Demo\NewPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
