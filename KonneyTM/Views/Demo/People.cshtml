@@ -45,16 +45,13 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Email)
                         </td>
-                        <td class="ml-auto">
+                        <td class="ml-auto text-center">
                             <a href="@Url.Action("EditPerson", "Demo", new { id = item.ID })">
                                 <i class="fas fa-edit fa-2x"></i>
                             </a>
                             <a href="@Url.Action("DeletePerson", "Demo", new { id = item.ID })">
                                 <i class="fas fa-trash-alt fa-2x"></i>
                             </a>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                         </td>
                     </tr>
                 }
