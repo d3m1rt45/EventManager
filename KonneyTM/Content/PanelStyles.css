@@ -150,22 +150,34 @@ th {
 }
 
 .PersonCol {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .PersonCard {
+    border: #00EBC3 0.2rem solid;
     border-top-left-radius: 3rem;
     border-bottom-right-radius: 3rem;
-    height: 10rem;
+    height: 9.5rem;
     background-color: #0F410D;
     margin-bottom: 0.3rem;
 }
 
-.PersonInitials {
-    font-size: 40pt;
+.PersonName {
     color: #EEFBEE;
 }
 
-.PersonName {
-    color: #0F410D;
+.PersonPhone {
+    color: #EEFBEE;
+}
+
+.PersonEmail {
+    color: #EEFBEE;
+    font-size: 12pt;
+}
+
+.PersonEdit {
+    position: absolute;
+    color: #00EBC3;
+    right: 1.5rem;
+    top: 0.5rem;
 }

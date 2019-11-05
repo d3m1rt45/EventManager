@@ -44,7 +44,13 @@ namespace KonneyTM.Controllers
 
         public ActionResult People()
         {
-            return View(db.People);
+            return View(db.People.OrderBy(p => p.FirstName));
+        }
+
+        public ActionResult EditPerson(int id)
+        {
+            var person = db.People.First(p => p.ID == id);
+            return View(person);
         }
 
         public ActionResult Venues()
