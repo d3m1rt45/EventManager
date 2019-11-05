@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KonneyTM.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,5 +28,49 @@ namespace KonneyTM.Models
         [Required(ErrorMessage = "Email address cannot be empty.")]
         [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
         public string Email { get; set; }
+
+        public void SaveAsPerson()
+        {
+            var db = new KonneyContext();
+
+            var person = new Person
+            {
+                FirstName = this.FirstName,
+                LastName = this.LastName,
+                PhoneNumber = this.PhoneNumber,
+                Email = this.Email
+            };
+
+            db.People.Add(person);
+            db.SaveChanges();
+        }
+
+        public void SubmitChanges()
+        {
+            var db = new KonneyContext();
+
+            var person = db.People.First(p => p.ID == this.ID);
+
+            person.FirstName = this.FirstName;
+            person.LastName = this.LastName;
+            person.Email = this.Email;
+            person.PhoneNumber = this.PhoneNumber;
+
+            db.SaveChanges();
+        }
+        
+        public static PersonViewModel ConvertPerson(Person person)
+        {
+            var personVM = new PersonViewModel
+            {
+                ID = person.ID,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                PhoneNumber = person.PhoneNumber,
+                Email = person.Email
+            };
+
+            return personVM;
+        }
     }
 }

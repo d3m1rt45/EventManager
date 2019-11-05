@@ -17,34 +17,33 @@ namespace KonneyTM.Controllers
 
         public ActionResult Events()
         {
-            return View(db.Events);
+            return View(db.Events.ToList());
         }
 
         public ActionResult NewEvent()
         {
-            var newEventVM = new NewEventViewModel();
-            
-            return View(newEventVM);
+            var eventVM = new EventViewModel();
+            return View(eventVM);
         }
 
         [HttpPost]
-        public ActionResult NewEvent(NewEventViewModel newEventVM)
+        public ActionResult NewEvent(EventViewModel eventVM)
         {
             if(ModelState.IsValid)
             {
-                newEventVM.SaveAsEvent();
-
+                eventVM.SaveAsEvent();
                 return RedirectToAction("Events");
             }
             else
             {
-                return View(newEventVM);
+                return View(eventVM);
             }
         }
 
         public ActionResult People()
         {
-            return View(db.People.OrderBy(p => p.FirstName));
+            var peopleByName = db.People.OrderBy(p => p.FirstName).ToList();
+            return View(peopleByName);
         }
 
         public ActionResult NewPerson()
@@ -58,18 +57,8 @@ namespace KonneyTM.Controllers
         public ActionResult NewPerson(PersonViewModel personVM)
         {
             if (ModelState.IsValid)
-            { 
-                var person = new Person
-                {
-                    FirstName = personVM.FirstName,
-                    LastName = personVM.LastName,
-                    PhoneNumber = personVM.PhoneNumber,
-                    Email = personVM.Email
-                };
-
-                db.People.Add(person);
-                db.SaveChanges();
-
+            {
+                personVM.SaveAsPerson();
                 return RedirectToAction("People");
             }
             else
@@ -80,17 +69,7 @@ namespace KonneyTM.Controllers
 
         public ActionResult EditPerson(int id)
         {
-            var person = db.People.First(p => p.ID == id);
-
-            var personVM = new PersonViewModel
-            {
-                ID = person.ID,
-                FirstName = person.FirstName,
-                LastName = person.LastName,
-                PhoneNumber = person.PhoneNumber,
-                Email = person.Email
-            };
-
+            var personVM = PersonViewModel.ConvertPerson(db.People.First(p => p.ID == id));
             return View(personVM);
         }
 
@@ -99,14 +78,7 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                var person = db.People.First(p => p.ID == personVM.ID);
-
-                person.FirstName = personVM.FirstName;
-                person.LastName = personVM.LastName;
-                person.Email = personVM.Email;
-                person.PhoneNumber = personVM.PhoneNumber;
-
-                db.SaveChanges();
+                personVM.SubmitChanges();
                 return RedirectToAction("People");
             }
 
@@ -115,7 +87,7 @@ namespace KonneyTM.Controllers
 
         public ActionResult Venues()
         {
-            return View();
+            return View(db.Venues.ToList());
         }
     }
 }

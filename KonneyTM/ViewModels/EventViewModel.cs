@@ -10,9 +10,9 @@ using System.Web.Mvc;
 
 namespace KonneyTM.Models
 {
-    public class NewEventViewModel
+    public class EventViewModel
     {
-        public NewEventViewModel()
+        public EventViewModel()
         {
             var db = new KonneyContext();
             

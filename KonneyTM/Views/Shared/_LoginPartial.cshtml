@@ -28,7 +28,7 @@ else if (Request.Path.Contains("Demo"))
 else
 {
     <li class="nav-item">
-        @Html.ActionLink("Demo", "Index", "Demo", null, new { @class = "nav-link text-light" })
+        @Html.ActionLink("Demo", "Events", "Demo", null, new { @class = "nav-link text-light" })
     </li>
     <li class="nav-item">
         @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-light" })
