@@ -11,8 +11,32 @@
             <h2>People</h2>
         </div><!--/.Header-->
 
+        <article class="PeopleRow row">
+            @foreach (var item in Model)
+            {
+                
+                <div class="PersonCol col-2">
+                    <a href="@Url.Action("PersonDetails", "Demo", new { id = item.ID } )">
+                        <div class="PersonCard d-flex align-items-center justify-content-center">
+                            @if (item.ImagePath == null)
+                            {
+                                <h3 class="PersonInitials">@item.FirstName.Substring(0, 1) @item.LastName.Substring(0, 1)</h3>
+                            }
+                            else
+                            {
+                                //Image Logic to be Implemented. Possibly a jQuery Function.
+                            }
+                        </div><!--/.PersonCard-->
+                    </a>
+                    <div class="PersonName text-center w-100">
+                        <h4>@item.FirstName @item.LastName</h4>
+                    </div>
+                </div><!--/.PersonCol-->
 
-        <article class="PeopleTable">
+            }
+        </article><!--/.PeopleRow-->
+
+        @*<article class="PeopleTable">
             <table class="table table-bordered">
                 <tr>
                     <th>
@@ -57,7 +81,7 @@
                 }
 
             </table>
-        </article>
+        </article>*@
 
         <p class="ml-auto">
             @Html.ActionLink("Create New", "Create")

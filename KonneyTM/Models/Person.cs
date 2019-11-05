@@ -25,6 +25,8 @@ namespace KonneyTM.Models
         [Display(Name="E-mail")]
         public string Email { get; set; }
 
+        public string ImagePath { get; set; }
+
         public virtual ICollection<Event> Events { get; set; }
     }
 }

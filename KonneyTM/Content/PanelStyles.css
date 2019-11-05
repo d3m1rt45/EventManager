@@ -143,3 +143,29 @@ th {
     font-family: 'Overlock SC', sans-serif;
     font-size: 16pt;
 }
+
+.PeopleRow {
+    padding-left: 1rem;
+    padding-right: 0.8rem;
+}
+
+.PersonCol {
+    margin-bottom: 2rem;
+}
+
+.PersonCard {
+    border-top-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    height: 10rem;
+    background-color: #0F410D;
+    margin-bottom: 0.3rem;
+}
+
+.PersonInitials {
+    font-size: 40pt;
+    color: #EEFBEE;
+}
+
+.PersonName {
+    color: #0F410D;
+}
