@@ -27,6 +27,8 @@ namespace KonneyTM.Models
             db.Dispose();
         }
 
+        public int ID { get; set; }
+
         [Required]
         [StringLength(30)]
         public string Title { get; set; }
