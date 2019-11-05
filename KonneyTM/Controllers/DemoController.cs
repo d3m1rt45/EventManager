@@ -1,5 +1,6 @@
 ﻿using KonneyTM.DAL;
 using KonneyTM.Models;
+using KonneyTM.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace KonneyTM.Controllers
 
         public ActionResult Events()
         {
-            return View(db.Events.ToList());
+            return View(db.Events.OrderBy(e => e.Date).ToList());
         }
 
         public ActionResult NewEvent()
@@ -88,6 +89,25 @@ namespace KonneyTM.Controllers
         public ActionResult Venues()
         {
             return View(db.Venues.ToList());
+        }
+
+        public ActionResult NewVenue()
+        {
+            var venueVM = new VenueViewModel();
+
+            return View(venueVM);
+        }
+
+        [HttpPost]
+        public ActionResult NewVenue(VenueViewModel venueVM)
+        {
+            if (ModelState.IsValid)
+            {
+                venueVM.SaveAsVenue();
+                return RedirectToAction("Venues");
+            }
+
+            return View(venueVM);
         }
     }
 }

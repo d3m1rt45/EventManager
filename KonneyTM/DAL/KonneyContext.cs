@@ -23,5 +23,7 @@ namespace KonneyTM.DAL
         }
 
         public System.Data.Entity.DbSet<KonneyTM.Models.PersonViewModel> PersonViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<KonneyTM.ViewModels.VenueViewModel> VenueViewModels { get; set; }
     }
 }

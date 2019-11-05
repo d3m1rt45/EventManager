@@ -1,0 +1,39 @@
+﻿@model IEnumerable<KonneyTM.Models.Venue>
+
+@{
+    ViewBag.Title = "Venues";
+}
+@Styles.Render("~/PanelStyles")
+
+<section class="Panel-Venues">
+
+    <div class="Header">
+        <h2>Venues</h2>
+    </div><!--/.Header-->
+
+    <article class="VenueRow row">
+        @foreach (var item in Model)
+        {
+
+            <div class="VenueCol col-md-6">
+                <div class="VenueCard d-flex justify-content-center align-items-center">
+                    <div class="Align text-center">
+                        <a href="@Url.Action("EditVenue", "Demo", new { id = item.ID})"><i class="PersonEdit fas fa-edit fa-2x"></i></a>
+                        <h4 class="VenueName d-block">@item.Name.</h4><!--/.PersonDetails-->
+                        <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
+                        <h5 class="VenueAddress lead d-block">@item.Address</h5>
+                        <h5 class="VenuePostCode lead d-block">@item.PostCode</h5>
+                    </div><!--/.Align-->
+                </div><!--/.VenueCard-->
+            </div><!--/.VenueCol-->
+
+        }
+        <div class="NewVenueColumn col-md-6">
+            <a class="NewVenueLink" href="@Url.Action("NewVenue", "Demo")">
+                <div class="NewVenue">
+                    <i class="fas fa-plus fa-6x"></i>
+                </div><!--/.NewVenue-->
+            </a><!--/.NewVenueLink-->
+        </div><!--/.NewVenueColumn-->
+    </article><!--/.VenueRow-->
+</section>

@@ -53,7 +53,6 @@ namespace KonneyTM.Models
         public List<Venue> VenueList { get; set; }
         public List<SelectListItem> PeopleList { get; set; }
 
-
         public void SaveAsEvent()
         {
             var db = new KonneyContext();

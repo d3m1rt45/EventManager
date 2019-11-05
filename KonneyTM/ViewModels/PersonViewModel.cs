@@ -29,22 +29,34 @@ namespace KonneyTM.Models
         [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
         public string Email { get; set; }
 
+        
+        public static PersonViewModel ConvertPerson(Person person)
+        {
+            var personVM = new PersonViewModel
+            {
+                ID = person.ID,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                PhoneNumber = person.PhoneNumber,
+                Email = person.Email
+            };
+            return personVM;
+        }
         public void SaveAsPerson()
         {
             var db = new KonneyContext();
 
-            var person = new Person
+            db.People.Add(new Person
             {
                 FirstName = this.FirstName,
                 LastName = this.LastName,
                 PhoneNumber = this.PhoneNumber,
                 Email = this.Email
-            };
+            });
 
-            db.People.Add(person);
             db.SaveChanges();
+            db.Dispose();
         }
-
         public void SubmitChanges()
         {
             var db = new KonneyContext();
@@ -57,20 +69,7 @@ namespace KonneyTM.Models
             person.PhoneNumber = this.PhoneNumber;
 
             db.SaveChanges();
-        }
-        
-        public static PersonViewModel ConvertPerson(Person person)
-        {
-            var personVM = new PersonViewModel
-            {
-                ID = person.ID,
-                FirstName = person.FirstName,
-                LastName = person.LastName,
-                PhoneNumber = person.PhoneNumber,
-                Email = person.Email
-            };
-
-            return personVM;
+            db.Dispose();
         }
     }
 }
