@@ -50,7 +50,36 @@ namespace KonneyTM.Controllers
         public ActionResult EditPerson(int id)
         {
             var person = db.People.First(p => p.ID == id);
-            return View(person);
+
+            var personVM = new PersonViewModel
+            {
+                ID = person.ID,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                PhoneNumber = person.PhoneNumber,
+                Email = person.Email
+            };
+
+            return View(personVM);
+        }
+
+        [HttpPost]
+        public ActionResult EditPerson(PersonViewModel personVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var person = db.People.First(p => p.ID == personVM.ID);
+
+                person.FirstName = personVM.FirstName;
+                person.LastName = personVM.LastName;
+                person.Email = personVM.Email;
+                person.PhoneNumber = personVM.PhoneNumber;
+
+                db.SaveChanges();
+                return RedirectToAction("People");
+            }
+
+            return View(personVM);
         }
 
         public ActionResult Venues()

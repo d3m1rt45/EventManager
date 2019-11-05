@@ -25,7 +25,15 @@ else if (Request.Path.Contains("Demo"))
             </li>
         </ul>
     }
-    else if (Request.Path.Contains("NewPerson") || Request.Path.Contains("PersonDetails"))
+    else if (Request.Path.Contains("People"))
+    {
+        <ul class="Back">
+            <li class="nav-item">
+                @Html.ActionLink("Back", "Events", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
+            </li>
+        </ul>
+    }
+    else if (Request.Path.Contains("Person"))
     {
         <ul class="Back">
             <li class="nav-item">

@@ -14,18 +14,25 @@
         <article class="PeopleRow row">
             @foreach (var item in Model)
             {
-                
+
                 <div class="PersonCol col-2">
                     <div class="PersonCard text-center pt-4">
                         <a href="@Url.Action("EditPerson", "Demo", new { id = item.ID})"><i class="PersonEdit fas fa-edit fa-2x"></i></a>
-                        <h4 class="PersonName d-block">@item.FirstName @item.LastName.Substring(0,1).</h4><!--/.PersonDetails-->
+                        <h4 class="PersonName d-block">@item.FirstName @item.LastName.Substring(0, 1).</h4><!--/.PersonDetails-->
                         <h5 class="PersonEmail lead d-block">@item.Email</h5>
                         <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
                     </div><!--/.PersonCard-->
-                    
+
                 </div><!--/.PersonCol-->
 
             }
+            <div class="NewPersonColumn col-6">
+                <a class="NewPersonLink" href="@Url.Action("NewEvent", "Demo")">
+                    <div class="NewPerson">
+                        <i class="fas fa-plus fa-9x"></i>
+                    </div><!--/.NewPerson-->
+                </a><!--/.NewPersonLink-->
+            </div><!--/.NewPersonColumn-->
         </article><!--/.PeopleRow-->
 
 
