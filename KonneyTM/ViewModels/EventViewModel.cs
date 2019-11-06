@@ -101,12 +101,19 @@ namespace KonneyTM.ViewModels
                     Date = ev.Date,
                     Time = ev.Time,
                     Place = VenueViewModel.FromVenue(ev.Place)
-                    
                 };
                 foreach (var p in ev.PeopleAttending)
                 {
                     eventVM.PeopleAttending.Add(PersonViewModel.FromPerson(p));
                 }
+                eventVM.PeopleList = new List<SelectListItem>();
+                eventVM.PeopleAttending = new List<PersonViewModel>();
+
+                foreach (var p in db.People)
+                {
+                    eventVM.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
+                }
+
                 eventsVM.Add(eventVM);
             }
 

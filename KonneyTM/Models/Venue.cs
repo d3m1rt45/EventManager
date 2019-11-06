@@ -17,6 +17,8 @@ namespace KonneyTM.Models
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string PostCode { get; set; }
+
+        [DataType(DataType.ImageUrl)]
         public string ImagePath { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }

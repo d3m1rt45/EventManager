@@ -10,7 +10,7 @@
         <h2>New Person</h2>
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("NewVenue", "Demo", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
         @Html.AntiForgeryToken()
 

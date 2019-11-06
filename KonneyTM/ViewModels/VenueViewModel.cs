@@ -29,7 +29,9 @@ namespace KonneyTM.ViewModels
             ErrorMessage = "Invalid Postcode")]
         public string PostCode { get; set; }
 
+        [DataType(DataType.ImageUrl)]
         public string ImagePath { get; set; }
+        
         public HttpPostedFileBase ImageFile { get; set; }
 
         public void SaveToDB()
@@ -56,7 +58,8 @@ namespace KonneyTM.ViewModels
                 Name = venue.Name,
                 Address = venue.Address,
                 PostCode = venue.PostCode,
-                PhoneNumber = venue.PhoneNumber
+                PhoneNumber = venue.PhoneNumber,
+                ImagePath = venue.ImagePath
             };
 
             return venueVM;
@@ -69,7 +72,8 @@ namespace KonneyTM.ViewModels
                 Name = this.Name,
                 Address = this.Address,
                 PostCode = this.PostCode,
-                PhoneNumber = this.PhoneNumber
+                PhoneNumber = this.PhoneNumber,
+                ImagePath = this.ImagePath
             };
 
             return venue;
@@ -89,7 +93,8 @@ namespace KonneyTM.ViewModels
                     Name = v.Name,
                     Address = v.Address,
                     PostCode = v.PostCode,
-                    PhoneNumber = v.PhoneNumber
+                    PhoneNumber = v.PhoneNumber,
+                    ImagePath = v.ImagePath
                 });
             }
 
