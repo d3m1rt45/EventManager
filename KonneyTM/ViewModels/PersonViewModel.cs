@@ -30,7 +30,7 @@ namespace KonneyTM.ViewModels
         [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
         public string Email { get; set; }
 
-        
+        //Takes a Person instance and returns a PersonViewModel instance
         public static PersonViewModel FromPerson(Person person)
         {
             var personVM = new PersonViewModel
@@ -43,6 +43,8 @@ namespace KonneyTM.ViewModels
             };
             return personVM;
         }
+
+        //Returns all the Persons in the Database as a List of PersonViewModel instances ordered by FirstName
         public static List<PersonViewModel> GetAllAsOrderedList()
         {
             var db = new KonneyContext();
@@ -64,7 +66,8 @@ namespace KonneyTM.ViewModels
 
             return peopleVM.OrderBy(p => p.FirstName).ToList();
         }
-        
+
+        //Converts this instance of this ViewModel to a Person instance
         public Person ToPerson()
         {
             var db = new KonneyContext();
@@ -72,7 +75,8 @@ namespace KonneyTM.ViewModels
             return person;
         }
 
-        public void SaveAsPerson()
+        //Converts this instance to Person and saves it to the database all at once.
+        public void SaveToDB()
         {
             var db = new KonneyContext();
 

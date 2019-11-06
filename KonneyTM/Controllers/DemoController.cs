@@ -18,12 +18,14 @@ namespace KonneyTM.Controllers
 
         public ActionResult Events()
         {
-            return View(EventViewModel.GetAllAsOrderedList());
+            var eventVMs = EventViewModel.GetAllAsOrderedList();
+            return View(eventVMs);
         }
 
         public ActionResult NewEvent()
         {
-            return View(new EventViewModel());
+            var eventVM = new EventViewModel();
+            return View(eventVM);
         }
 
         [HttpPost]
@@ -31,7 +33,7 @@ namespace KonneyTM.Controllers
         {
             if(ModelState.IsValid)
             {
-                eventVM.SaveAsEvent();
+                eventVM.SaveAsEvent(); //Converts the EventViewModel instance to an Event instance and saves to to the database.
                 return RedirectToAction("Events");
             }
 
@@ -54,7 +56,7 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                personVM.SaveAsPerson();
+                personVM.SaveToDB();
                 return RedirectToAction("People");
             }
             return View(personVM);
@@ -94,7 +96,7 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                venueVM.SaveAsVenue();
+                venueVM.SaveToDB();
                 return RedirectToAction("Venues");
             }
 

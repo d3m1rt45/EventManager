@@ -61,7 +61,8 @@ namespace KonneyTM.ViewModels
         public List<Venue> VenueList { get; set; }
         public List<SelectListItem> PeopleList { get; set; }
 
-        public void SaveAsEvent()
+        //Converts the ViewModel instance to an Event and saves it to the database.
+        public void SaveToDB() 
         {
             var db = new KonneyContext();
 
@@ -84,6 +85,7 @@ namespace KonneyTM.ViewModels
             db.Dispose();
         }
 
+        //Returns all the Events in the Database as a List of EventViewModels ordered by date.
         public static List<EventViewModel> GetAllAsOrderedList()
         {
             var db = new KonneyContext();

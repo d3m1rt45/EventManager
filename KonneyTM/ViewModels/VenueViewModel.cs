@@ -29,7 +29,7 @@ namespace KonneyTM.ViewModels
             ErrorMessage = "Invalid Postcode")]
         public string PostCode { get; set; }
 
-        public void SaveAsVenue()
+        public void SaveToDB()
         {
             var db = new KonneyContext();
 

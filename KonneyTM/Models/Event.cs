@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KonneyTM.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,5 +28,6 @@ namespace KonneyTM.Models
         public virtual ICollection<Person> PeopleAttending { get; set; }
 
         public virtual Venue Place { get; set; }
+
     }
 }
