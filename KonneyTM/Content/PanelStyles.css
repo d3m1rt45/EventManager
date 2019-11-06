@@ -52,26 +52,36 @@ span {
     margin-bottom: 1rem;
 }
 
-.Controls > .Left, .Right {
-    display: inline-block;
+.DeleteEvent, .EditEvent, .EventDetails {
+    position: absolute;
 }
 
-.Controls a {
-    color: #EEFBEE;
-    font-family: 'Overlock', sans-serif;
-    font-weight: 700;
-    font-size: 13pt;
-    margin-right: 0.5rem;
-    text-decoration: underline;
+.EventDetails {
+    bottom: 2em;
+    left: 1.2em;
+    color: coral
+}
+
+.EditEvent {
+    bottom: 2.1em;
+    left: 2.7em;
+}
+
+.DeleteEvent {
+    position: absolute;
+    color: #ff2200;
+    cursor: pointer;
+    bottom: 2em;
+    left: 4.4em;
 }
 
 .Picture {
     border-radius: 0.5rem;
-    background-image: url("../Images/Welcome.jpg");
     background-position: center;
     background-size: cover;
     height: 100%;
     width: 100%;
+    box-shadow: inset 0.2rem 0.2rem 0.3rem;
 }
 
 .NewEventColumn, .NewPersonColumn, .NewVenueColumn {
@@ -178,6 +188,10 @@ th {
     font-size: 12pt;
 }
 
+.InnerRow{
+    z-index: 1 !important;
+}
+
 .EditPerson {
     position: absolute;
     color: #00fffb;
@@ -186,10 +200,11 @@ th {
 }
 
 .DeletePerson {
+    z-index: 2 !important;
     position: absolute;
     color: #ff2200;
-    left: 1em;
-    top: 0.46em;
+    right: 1.07em;
+    bottom: 2em;
     cursor: pointer;
 }
 

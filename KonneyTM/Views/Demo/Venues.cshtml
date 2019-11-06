@@ -14,11 +14,7 @@
     <article class="VenueRow row">
         @foreach (var item in Model)
         {
-
             <div class="VenueCol col-md-4">
-                @*@if (item.ImagePath != null && item.ImagePath != ""){*@
-
-
                 <div class="VenueCard" id="@item.ID" style="background-image: url(/Images/Venues/@item.ImagePath)">
                     <div class="overlay text-center d-flex justify-content-center align-items-center">
                         <div class="Align">
@@ -29,7 +25,7 @@
                                onclick="$('.modal-body').html('@item.Name and all events scheduled here will be deleted. Are you sure?');
                                                 $('.ConfirmDelete').attr('href', '@Url.Action("DeleteVenue", "Demo", new { id = @item.ID })')">
                                 <i class="DeleteVenue fas fa-trash-alt fa-2x"></i>
-                            </a><!--/.EditButton-->
+                            </a><!--/.DeleteButton-->
                             <h4 class="VenueName d-block">@item.Name</h4>
                             <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
                             <h5 class="VenueAddress lead d-block">@item.Address</h5>
@@ -37,21 +33,9 @@
                         </div>
                     </div><!--/.Align-->
                 </div><!--/.VenueCard-->
-                @*}else{
-                        <div class="VenueCard d-flex justify-content-center align-items-center">
-                            <div class="Align text-center">
-                                <a href="@Url.Action("EditVenue", "Demo", new { id = item.ID })"><i class="PersonEdit fas fa-edit fa-2x"></i></a>
-                                <h4 class="VenueName d-block">@item.Name</h4><!--/.PersonDetails-->
-                                <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
-                                <h5 class="VenueAddress lead d-block">@item.Address</h5>
-                                <h5 class="VenuePostCode lead d-block">@item.PostCode</h5>
-                            </div><!--/.Align-->
-                        </div><!--/.VenueCard-->
-                    }*@
             </div><!--/.VenueCol-->
-
         }
-        <div class="NewVenueColumn col-md-6">
+        <div class="NewVenueColumn col-md-4">
             <a class="NewVenueLink" href="@Url.Action("NewVenue", "Demo")">
                 <div class="NewVenue">
                     <i class="fas fa-plus fa-6x"></i>
