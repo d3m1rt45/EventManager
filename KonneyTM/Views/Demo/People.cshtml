@@ -17,7 +17,9 @@
 
             <div class="PersonCol col-2">
                 <div class="PersonCard text-center pt-4">
-                    <a href="@Url.Action("EditPerson", "Demo", new { id = item.ID})"><i class="PersonEdit fas fa-user-edit fa-2x"></i></a>
+                    <a class="EditButton" href="@Url.Action("EditPerson", "Demo", new { id = item.ID})">
+                        <i class="EditPerson fas fa-user-edit fa-2x"></i>
+                    </a><!--/.EditButton-->
                     <h4 class="PersonName d-block">@item.FirstName @item.LastName.Substring(0, 1).</h4><!--/.PersonDetails-->
                     <h5 class="PersonEmail lead d-block">@item.Email</h5>
                     <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>

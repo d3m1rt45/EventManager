@@ -28,9 +28,9 @@ namespace KonneyTM.DAL
 
             var venues = new List<Venue>
             {
-                new Venue{Name="Cavendish Conference Centre", Address="Cavendish Venues, 22 Duchess Mews, Marylebone, London", PostCode="W1G 9DT", PhoneNumber="02077067700"},
-                new Venue{Name="Lisa's House", Address="26 Hartbrooke Road, Enfield", PostCode="EN2 0DE", PhoneNumber="07958569896"},
-                new Venue{Name="The Harp", Address="47 Chandos Pl, Charing Cross, London", PostCode="WC2N 4HS", PhoneNumber="020 7836 0291"}
+                new Venue{Name="Cavendish Conference Centre", Address="Cavendish Venues, 22 Duchess Mews, Marylebone, London", PostCode="W1G 9DT", PhoneNumber="02077067700", ImagePath="02077067700W1G9DT.jpg"},
+                new Venue{Name="National Theatre", Address="Upper Ground, Lambeth, London", PostCode="SE1 9PX", PhoneNumber="02074523000", ImagePath="0207452000SE19PX.jpg"},
+                new Venue{Name="The Harp", Address="47 Chandos Pl, Charing Cross, London", PostCode="WC2N 4HS", PhoneNumber="02078360291", ImagePath="02078360291WC2N4HS.jpg"}
             };
 
             venues.ForEach(v => context.Venues.Add(v));

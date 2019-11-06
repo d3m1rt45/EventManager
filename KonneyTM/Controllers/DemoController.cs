@@ -98,13 +98,13 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
+                venueVM.SaveToDB();
+
                 string extension = Path.GetExtension(venueVM.ImageFile.FileName);
                 string imageFileName = venueVM.PhoneNumber.RemoveWhitespace() + venueVM.PostCode.RemoveWhitespace() + extension;
                 venueVM.ImagePath = imageFileName;
                 imageFileName = Path.Combine(Server.MapPath("~/Images/Venues"), imageFileName);
                 venueVM.ImageFile.SaveAs(imageFileName);
-
-                venueVM.SaveToDB();
 
                 return RedirectToAction("Venues");
             }
@@ -127,6 +127,11 @@ namespace KonneyTM.Controllers
                 return RedirectToAction("Venues");
             }
             return View(venueVM);
+        }
+
+        public ActionResult ConfirmVenueDelete(int id)
+        {
+            return View(db.Venues.First(v => v.ID == id));
         }
     }
 }

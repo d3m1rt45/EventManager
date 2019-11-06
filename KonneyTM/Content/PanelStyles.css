@@ -178,7 +178,7 @@ th {
     font-size: 12pt;
 }
 
-.PersonEdit {
+.EditPerson {
     position: absolute;
     color: #EEFBEE;
     right: 1.4rem;
@@ -226,22 +226,33 @@ th {
     margin-bottom: 3rem;
     box-shadow: black 0.1rem 0.5rem 0.4rem;
     border: #00EBC3 0.2rem solid;
+    transition-duration: 1s;
 }
-    .VenueCardImaged:hover {
-        transition-duration: 1s;
-        background: #0F410D;
-        background-image: none !important;
-    }
+
+.overlay { /* Sit on top of the page content */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 1rem;
+}
 
 .VenueName, .VenuePhone, .VenueAddress, .VenuePostCode {
     color: #EEFBEE;
 }
 
-.VenueEdit {
+.EditVenue {
     position: absolute;
     color: #EEFBEE;
-    right: 1.4rem;
-    top: 0.7rem;
+    right: 1.2em;
+    top: 0.7em;
+}
+
+.DeleteVenue {
+    position: absolute;
+    color: #EEFBEE;
+    right: 1.5em;
+    bottom: 2.3em;
+    cursor: pointer;
 }
 
 .NewVenue {
