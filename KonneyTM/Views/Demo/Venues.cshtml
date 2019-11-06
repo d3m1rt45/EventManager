@@ -5,42 +5,39 @@
 }
 @Styles.Render("~/PanelStyles")
 
-    <section class="Panel-Venues">
+<section class="Panel-Venues">
 
-        <div class="Header">
-            <h2>Venues</h2>
-        </div><!--/.Header-->
+    <div class="Header">
+        <h2>Venues</h2>
+    </div><!--/.Header-->
 
-        <article class="VenueRow row">
-            @foreach (var item in Model)
-            {
+    <article class="VenueRow row">
+        @foreach (var item in Model)
+        {
 
-                <div class="VenueCol col-md-6">
-                    @*@if (item.ImagePath != null && item.ImagePath != ""){*@
+            <div class="VenueCol col-md-4">
+                @*@if (item.ImagePath != null && item.ImagePath != ""){*@
 
 
-                        <div class="VenueCard" id="@item.ID" style="background-image: url(/Images/Venues/@item.ImagePath)">
-                            <div class="overlay text-center d-flex justify-content-center align-items-center">
-                                <div class="Align">
-                                    <a class="EditButton" href="@Url.Action("EditVenue", "Demo", new { id = item.ID })">
-                                        <i class="EditVenue fas fa-edit fa-2x"></i>
-                                    </a><!--/.EditButton-->
-                                    <a class="DeleteButton" data-toggle="modal" data-target="#DeleteVenueModal" 
-                                       onclick="$('.modal-body').html('@item.Name and all events scheduled here will be deleted. Are you sure?');
-                                                $('.DeleteVenueButton').attr('href', '@Url.Action("DeleteVenue", "Demo", new { id = @item.ID })')">
-                                        <i class="DeleteVenue fas fa-trash-alt fa-2x"></i>
-                                    </a><!--/.EditButton-->
-                                    <h4 class="VenueName d-block">@item.Name</h4>
-                                    <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
-                                    <h5 class="VenueAddress lead d-block">@item.Address</h5>
-                                    <h5 class="VenuePostCode lead d-block">@item.PostCode</h5>
-                                </div>
-                            </div><!--/.Align-->
-                        </div><!--/.VenueCard-->
-                        
-                          
-
-                    @*}else{
+                <div class="VenueCard" id="@item.ID" style="background-image: url(/Images/Venues/@item.ImagePath)">
+                    <div class="overlay text-center d-flex justify-content-center align-items-center">
+                        <div class="Align">
+                            <a class="EditButton" href="@Url.Action("EditVenue", "Demo", new { id = item.ID })">
+                                <i class="EditVenue fas fa-edit fa-2x"></i>
+                            </a><!--/.EditButton-->
+                            <a class="DeleteButton" data-toggle="modal" data-target="#DeleteVenueModal"
+                               onclick="$('.modal-body').html('@item.Name and all events scheduled here will be deleted. Are you sure?');
+                                                $('.ConfirmDelete').attr('href', '@Url.Action("DeleteVenue", "Demo", new { id = @item.ID })')">
+                                <i class="DeleteVenue fas fa-trash-alt fa-2x"></i>
+                            </a><!--/.EditButton-->
+                            <h4 class="VenueName d-block">@item.Name</h4>
+                            <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
+                            <h5 class="VenueAddress lead d-block">@item.Address</h5>
+                            <h5 class="VenuePostCode lead d-block">@item.PostCode</h5>
+                        </div>
+                    </div><!--/.Align-->
+                </div><!--/.VenueCard-->
+                @*}else{
                         <div class="VenueCard d-flex justify-content-center align-items-center">
                             <div class="Align text-center">
                                 <a href="@Url.Action("EditVenue", "Demo", new { id = item.ID })"><i class="PersonEdit fas fa-edit fa-2x"></i></a>
@@ -51,37 +48,33 @@
                             </div><!--/.Align-->
                         </div><!--/.VenueCard-->
                     }*@
-                </div><!--/.VenueCol-->
+            </div><!--/.VenueCol-->
 
-            }
-            <div class="NewVenueColumn col-md-6">
-                <a class="NewVenueLink" href="@Url.Action("NewVenue", "Demo")">
-                    <div class="NewVenue">
-                        <i class="fas fa-plus fa-6x"></i>
-                    </div><!--/.NewVenue-->
-                </a><!--/.NewVenueLink-->
-            </div><!--/.NewVenueColumn-->
-        </article><!--/.VenueRow-->
-    </section>
+        }
+        <div class="NewVenueColumn col-md-6">
+            <a class="NewVenueLink" href="@Url.Action("NewVenue", "Demo")">
+                <div class="NewVenue">
+                    <i class="fas fa-plus fa-6x"></i>
+                </div><!--/.NewVenue-->
+            </a><!--/.NewVenueLink-->
+        </div><!--/.NewVenueColumn-->
+    </article><!--/.VenueRow-->
+</section>
 
-    <article class="modal fade" id="DeleteVenueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-danger">Delete Venue</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <p class="font-weight-bold modal-body mb-0">
-
-                </p>
-                <div class="modal-footer">
-                    <a class="CloseModalButton btn btn-secondary text-light" data-dismiss="modal">Close</a>
-                    <a class="DeleteVenueButton btn btn-danger text-light">Delete</a>
-                </div>
-            </div>
-        </div>
-    </article>
-
-
+<article class="DeleteVenueModal modal fade" id="DeleteVenueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-danger">Delete Venue</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div><!--/.modal-header-->
+            <p class="modal-body font-weight-bold mb-0"></p>
+            <div class="modal-footer">
+                <a class="CloseModal btn btn-secondary text-light" data-dismiss="modal">Close</a>
+                <a class="ConfirmDelete btn btn-danger text-light">Delete</a>
+            </div><!--/.modal-footer-->
+        </div><!--/.modal-content-->
+    </div><!--/.modal-dialog-->
+</article><!--/.DeleteVenueModal-->

@@ -81,6 +81,14 @@ namespace KonneyTM.Controllers
             return View(personVM);
         }
 
+        public ActionResult DeletePerson(int id)
+        {
+            var person = db.People.First(p => p.ID == id);
+            db.People.Remove(person);
+            db.SaveChanges();
+            return RedirectToAction("People");
+        }
+
         public ActionResult Venues()
         {
             return View(VenueViewModel.GetAllAsOrderedList());
@@ -145,5 +153,7 @@ namespace KonneyTM.Controllers
 
             return RedirectToAction("Venues");
         }
+
+        
     }
 }
