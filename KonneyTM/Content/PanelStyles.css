@@ -212,11 +212,26 @@ th {
     height: 15rem;
     border-radius: 1rem;
     padding: 1rem 1rem 1rem 1rem;
-    background: rgb(15,65,13);
+    background-color: rgb(15,65,13);
     margin-bottom: 3rem;
     box-shadow: black 0.1rem 0.5rem 0.4rem;
     border: #00EBC3 0.2rem solid;
 }
+
+.VenueCardImaged {
+    background-position: center !important;
+    background-size: cover !important;
+    height: 15rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+}
+    .VenueCardImaged:hover {
+        transition-duration: 1s;
+        background: #0F410D;
+        background-image: none !important;
+    }
 
 .VenueName, .VenuePhone, .VenueAddress, .VenuePostCode {
     color: #EEFBEE;

@@ -178,6 +178,7 @@
     <Compile Include="DAL\CustomDataAnnotations.cs" />
     <Compile Include="DAL\KonneyContext.cs" />
     <Compile Include="DAL\KonneyInitializer.cs" />
+    <Compile Include="ExtensionMethods\StringExtensionMethods.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\SharedStyles.css" />
+    <Content Include="Images\Venues\02088016640N154JR.JPG" />
     <Content Include="Images\Welcome.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -319,7 +321,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\Venues\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

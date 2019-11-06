@@ -1,4 +1,5 @@
 ﻿using KonneyTM.DAL;
+using KonneyTM.ExtensionMethods;
 using KonneyTM.Models;
 using KonneyTM.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
@@ -98,12 +99,13 @@ namespace KonneyTM.Controllers
             if (ModelState.IsValid)
             {
                 string extension = Path.GetExtension(venueVM.ImageFile.FileName);
-                string imageFileName = venueVM.ID + extension;
+                string imageFileName = venueVM.PhoneNumber.RemoveWhitespace() + venueVM.PostCode.RemoveWhitespace() + extension;
                 venueVM.ImagePath = imageFileName;
                 imageFileName = Path.Combine(Server.MapPath("~/Images/Venues"), imageFileName);
                 venueVM.ImageFile.SaveAs(imageFileName);
 
                 venueVM.SaveToDB();
+
                 return RedirectToAction("Venues");
             }
 

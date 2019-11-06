@@ -16,21 +16,35 @@
         {
 
             <div class="VenueCol col-md-6">
-                <div class="VenueCard @item.ID d-flex justify-content-center align-items-center">
-                    <div class="Align text-center">
-                        @if (item.ImagePath != null && item.ImagePath != "")
-                        {
-                            <script>
-                                $('myObject').css('background-image', 'url("~/Images/Venues' + @item.ImagePath + '")');
-                            </script>
-                        }
-                        <a href="@Url.Action("EditVenue", "Demo", new { id = item.ID})"><i class="PersonEdit fas fa-edit fa-2x"></i></a>
-                        <h4 class="VenueName d-block">@item.Name</h4><!--/.PersonDetails-->
-                        <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
-                        <h5 class="VenueAddress lead d-block">@item.Address</h5>
-                        <h5 class="VenuePostCode lead d-block">@item.PostCode</h5>
-                    </div><!--/.Align-->
-                </div><!--/.VenueCard-->
+                @if (item.ImagePath != null && item.ImagePath != "")
+                {
+                    <div class="VenueCardImaged d-flex justify-content-center align-items-center"
+                         onmouseover="$(this).children().removeClass('d-none')"
+                         onmouseout="$(this).children().addClass('d-none')"
+                         style="background-image: url(/Images/Venues/@item.ImagePath)">
+                        <div class="Align d-none text-center">
+                            <a class="EditButton" href="@Url.Action("EditVenue", "Demo", new { id = item.ID })">
+                                <i class="PersonEdit fas fa-edit fa-2x"></i>
+                            </a><!--/.EditButton-->
+                            <h4 class="VenueName d-block">@item.Name</h4>
+                            <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
+                            <h5 class="VenueAddress lead d-block">@item.Address</h5>
+                            <h5 class="VenuePostCode lead d-block">@item.PostCode</h5>
+                        </div><!--/.Align-->
+                    </div><!--/.VenueCard-->
+                }
+                else
+                {
+                    <div class="VenueCard d-flex justify-content-center align-items-center">
+                        <div class="Align text-center">
+                            <a href="@Url.Action("EditVenue", "Demo", new { id = item.ID })"><i class="PersonEdit fas fa-edit fa-2x"></i></a>
+                            <h4 class="VenueName d-block">@item.Name</h4><!--/.PersonDetails-->
+                            <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
+                            <h5 class="VenueAddress lead d-block">@item.Address</h5>
+                            <h5 class="VenuePostCode lead d-block">@item.PostCode</h5>
+                        </div><!--/.Align-->
+                    </div><!--/.VenueCard-->
+                }
             </div><!--/.VenueCol-->
 
         }
