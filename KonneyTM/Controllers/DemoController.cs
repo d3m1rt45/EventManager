@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -33,7 +34,7 @@ namespace KonneyTM.Controllers
         {
             if(ModelState.IsValid)
             {
-                eventVM.SaveAsEvent(); //Converts the EventViewModel instance to an Event instance and saves to to the database.
+                eventVM.SaveToDB(); //Converts the EventViewModel instance to an Event instance and saves to to the database.
                 return RedirectToAction("Events");
             }
 
@@ -96,6 +97,12 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
+                string extension = Path.GetExtension(venueVM.ImageFile.FileName);
+                string imageFileName = venueVM.ID + extension;
+                venueVM.ImagePath = imageFileName;
+                imageFileName = Path.Combine(Server.MapPath("~/Images/Venues"), imageFileName);
+                venueVM.ImageFile.SaveAs(imageFileName);
+
                 venueVM.SaveToDB();
                 return RedirectToAction("Venues");
             }
