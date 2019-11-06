@@ -129,9 +129,21 @@ namespace KonneyTM.Controllers
             return View(venueVM);
         }
 
-        public ActionResult ConfirmVenueDelete(int id)
+        public ActionResult DeleteVenue(int id)
         {
-            return View(db.Venues.First(v => v.ID == id));
+            //Remove the related events to make the deletion of Venue possible.
+            var relatedEvents = db.Events.Where(p => p.Place.ID == id).ToList();
+            foreach(var ev in relatedEvents)
+            {
+                db.Events.Remove(ev);
+            }
+
+            //Remove the venue and save changes
+            var venue = db.Venues.First(v => v.ID == id);
+            db.Venues.Remove(venue);
+            db.SaveChanges();
+
+            return RedirectToAction("Venues");
         }
     }
 }

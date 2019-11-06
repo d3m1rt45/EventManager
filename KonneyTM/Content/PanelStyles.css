@@ -209,16 +209,6 @@ th {
 }
 
 .VenueCard {
-    height: 15rem;
-    border-radius: 1rem;
-    padding: 1rem 1rem 1rem 1rem;
-    background-color: rgb(15,65,13);
-    margin-bottom: 3rem;
-    box-shadow: black 0.1rem 0.5rem 0.4rem;
-    border: #00EBC3 0.2rem solid;
-}
-
-.VenueCardImaged {
     background-position: center !important;
     background-size: cover !important;
     height: 15rem;
@@ -228,11 +218,10 @@ th {
     border: #00EBC3 0.2rem solid;
     transition-duration: 1s;
 }
-
 .overlay { /* Sit on top of the page content */
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.85);
     border-radius: 1rem;
 }
 
@@ -242,14 +231,14 @@ th {
 
 .EditVenue {
     position: absolute;
-    color: #EEFBEE;
+    color: #00fffb;
     right: 1.2em;
     top: 0.7em;
 }
 
 .DeleteVenue {
     position: absolute;
-    color: #EEFBEE;
+    color: #ff2200;
     right: 1.5em;
     bottom: 2.3em;
     cursor: pointer;
@@ -267,4 +256,18 @@ th {
     box-shadow: black 0.1rem 0.5rem 0.4rem;
     border: #00EBC3 0.2rem solid;
     transition-duration: 0.5s;
+}
+
+/* CONFIRM DELETION MODAL */
+.modal-body {
+    font-family: Overlock, sans-serif;
+    font-weight: 700;
+    font-size: 17pt;
+}
+
+.DeleteVenueButton, .CloseModalButton {
+    cursor: pointer;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 15pt;
+    font-family: 'Overlock SC', sans-serif;
 }
