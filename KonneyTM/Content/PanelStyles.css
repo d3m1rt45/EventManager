@@ -117,8 +117,17 @@ span {
 .ChangeVenue {
     position: absolute;
     color: #00fffb;
-    right: 1.3em;
-    top: 2em;
+    right: 1.07em;
+    bottom: 2em;
+}
+
+.RemovePerson {
+    z-index: 2 !important;
+    position: absolute;
+    color: #ff2200;
+    right: 1.07em;
+    bottom: 2em;
+    cursor: pointer;
 }
 
 

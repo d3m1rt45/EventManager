@@ -95,6 +95,14 @@ namespace KonneyTM.Controllers
             return RedirectToAction("EventDetails", new { id = eventID });
         }
 
+        public ActionResult RemovePerson(int eventID, int personID)
+        {
+            var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
+            relatedEvent.InvitedPeopleIDs.RemoveAll(i => i == personID);
+            relatedEvent.SubmitChanges();
+            return RedirectToAction("EventDetails", new { id = eventID });
+        }
+
         public ActionResult People()
         {
             //Returns a list of PersonViewModel populated by each person in db.People, ordered by their first name

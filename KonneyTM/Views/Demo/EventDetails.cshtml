@@ -49,6 +49,10 @@
                         <h4 class="PersonName d-block">@item.LastName</h4>
                         <h5 class="PersonEmail lead d-block">@item.Email</h5>
                         <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
+
+                        <a class="RemoveButton" href="@Url.Action("RemovePerson", "Demo", new { eventID = Model.ID, personID = item.ID})">
+                            <i class="RemovePerson fas fa-trash-alt fa-2x"></i>
+                        </a><!--/.DeleteButton-->
                     </div><!--/.PersonCard-->
                 </div><!--/.PersonCol-->
             }
@@ -64,5 +68,4 @@
             }
         </div><!--/.row-->
     </article><!--/.EventsContainer-->
-
 </section>

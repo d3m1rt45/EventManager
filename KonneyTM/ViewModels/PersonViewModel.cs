@@ -88,6 +88,26 @@ namespace KonneyTM.ViewModels
             return personVMList;
         }
 
+        //Takes a PersonViewModel list and returns a Person list
+        public static List<Person> ToPersonList(ICollection<PersonViewModel> people)
+        {
+            var personList = new List<Person>();
+
+            foreach (var p in people)
+            {
+                personList.Add(new Person
+                {
+                    ID = p.ID,
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    Email = p.Email,
+                    PhoneNumber = p.PhoneNumber
+                });
+            }
+
+            return personList;
+        }
+
         //Converts this instance of this ViewModel to a Person instance
         public Person ToPerson()
         {

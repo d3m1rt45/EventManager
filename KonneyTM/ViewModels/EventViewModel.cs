@@ -157,14 +157,15 @@ namespace KonneyTM.ViewModels
             ev.Date = Convert.ToDateTime(this.Date);
             ev.Time = Convert.ToDateTime(this.Time);
             ev.Place = db.Venues.First(v => v.ID == this.PlaceID);
-            ev.PeopleAttending = new List<Person>();
             ev.ImagePath = this.ImagePath;
 
+            ev.PeopleAttending.Clear();
             foreach (var id in this.InvitedPeopleIDs)
             {
                 ev.PeopleAttending.Add(db.People.First(p => p.ID == id));
             }
 
+            db.Events.Attach(ev);
             db.SaveChanges();
             db.Dispose();
         }
