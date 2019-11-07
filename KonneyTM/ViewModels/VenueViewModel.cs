@@ -55,6 +55,7 @@ namespace KonneyTM.ViewModels
         {
             var venueVM = new VenueViewModel
             {
+                ID = venue.ID,
                 Name = venue.Name,
                 Address = venue.Address,
                 PostCode = venue.PostCode,

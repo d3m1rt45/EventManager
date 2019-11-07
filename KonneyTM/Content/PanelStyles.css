@@ -16,7 +16,7 @@ section {
 }
 
 .EventCard {
-    height: 15rem;
+    height: 16rem;
     border-radius: 1rem;
     padding: 1rem 1rem 1rem 1rem;
     background: rgb(15,65,13);
@@ -43,36 +43,12 @@ span {
     font-size: 15pt;
 }
 
-
 .InnerRow {
     height: 100%;
 }
 
 .Info {
     margin-bottom: 1rem;
-}
-
-.DeleteEvent, .EditEvent, .EventDetails {
-    position: absolute;
-}
-
-.EventDetails {
-    bottom: 2em;
-    left: 1.2em;
-    color: coral
-}
-
-.EditEvent {
-    bottom: 2.1em;
-    left: 2.7em;
-}
-
-.DeleteEvent {
-    position: absolute;
-    color: #ff2200;
-    cursor: pointer;
-    bottom: 2em;
-    left: 4.4em;
 }
 
 .Picture {
@@ -90,6 +66,13 @@ span {
     align-items: center;
     height: 100%;
     margin-top: 1em;
+}
+
+.EventDetails {
+    position:absolute;
+    bottom: 0;
+    left: 0.5em;
+    color: #00fffb;
 }
 
 .NewEvent {
@@ -117,6 +100,23 @@ span {
 .NewEvent i, .NewPerson i, .NewVenue i {
     color: #EEFBEE;
 }
+
+.EventDetailsTitle {
+    font-weight: 900;
+}
+
+.EventVenueCard {
+    background-position: center !important;
+    background-size: cover !important;
+    height: 12rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+    transition-duration: 1s;
+}
+
+
 
 .ButtonOut {
     margin: 0 0.5rem 0 0.5rem;

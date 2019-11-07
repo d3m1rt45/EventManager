@@ -1,0 +1,49 @@
+﻿@model KonneyTM.ViewModels.EventViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
+@Styles.Render("~/PanelStyles")
+
+<section class="Panel-Events">
+
+    <div class="Header">
+        <h2>Event Details</h2>
+    </div><!--/.Header-->
+
+    <article class="EventsContainer container-fluid">
+        <div class="row text-center">
+            <div class="VenueCol col-xl-12">
+                <h2 class="EventDetailsTitle mb-xl-3">@Model.Title</h2>
+                <div class="EventVenueCard" style="background-image: url(/Images/Venues/@Model.Place.ImagePath)">
+                    <div class="overlay text-center d-flex justify-content-center align-items-center">
+                        <div class="Align">
+                            <h4 class="VenueName d-block">@Model.Place.Name</h4>
+                            <h5 class="VenuePhone lead d-block">@Model.Place.PhoneNumber</h5>
+                            <h5 class="VenueAddress lead d-block">@Model.Place.Address</h5>
+                            <h5 class="VenuePostCode lead d-block">@Model.Place.PostCode</h5>
+                        </div>
+                    </div><!--/.Align-->
+                </div><!--/.VenueCard-->
+            </div><!--/.VenueCol-->
+            <div class="EventInfo col-xl-12 d-flex align-items-center justify-content-center mb-xl-5">
+                <div class="Align">
+                    <h3 class="d-inline-block mr-2">Date:</h3><h3 class="text-primary d-inline-block mr-5">@Model.Date.ToLongDateString()</h3>
+                    <h3 class="d-inline-block mr-2">Time</h3><h3 class="text-primary d-inline-block">@Model.Time.ToShortTimeString()</h3> <br />
+                </div>
+            </div>
+            <h2 class="EventPeopleTitle mb-xl-3 col-xl-12">People Attending</h2>
+            @foreach (var item in Model.PeopleAttending)
+            {
+                <div class="PersonCol col-2">
+                    <div class="PersonCard text-center pt-4">
+                        <h4 class="PersonName d-block">@item.FirstName</h4>
+                        <h4 class="PersonName d-block">@item.LastName</h4>
+                        <h5 class="PersonEmail lead d-block">@item.Email</h5>
+                        <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
+                    </div><!--/.PersonCard-->
+                </div><!--/.PersonCol-->
+            }
+        </div><!--/.row-->
+    </article><!--/.EventsContainer-->
+
+</section>

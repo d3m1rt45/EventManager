@@ -56,10 +56,38 @@ namespace KonneyTM.ViewModels
         [Required]
         public List<int> InvitedPeopleIDs { get; set; }
 
-
         //CHECKBOX and RADIOBUTTON Properties
         public List<Venue> VenueList { get; set; }
         public List<SelectListItem> PeopleList { get; set; }
+
+        public static EventViewModel FromEvent(Event ev)
+        {
+            var eventVM = new EventViewModel
+            {
+                ID = ev.ID,
+                Title = ev.Title,
+                Place = VenueViewModel.FromVenue(ev.Place),
+                PlaceID = ev.Place.ID,
+                Date = ev.Date,
+                Time = ev.Time,
+                PeopleAttending = PersonViewModel.FromPersonList(ev.PeopleAttending),
+                InvitedPeopleIDs = GetIDsFromPersonList(ev.PeopleAttending),
+            };
+
+            return eventVM;
+        }
+
+        public static List<int> GetIDsFromPersonList(ICollection<Person> people)
+        {
+            var ids = new List<int>();
+
+            foreach (var p in people)
+            {
+                ids.Add(p.ID);
+            }
+
+            return ids;
+        }
 
         //Converts the ViewModel instance to an Event and saves it to the database.
         public void SaveToDB() 
