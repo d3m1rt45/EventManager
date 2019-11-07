@@ -49,6 +49,9 @@ namespace KonneyTM.ViewModels
 
         public List<PersonViewModel> PeopleAttending { get; set; }
 
+        [DataType(DataType.ImageUrl)]
+        public string ImagePath { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
 
         //IDs for populating the above lists
         [Required]
@@ -72,6 +75,7 @@ namespace KonneyTM.ViewModels
                 Time = ev.Time,
                 PeopleAttending = PersonViewModel.FromPersonList(ev.PeopleAttending),
                 InvitedPeopleIDs = GetIDsFromPersonList(ev.PeopleAttending),
+                ImagePath = ev.ImagePath
             };
 
             return eventVM;
@@ -100,7 +104,8 @@ namespace KonneyTM.ViewModels
                 Date = Convert.ToDateTime(this.Date),
                 Time = Convert.ToDateTime(this.Time),
                 Place = db.Venues.First(v => v.ID == this.PlaceID),
-                PeopleAttending = new List<Person>()
+                PeopleAttending = new List<Person>(),
+                ImagePath = this.ImagePath
             };
 
             foreach(var id in this.InvitedPeopleIDs)
@@ -126,21 +131,14 @@ namespace KonneyTM.ViewModels
                 {
                     ID = ev.ID,
                     Title = ev.Title,
+                    Place = VenueViewModel.FromVenue(ev.Place),
+                    PlaceID = ev.Place.ID,
                     Date = ev.Date,
                     Time = ev.Time,
-                    Place = VenueViewModel.FromVenue(ev.Place)
+                    PeopleAttending = PersonViewModel.FromPersonList(ev.PeopleAttending),
+                    InvitedPeopleIDs = GetIDsFromPersonList(ev.PeopleAttending),
+                    ImagePath = ev.ImagePath
                 };
-                foreach (var p in ev.PeopleAttending)
-                {
-                    eventVM.PeopleAttending.Add(PersonViewModel.FromPerson(p));
-                }
-                eventVM.PeopleList = new List<SelectListItem>();
-                eventVM.PeopleAttending = new List<PersonViewModel>();
-
-                foreach (var p in db.People)
-                {
-                    eventVM.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
-                }
 
                 eventsVM.Add(eventVM);
             }

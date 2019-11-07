@@ -39,8 +39,8 @@ namespace KonneyTM.DAL
 
             var events = new List<Event>
             {
-                new Event{Title="Oxford Law (17-18) Reunion", PeopleAttending=people, Place=venues[0], Date=DateTime.Now.AddDays(24), Time = DateTime.UtcNow},
-                new Event{Title="Party!! For like... No reason!", PeopleAttending=people, Place=venues[1], Date=DateTime.Now.AddDays(7), Time = DateTime.UtcNow},
+                new Event{Title="Oxford Law (17-18) Reunion", PeopleAttending=people, Place=venues[0], Date=DateTime.Now.AddDays(24), Time = DateTime.UtcNow, ImagePath="whatlawnow.jpg"},
+                new Event{Title="Party!! For like... No reason!", PeopleAttending=people, Place=venues.First(p => p.Name == "The Harp"), Date=DateTime.Now.AddDays(7), Time = DateTime.UtcNow, ImagePath="noreasonforthisparty.jpg"},
             };
 
             events.ForEach(e => context.Events.Add(e));

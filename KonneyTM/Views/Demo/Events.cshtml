@@ -15,35 +15,29 @@
                 @foreach (var item in Model)
                 {
                     <div class="OuterColumn col-6">
-                        <div class="EventCard">
-                            <div class="InnerRow row pb-0">
-                                <div class="InnerColumn col-7 pb-0 pt-4">
+                        <div class="EventCard" style="background-image:url(/Images/Events/@item.ImagePath)">
+                            <div class="overlay text-center d-flex justify-content-center align-items-center">
+                                <div class="Align w-100">
                                     <h4 class="mb-3 d-block">@item.Title</h4>
-                                    <div class="Info pb-0">
-                                        <h4>Venue:</h4><span>@item.Place.Name</span> <br />
-                                        <h4>Date:</h4><span>@item.Date.ToLongDateString()</span> <br />
-                                        <h4 class="pb-0">Time:</h4><span>@item.Time.ToShortTimeString()</span> <br />
-                                        <a class="DetailsButton" href="@Url.Action("EventDetails", "Demo", new { id = item.ID })">
-                                            <i class="EventDetails fas fa-info-circle fa-2x"></i>
-                                        </a><!--/.DetailsButton-->
-                                    </div><!--/.Info-->
-                                </div><!--/.InnerColumn-->
-                                <div class="PictureColumn col-5">
-                                    <div class="Picture" style="background-image: url(/Images/Venues/@item.Place.ImagePath)">
-                                    </div><!--/.Picture-->
-                                </div><!--/.PictureColumn-->
-                            </div><!--/.InnerRow-->
+                                    <h4>Venue:</h4><span>@item.Place.Name</span> <br />
+                                    <h4>Date:</h4><span>@item.Date.ToLongDateString()</span> <br />
+                                    <h4>Time:</h4><span>@item.Time.ToShortTimeString()</span> <br />
+                                    <a href="@Url.Action("EventDetails", "Demo", new { id = item.ID })">
+                                        <i class="EventDetails mt-3 fas fa-info-circle fa-2x"></i>
+                                    </a><!--/.DetailsButton-->
+                                </div><!--/.Align-->
+                            </div><!--/.overlay-->
                         </div><!--/.EventCard-->
                     </div><!--/.OuterColumn-->
-                }
-            <div class="NewEventColumn col-6">
-                <a class="NewEventLink" href="@Url.Action("NewEvent", "Demo")">
-                    <div class="NewEvent">
-                        <i class="fas fa-plus fa-9x"></i>
-                    </div>
-                </a><!--/.NewEventLink-->
-            </div><!--/.NewEventColumn-->
-            </div><!--/.OuterRow-->
+                 }
+                            <div class="NewEventColumn col-6">
+                                <a class="NewEventLink" href="@Url.Action("NewEvent", "Demo")">
+                                    <div class="NewEvent">
+                                        <i class="fas fa-plus fa-9x"></i>
+                                    </div>
+                                </a><!--/.NewEventLink-->
+                            </div><!--/.NewEventColumn-->
+                        </div><!--/.OuterRow-->
         </article><!--/.EventsContainer-->
 
     </section>

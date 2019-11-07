@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
 
-
 @if (Request.IsAuthenticated)
 {
     <div class="Footer UserFooter d-flex w-100 justify-content-between fixed-bottom">
@@ -17,18 +16,10 @@
 else if (Request.Path.Contains("Demo"))
 {
 <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
-    @if (Request.Path.Contains("NewEvent") || Request.Path.Contains("EventDetails"))
+    @if (Request.Path.Contains("NewEvent") || Request.Path.Contains("EventDetails") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
     {
         <ul class="Back">
-            <li class="nav-item">
-                @Html.ActionLink("Back", "Events", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
-            </li>
-        </ul>
-    }
-    else if (Request.Path.Contains("People") || Request.Path.Contains("Venues"))
-    {
-        <ul class="Back">
-            <li class="nav-item">
+            <li class="nav-item BackInner">
                 @Html.ActionLink("Back", "Events", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
             </li>
         </ul>
@@ -36,15 +27,15 @@ else if (Request.Path.Contains("Demo"))
     else if (Request.Path.Contains("Person"))
     {
         <ul class="Back">
-            <li class="nav-item">
+            <li class="nav-item BackInner">
                 @Html.ActionLink("Back", "People", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
             </li>
         </ul>
     }
-    else if (Request.Path.Contains("NewVenue") || Request.Path.Contains("VenueDetails"))
+    else if (Request.Path.Contains("NewVenue") || Request.Path.Contains("EditVenue"))
     {
         <ul class="Back">
-            <li class="nav-item">
+            <li class="nav-item BackInner">
                 @Html.ActionLink("Back", "Venues", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
             </li>
         </ul>

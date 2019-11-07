@@ -25,6 +25,9 @@ namespace KonneyTM.Models
         [DisplayFormat(DataFormatString = "{0:hh-mm}", ApplyFormatInEditMode = true)]
         public DateTime Time { get; set; }
 
+        [DataType(DataType.ImageUrl)]
+        public string ImagePath { get; set; }
+
         public virtual ICollection<Person> PeopleAttending { get; set; }
 
         public virtual Venue Place { get; set; }

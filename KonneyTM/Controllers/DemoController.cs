@@ -35,6 +35,12 @@ namespace KonneyTM.Controllers
         {
             if(ModelState.IsValid)
             {
+                string extension = Path.GetExtension(eventVM.ImageFile.FileName);
+                string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
+                eventVM.ImagePath = imageFileName;
+                imageFileName = Path.Combine(Server.MapPath("~/Images/Events"), imageFileName);
+                eventVM.ImageFile.SaveAs(imageFileName);
+
                 eventVM.SaveToDB(); //Converts the EventViewModel instance to an Event instance and saves to to the database.
                 return RedirectToAction("Events");
             }
@@ -112,14 +118,13 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                venueVM.SaveToDB();
-
                 string extension = Path.GetExtension(venueVM.ImageFile.FileName);
                 string imageFileName = venueVM.PhoneNumber.RemoveWhitespace() + venueVM.PostCode.RemoveWhitespace() + extension;
                 venueVM.ImagePath = imageFileName;
                 imageFileName = Path.Combine(Server.MapPath("~/Images/Venues"), imageFileName);
                 venueVM.ImageFile.SaveAs(imageFileName);
 
+                venueVM.SaveToDB();
                 return RedirectToAction("Venues");
             }
 

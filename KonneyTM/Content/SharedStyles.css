@@ -77,6 +77,9 @@ nav {
 .Footer {
     padding: 1rem 4rem 0 4rem;
     width: 100vh;
+    background-color: #0F410D;
+    border-top: #00EBC3 0.2rem solid;
+    box-shadow: 0 -0.2rem 0.5rem black;
 }
 .HomeFooter {
     background-color: #0F410D;
@@ -128,8 +131,14 @@ nav {
     list-style-type: none;
 }
 
-
 .DemoFooter .Back {
     margin-left: -2rem;
+}
+
+.DemoFooter .BackInner {
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 3rem;
 }
 /* FOOTER ENDS */
