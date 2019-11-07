@@ -42,6 +42,12 @@ namespace KonneyTM.Controllers
             return View(eventVM);
         }
 
+        public ActionResult EventDetails(int id)
+        {
+            var eventVM = EventViewModel.FromEvent(db.Events.First(e => e.ID == id));
+            return View(eventVM);
+        }
+
         public ActionResult People()
         {
             //Returns a list of PersonViewModel populated by each person in db.People, ordered by their first name

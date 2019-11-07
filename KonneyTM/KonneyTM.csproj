@@ -319,6 +319,7 @@
     <Content Include="Views\Demo\NewVenue.cshtml" />
     <Content Include="Views\Demo\EditVenue.cshtml" />
     <Content Include="Views\Demo\ConfirmVenueDelete.cshtml" />
+    <Content Include="Views\Demo\EventDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

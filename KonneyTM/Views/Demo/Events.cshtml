@@ -15,30 +15,20 @@
                 @foreach (var item in Model)
                 {
                     <div class="OuterColumn col-6">
-
-                        <a class="DetailsButton" href="@Url.Action("EventDetails", "Demo", new { id = item.ID })">
-                            <i class="EventDetails fas fa-info-circle fa-2x"></i>
-                        </a><!--/.EditButton-->
-                        <a class="EditButton" href="@Url.Action("EditEvent", "Demo", new { id = item.ID })">
-                            <i class="EditEvent fas fa-edit fa-2x"></i>
-                        </a><!--/.EditButton-->
-                        <a class="DeleteButton" data-toggle="modal" data-target="#DeleteVenueModal"
-                            onclick="$('.modal-body').html('@item.Title will be deleted. Are you sure?');
-                                            $('.ConfirmDelete').attr('href', '@Url.Action("DeleteVenue", "Demo", new { id = @item.ID })')">
-                            <i class="DeleteEvent fas fa-trash-alt fa-2x"></i>
-                        </a><!--/.DeleteButton-->
-
                         <div class="EventCard">
                             <div class="InnerRow row pb-0">
-                                <div class="InnerColumn col-6 pb-0">
-                                    <h3>@item.Title</h3>
+                                <div class="InnerColumn col-7 pb-0 pt-4">
+                                    <h4 class="mb-3 d-block">@item.Title</h4>
                                     <div class="Info pb-0">
                                         <h4>Venue:</h4><span>@item.Place.Name</span> <br />
                                         <h4>Date:</h4><span>@item.Date.ToLongDateString()</span> <br />
                                         <h4 class="pb-0">Time:</h4><span>@item.Time.ToShortTimeString()</span> <br />
+                                        <a class="DetailsButton" href="@Url.Action("EventDetails", "Demo", new { id = item.ID })">
+                                            <i class="EventDetails fas fa-info-circle fa-2x"></i>
+                                        </a><!--/.DetailsButton-->
                                     </div><!--/.Info-->
                                 </div><!--/.InnerColumn-->
-                                <div class="PictureColumn col-6">
+                                <div class="PictureColumn col-5">
                                     <div class="Picture" style="background-image: url(/Images/Venues/@item.Place.ImagePath)">
                                     </div><!--/.Picture-->
                                 </div><!--/.PictureColumn-->

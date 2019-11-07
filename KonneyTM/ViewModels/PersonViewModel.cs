@@ -30,19 +30,6 @@ namespace KonneyTM.ViewModels
         [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
         public string Email { get; set; }
 
-        //Takes a Person instance and returns a PersonViewModel instance
-        public static PersonViewModel FromPerson(Person person)
-        {
-            var personVM = new PersonViewModel
-            {
-                ID = person.ID,
-                FirstName = person.FirstName,
-                LastName = person.LastName,
-                PhoneNumber = person.PhoneNumber,
-                Email = person.Email
-            };
-            return personVM;
-        }
 
         //Returns all the Persons in the Database as a List of PersonViewModel instances ordered by FirstName
         public static List<PersonViewModel> GetAllAsOrderedList()
@@ -65,6 +52,40 @@ namespace KonneyTM.ViewModels
             }
 
             return peopleVM.OrderBy(p => p.FirstName).ToList();
+        }
+
+        //Takes a Person instance and returns a PersonViewModel instance
+        public static PersonViewModel FromPerson(Person person)
+        {
+            var personVM = new PersonViewModel
+            {
+                ID = person.ID,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                PhoneNumber = person.PhoneNumber,
+                Email = person.Email
+            };
+            return personVM;
+        }
+
+        //Takes a Person list and returns a PersonViewModels list
+        public static List<PersonViewModel> FromPersonList(ICollection<Person> people)
+        {
+            var personVMList = new List<PersonViewModel>();
+
+            foreach(var p in people)
+            {
+                personVMList.Add(new PersonViewModel
+                {
+                    ID = p.ID,
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    Email = p.Email,
+                    PhoneNumber = p.PhoneNumber
+                });
+            }
+
+            return personVMList;
         }
 
         //Converts this instance of this ViewModel to a Person instance
