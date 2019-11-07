@@ -118,7 +118,8 @@ span {
     position: absolute;
     color: #00fffb;
     right: 1.07em;
-    bottom: 2em;
+    top: 2em;
+    cursor: pointer;
 }
 
 .RemovePerson {
@@ -126,7 +127,7 @@ span {
     position: absolute;
     color: #ff2200;
     right: 1.07em;
-    bottom: 2em;
+    top: 0.7em;
     cursor: pointer;
 }
 
@@ -302,7 +303,7 @@ th {
     font-size: 17pt;
 }
 
-.ConfirmDelete, .CloseModal{
+.Confirm, .CloseModal{
     cursor: pointer;
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     font-size: 15pt;
