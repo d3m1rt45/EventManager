@@ -33,6 +33,9 @@
                                 <h5 class="VenuePhone lead d-block">@Model.Place.PhoneNumber</h5>
                                 <h5 class="VenueAddress lead d-block">@Model.Place.Address</h5>
                                 <h5 class="VenuePostCode lead d-block">@Model.Place.PostCode</h5>
+                                <a class="ChangeVenueButton" href="@Url.Action("ChangeVenue","Demo",new { eventID = Model.ID })">
+                                    <i class="ChangeVenue fas fa-exchange-alt fa-2x"></i>
+                                </a><!--/.EditButton-->
                             </div>
                         </div><!--/.Align-->
                     </div><!--/.VenueCard-->

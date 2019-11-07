@@ -54,6 +54,21 @@ namespace KonneyTM.Controllers
             return View(eventVM);
         }
 
+        public ActionResult ChangeVenue(int eventID)
+        {
+            var change = new ChangeVenueVM { EventID = eventID };
+            return View(change);
+        }
+
+        public ActionResult SubmitVenueChange(int eventID, int venueID)
+        {
+            var eventToChange = db.Events.First(e => e.ID == eventID);
+            eventToChange.Place = db.Venues.First(v => v.ID == venueID);
+            db.SaveChanges();
+
+            return RedirectToAction("EventDetails", new { id = eventID });
+        }
+
         public ActionResult People()
         {
             //Returns a list of PersonViewModel populated by each person in db.People, ordered by their first name
