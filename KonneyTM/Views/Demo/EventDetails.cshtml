@@ -20,6 +20,9 @@
                                 <h4 class="mb-3 d-block">@Model.Title</h4>
                                 <h4>Date:</h4><span>@Model.Date.ToLongDateString()</span> <br />
                                 <h4>Time:</h4><span>@Model.Time.ToShortTimeString()</span> <br />
+                                <a class="EditButton" href="@Url.Action("EditEvent", "Demo", new { id = Model.ID })">
+                                    <i class="EditEvent fas fa-edit fa-2x"></i>
+                                </a><!--/.EditButton-->
                             </div><!--/.Align-->
                         </div><!--/.overlay-->
                     </div><!--/.EventCard-->
@@ -33,7 +36,7 @@
                                 <h5 class="VenuePhone lead d-block">@Model.Place.PhoneNumber</h5>
                                 <h5 class="VenueAddress lead d-block">@Model.Place.Address</h5>
                                 <h5 class="VenuePostCode lead d-block">@Model.Place.PostCode</h5>
-                                <a class="ChangeVenueButton"  data-toggle="modal" data-target="#RemovePersonModal"
+                                <a class="ChangeVenueButton" data-toggle="modal" data-target="#ConfirmModal"
                                     onclick="$('.modal-body').html('Change venue for this event?'); $('.modal-title').html('Venue Change');
                                              $('.Confirm').attr('href', '@Url.Action("ChangeVenue", "Demo", new { eventID = Model.ID })')">
                                     <i class="ChangeVenue fas fa-exchange-alt fa-2x"></i>
@@ -52,7 +55,7 @@
                             <h5 class="PersonEmail lead d-block">@item.Email</h5>
                             <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
 
-                            <a class="RemoveButton" data-toggle="modal" data-target="#RemovePersonModal"
+                            <a class="RemoveButton" data-toggle="modal" data-target="#ConfirmModal"
                                 onclick="$('.modal-body').html('Remove @item.FirstName @item.LastName from this event?'); $('.modal-title').html('Remove Person');
                                          $('.Confirm').attr('href', '@Url.Action("RemovePerson", "Demo", new { eventID = Model.ID, personID = item.ID })')">
                                 <i class="RemovePerson fas fa-trash-alt fa-2x"></i>
@@ -73,7 +76,7 @@
             </div><!--/.row-->
         </article><!--/.EventsContainer-->
 
-        <article id="RemovePersonModal" class="DeletePersonModal modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <article id="ConfirmModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">

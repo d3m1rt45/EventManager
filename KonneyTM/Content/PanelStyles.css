@@ -114,6 +114,13 @@ span {
     transition-duration: 1s;
 }
 
+.EditEvent {
+    position: absolute;
+    color: #00fffb;
+    right: 1.07em;
+    top: 2em;
+}
+
 .ChangeVenue {
     position: absolute;
     color: #00fffb;
@@ -125,7 +132,7 @@ span {
 .RemovePerson {
     z-index: 2 !important;
     position: absolute;
-    color: #ff2200;
+    color: #00fffb;
     right: 1.07em;
     top: 0.7em;
     cursor: pointer;
