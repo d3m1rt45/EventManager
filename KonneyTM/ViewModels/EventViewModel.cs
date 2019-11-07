@@ -146,5 +146,27 @@ namespace KonneyTM.ViewModels
             db.Dispose();
             return eventsVM.OrderBy(ev => ev.Date).ToList();
         }
+
+        public void SubmitChanges()
+        {
+            var db = new KonneyContext();
+
+            var ev = db.Events.First(p => p.ID == this.ID);
+
+            ev.Title = this.Title;
+            ev.Date = Convert.ToDateTime(this.Date);
+            ev.Time = Convert.ToDateTime(this.Time);
+            ev.Place = db.Venues.First(v => v.ID == this.PlaceID);
+            ev.PeopleAttending = new List<Person>();
+            ev.ImagePath = this.ImagePath;
+
+            foreach (var id in this.InvitedPeopleIDs)
+            {
+                ev.PeopleAttending.Add(db.People.First(p => p.ID == id));
+            }
+
+            db.SaveChanges();
+            db.Dispose();
+        }
     }
 }

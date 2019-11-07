@@ -56,8 +56,8 @@ namespace KonneyTM.Controllers
 
         public ActionResult ChangeVenue(int eventID)
         {
-            var change = new ChangeVenueVM { EventID = eventID };
-            return View(change);
+            var changeVenue = new ChangeVenueVM { EventID = eventID };
+            return View(changeVenue);
         }
 
         public ActionResult SubmitVenueChange(int eventID, int venueID)
@@ -66,6 +66,32 @@ namespace KonneyTM.Controllers
             eventToChange.Place = db.Venues.First(v => v.ID == venueID);
             db.SaveChanges();
 
+            return RedirectToAction("EventDetails", new { id = eventID });
+        }
+
+        public ActionResult AddPerson(int eventID)
+        {
+            var addPerson = new AddPersonVM { EventID = eventID };
+            var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
+            var allPeople = PersonViewModel.GetAllAsOrderedList();
+
+            foreach(var p in allPeople)
+            {
+                if (!relatedEvent.InvitedPeopleIDs.Contains(p.ID))
+                {
+                    addPerson.People.Add(p);
+                }
+            }
+
+            return View(addPerson);
+        }
+
+        public ActionResult SubmitPerson(int eventID, int personID)
+        {
+            var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
+            var relatedPerson = PersonViewModel.FromPerson(db.People.First(p => p.ID == personID));
+            relatedEvent.InvitedPeopleIDs.Add(relatedPerson.ID);
+            relatedEvent.SubmitChanges();
             return RedirectToAction("EventDetails", new { id = eventID });
         }
 

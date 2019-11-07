@@ -43,11 +43,11 @@ namespace KonneyTM.ViewModels
             {
                 peopleVM.Add(new PersonViewModel
                 {
+                    ID = p.ID,
                     FirstName = p.FirstName,
                     LastName = p.LastName,
                     PhoneNumber = p.PhoneNumber,
-                    Email = p.Email,
-                    ID = p.ID
+                    Email = p.Email
                 });
             }
 

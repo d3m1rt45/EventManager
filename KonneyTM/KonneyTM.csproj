@@ -187,6 +187,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ViewModels\AddPersonVM.cs" />
     <Compile Include="ViewModels\ChangeVenueVM.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="Models\Person.cs" />
@@ -324,6 +325,7 @@
     <Content Include="Views\Demo\ConfirmVenueDelete.cshtml" />
     <Content Include="Views\Demo\EventDetails.cshtml" />
     <Content Include="Views\Demo\ChangeVenue.cshtml" />
+    <Content Include="Views\Demo\AddPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
