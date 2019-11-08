@@ -114,11 +114,17 @@ span {
     transition-duration: 1s;
 }
 
-.EditEvent {
+.Edit {
+    color: #00fffb;
+    cursor: pointer;
+}
+
+.ChangeImage {
     position: absolute;
     color: #00fffb;
     right: 1.07em;
     top: 2em;
+    cursor: pointer;
 }
 
 .ChangeVenue {
@@ -153,6 +159,11 @@ span {
 
 .form-group {
     margin-bottom: 2rem;
+}
+.form-control {
+    font-family: Overlock, sans-serif;
+    font-size: 14pt;
+    font-weight: 700;
 }
 
 .ButtonIn {
@@ -303,16 +314,50 @@ th {
     transition-duration: 0.5s;
 }
 
-/* CONFIRM DELETION MODAL */
+/* MODALS */
+.modal-dialog {
+    border: #00EBC3 0.17rem solid;
+    border-radius: 0.6rem;
+    background-color: #00EBC3;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+}
+
+.modal form {
+    background-color: #EEFBEE;
+}
+
+.modal-header {
+    background-color: rgb(15,65,13);
+}
+
+.modal-header h4 {
+    color: #EEFBEE;
+}
+
 .modal-body {
     font-family: Overlock, sans-serif;
     font-weight: 700;
     font-size: 17pt;
+    background-color: #EEFBEE;
 }
 
-.Confirm, .CloseModal{
+.modal-footer {
+    background-color: rgb(15,65,13);
+}
+
+.Confirm {
     cursor: pointer;
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     font-size: 15pt;
     font-family: 'Overlock SC', sans-serif;
+    font-weight: 900;
+    background-color: #00EBC3;
+}
+
+.CloseModal {
+    cursor: pointer;
+    padding: 0.5rem 1.8rem 0.5rem 1.8rem;
+    font-size: 15pt;
+    font-family: 'Overlock SC', sans-serif;
+    font-weight: 900;
 }

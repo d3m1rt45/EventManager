@@ -17,14 +17,40 @@
                     <div class="EventDetailsCard" style="background-image:url(/Images/Events/@Model.ImagePath)">
                         <div class="overlay text-center d-flex justify-content-center align-items-center">
                             <div class="Align w-100">
-                                <h4 class="mb-3 d-block">@Model.Title</h4>
-                                <h4>Date:</h4><span>@Model.Date.ToLongDateString()</span> <br />
-                                <h4>Time:</h4><span>@Model.Time.ToShortTimeString()</span> <br />
-                                <a class="EditButton" href="@Url.Action("EditEvent", "Demo", new { id = Model.ID })">
-                                    <i class="EditEvent fas fa-edit fa-2x"></i>
-                                </a><!--/.EditButton-->
+                                <h4 class="mr-0">
+                                    <a class="EditTitleButton" data-toggle="modal" data-target="#EditTitleModal">
+                                        <i class="Edit fas fa-edit mr-1"></i>
+                                    </a><!--/.EditTitleButton-->
+                                    @Model.Title
+                                </h4><!--Title-->
+                                <span>
+
+                                </span><br /><br />
+                                <h4 class="mr-2">
+                                    <a class="EditDateButton" data-toggle="modal" data-target="#EditDateModal">
+                                        <i class="Edit fas fa-edit mr-1"></i>
+                                    </a><!--/.EditDateButton-->
+                                    Date:
+                                </h4>
+                                <span>
+                                    @Model.Date.ToLongDateString()
+
+                                </span> <br /><br />
+
+                                <h4 class="mr-2">
+                                    <a class="EditTimeButton" data-toggle="modal" data-target="#EditTimeModal">
+                                        <i class="Edit fas fa-edit mr-1"></i>
+                                    </a><!--/.EditTitleButton-->
+                                    Time:
+                                </h4>
+                                <span>
+                                    @Model.Time.ToShortTimeString()
+                                </span>
                             </div><!--/.Align-->
                         </div><!--/.overlay-->
+                        <a class="ChangeImageButton" data-toggle="modal" data-target="#ChangeImageModal">
+                            <i class="ChangeImage fas fa-image mr-1 fa-2x"></i>
+                        </a><!--/.EditTitleButton-->
                     </div><!--/.EventCard-->
                 </div>
                 <div class="col-6">
@@ -37,8 +63,8 @@
                                 <h5 class="VenueAddress lead d-block">@Model.Place.Address</h5>
                                 <h5 class="VenuePostCode lead d-block">@Model.Place.PostCode</h5>
                                 <a class="ChangeVenueButton" data-toggle="modal" data-target="#ConfirmModal"
-                                    onclick="$('.modal-body').html('Change venue for this event?'); $('.modal-title').html('Venue Change');
-                                             $('.Confirm').attr('href', '@Url.Action("ChangeVenue", "Demo", new { eventID = Model.ID })')">
+                                   onclick="$('#ConfirmModal .modal-body').html('Change venue for this event?'); $('.modal-title').html('Venue Change');
+                                             $('#ConfirmModal .Confirm').attr('href', '@Url.Action("ChangeVenue", "Demo", new { eventID = Model.ID })')">
                                     <i class="ChangeVenue fas fa-exchange-alt fa-2x"></i>
                                 </a><!--/.ChangeVenueButton-->
                             </div>
@@ -56,8 +82,8 @@
                             <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
 
                             <a class="RemoveButton" data-toggle="modal" data-target="#ConfirmModal"
-                                onclick="$('.modal-body').html('Remove @item.FirstName @item.LastName from this event?'); $('.modal-title').html('Remove Person');
-                                         $('.Confirm').attr('href', '@Url.Action("RemovePerson", "Demo", new { eventID = Model.ID, personID = item.ID })')">
+                               onclick="$('#ConfirmModal .modal-body').html('Remove @item.FirstName @item.LastName from this event?'); $('.modal-title').html('Remove Person');
+                                         $('#ConfirmModal .Confirm').attr('href', '@Url.Action("RemovePerson", "Demo", new { eventID = Model.ID, personID = item.ID })')">
                                 <i class="RemovePerson fas fa-trash-alt fa-2x"></i>
                             </a><!--/.DeleteButton-->
                         </div><!--/.PersonCard-->
@@ -76,7 +102,7 @@
             </div><!--/.row-->
         </article><!--/.EventsContainer-->
 
-        <article id="ConfirmModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <article id="ConfirmModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Confirmation Modal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
@@ -84,10 +110,152 @@
                     </div><!--/.modal-header-->
                     <p class="modal-body text-center font-weight-bold mb-0"></p>
                     <div class="modal-footer d-flex justify-content-center pt-4">
-                        <a class="CloseModal btn btn-secondary text-light" data-dismiss="modal">Cancel</a>
-                        <a class="Confirm btn btn-danger text-light">Confirm</a>
+                        <a class="CloseModal btn btn-danger text-light" data-dismiss="modal">Cancel</a>
+                        <a class="Confirm btn">Confirm</a>
                     </div><!--/.modal-footer-->
                 </div><!--/.modal-content-->
             </div><!--/.modal-dialog-->
+        </article><!--/.ConfirmModal-->
+
+        <article id="EditTitleModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100">Edit Event</h4>
+                    </div><!--/.modal-header-->
+
+                    @using (Html.BeginForm("EditEvent", "Demo"))
+                    {
+                        @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
+                        @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
+                        @Html.HiddenFor(m => m.Time, new { value = Model.Time })
+                        @Html.HiddenFor(m => m.Date, new { value = Model.Date })
+
+                        for (var i = 0; i < Model.PeopleAttending.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
+                        }
+
+                        <p class="modal-body text-center font-weight-bold mb-0">
+                            <div class="Title form-group text-center px-5">
+                                <h5>New Name</h5>
+                                @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control text-center" } })
+                            </div><!--/.Title-->
+                        </p>
+                        <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
+                            <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <input type="submit" value="Confirm" class="Confirm btn" />
+                        </div><!--/.modal-footer-->
+                    }
+                </div><!--/.modal-content-->
+            </div><!--/.modal-dialog-->
+        </article><!--/.EditTitleModal-->
+
+        <article id="EditDateModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100">Edit Event</h4>
+                    </div><!--/.modal-header-->
+
+                    @using (Html.BeginForm("EditEvent", "Demo"))
+                    {
+                        @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
+                        @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
+                        @Html.HiddenFor(m => m.Time, new { value = Model.Time })
+                        @Html.HiddenFor(m => m.Title, new { value = Model.Title })
+
+                        for (var i = 0; i < Model.PeopleAttending.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
+                        }
+
+                        <p class="modal-body text-center font-weight-bold mb-0">
+                            <div class="Title form-group text-center px-5">
+                                <h5>New Date</h5>
+                                @Html.EditorFor(m => m.Date, new { htmlAttributes = new { @class = "form-control text-center pl-5 ml-2" } })
+                            </div><!--/.Title-->
+                        </p>
+                        <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
+                            <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <input type="submit" value="Confirm" class="Confirm btn" />
+                        </div><!--/.modal-footer-->
+                    }
+                </div><!--/.modal-content-->
+            </div><!--/.modal-dialog-->
         </article><!--/.DeletePersonModal-->
+
+        <article id="EditTimeModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100">Edit Event</h4>
+                    </div><!--/.modal-header-->
+
+                    @using (Html.BeginForm("EditEvent", "Demo"))
+                    {
+                        @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
+                        @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
+                        @Html.HiddenFor(m => m.Date, new { value = Model.Date })
+                        @Html.HiddenFor(m => m.Title, new { value = Model.Title })
+
+                        for (var i = 0; i < Model.PeopleAttending.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
+                        }
+
+                        <p class="modal-body text-center font-weight-bold pb-2 pt-2">
+                            <div class="Title form-group text-center px-5">
+                                <h5>New Time</h5>
+                                @Html.EditorFor(m => m.Time, new { htmlAttributes = new { @class = "form-control text-center pl-5" } })
+                            </div><!--/.Title-->
+                        </p>
+                        <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
+                            <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <input type="submit" value="Confirm" class="Confirm btn" />
+                        </div><!--/.modal-footer-->
+                    }
+                </div><!--/.modal-content-->
+            </div><!--/.modal-dialog-->
+        </article><!--/.DeletePersonModal-->
+
+        <article id="ChangeImageModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100">Edit Event</h4>
+                    </div><!--/.modal-header-->
+
+                    @using (Html.BeginForm("EditEvent", "Demo", new { enctype = "multipart/form-data"}))
+                    {
+                        @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
+                        @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
+                        @Html.HiddenFor(m => m.Time, new { value = Model.Time })
+                        @Html.HiddenFor(m => m.Date, new { value = Model.Date })
+                        @Html.HiddenFor(m => m.Title, new { value = Model.Title })
+
+                        for (var i = 0; i < Model.PeopleAttending.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
+                        }
+
+                        <p class="modal-body text-center font-weight-bold mb-0">
+                            <div class="form-group form-group col-md-4 offset-md-4 text-center">
+                                <h4>New Image</h4>
+                                <input class="pl-4 pr-1" type="file" name="ImageFile" required />
+                            </div>
+                        </p>
+
+                        <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
+                            <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <input type="submit" value="Confirm" class="Confirm btn" />
+                        </div><!--/.modal-footer-->
+                    }
+                </div><!--/.modal-content-->
+            </div><!--/.modal-dialog-->
+        </article><!--/.EditTitleModal-->
     </section>
