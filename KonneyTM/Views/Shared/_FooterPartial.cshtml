@@ -13,14 +13,14 @@
         }
     </div>
 }
-else if (Request.Path.Contains("Demo"))
+else if (true)
 {
 <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
-    @if (Request.Path.Contains("NewEvent") || Request.Path.Contains("EventDetails") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
+    @if (Request.Path.Contains("NewEvent") || Request.Path.Contains("Event/") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
     {
         <ul class="Back">
             <li class="nav-item BackInner">
-                @Html.ActionLink("Back", "Events", "Demo", null, new { @class = "nav-link font-weight-bold text-light" })
+                @Html.ActionLink("Back", "Index", "Events", null, new { @class = "nav-link font-weight-bold text-light" })
             </li>
         </ul>
     }

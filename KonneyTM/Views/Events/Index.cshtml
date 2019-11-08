@@ -22,7 +22,7 @@
                                     <h4>Venue:</h4><span>@item.Place.Name</span> <br />
                                     <h4>Date:</h4><span>@item.Date.ToLongDateString()</span> <br />
                                     <h4>Time:</h4><span>@item.Time.ToShortTimeString()</span> <br />
-                                    <a href="@Url.Action("EventDetails", "Demo", new { id = item.ID })">
+                                    <a href="@Url.Action("Event", "Events", new { id = item.ID })">
                                         <i class="EventDetails mt-3 fas fa-info-circle fa-2x"></i>
                                     </a><!--/.DetailsButton-->
                                 </div><!--/.Align-->

@@ -1,22 +1,20 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    <li class="nav-item">
-        @Html.ActionLink("Events", "Events", "Panel", null, new { @class = "nav-link text-light" })
+    <li class="Events nav-item">
+        @Html.ActionLink("Events", "Index", "Events", null, new { @class = "nav-link text-light" })
     </li>
-    <li class="nav-item">
-        @Html.ActionLink("People", "People", "Panel", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link text-light" })
+    <li class="Venues nav-item">
+        @Html.ActionLink("Venues", "Venues", "Demo", null, new { @class = "nav-link text-light" })
     </li>
-    <li class="nav-item">
-        @Html.ActionLink("Venues", "Venues", "Panel", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-light" })
+    <li class="People nav-item">
+        @Html.ActionLink("People", "People", "Demo", null, new { @class = "nav-link text-light" })
     </li>
-
-
 }
 else if (Request.Path.Contains("Demo"))
 {
     <li class="Events nav-item">
-        @Html.ActionLink("Events", "Events", "Demo", null, new { @class = "nav-link text-light" })
+        @Html.ActionLink("Events", "Index", "Events", null, new { @class = "nav-link text-light" })
     </li>
     <li class="Venues nav-item">
         @Html.ActionLink("Venues", "Venues", "Demo", null, new { @class = "nav-link text-light" })
@@ -28,7 +26,7 @@ else if (Request.Path.Contains("Demo"))
 else
 {
     <li class="nav-item">
-        @Html.ActionLink("Demo", "Events", "Demo", null, new { @class = "nav-link text-light" })
+        @Html.ActionLink("Demo", "Index", "Events", null, new { @class = "nav-link text-light" })
     </li>
     <li class="nav-item">
         @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-light" })
