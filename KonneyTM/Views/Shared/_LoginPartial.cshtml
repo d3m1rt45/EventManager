@@ -1,26 +1,15 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+
+@if (Request.IsAuthenticated || Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
 {
     <li class="Events nav-item">
         @Html.ActionLink("Events", "Index", "Events", null, new { @class = "nav-link text-light" })
     </li>
     <li class="Venues nav-item">
-        @Html.ActionLink("Venues", "Venues", "Demo", null, new { @class = "nav-link text-light" })
+        @Html.ActionLink("Venues", "Index", "Venues", null, new { @class = "nav-link text-light" })
     </li>
     <li class="People nav-item">
-        @Html.ActionLink("People", "People", "Demo", null, new { @class = "nav-link text-light" })
-    </li>
-}
-else if (Request.Path.Contains("Demo"))
-{
-    <li class="Events nav-item">
-        @Html.ActionLink("Events", "Index", "Events", null, new { @class = "nav-link text-light" })
-    </li>
-    <li class="Venues nav-item">
-        @Html.ActionLink("Venues", "Venues", "Demo", null, new { @class = "nav-link text-light" })
-    </li>
-    <li class="People nav-item">
-        @Html.ActionLink("People", "People", "Demo", null, new { @class = "nav-link text-light" })
+        @Html.ActionLink("People", "Index", "People", null, new { @class = "nav-link text-light" })
     </li>
 }
 else

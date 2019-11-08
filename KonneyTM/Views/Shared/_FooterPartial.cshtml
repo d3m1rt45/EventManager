@@ -13,7 +13,7 @@
         }
     </div>
 }
-else if (true)
+else if (Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
 {
 <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
     @if (Request.Path.Contains("NewEvent") || Request.Path.Contains("Event/") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))

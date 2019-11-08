@@ -11,22 +11,20 @@ namespace KonneyTM.Controllers
 {
     public class EventsController : Controller
     {
-        private KonneyContext db = new KonneyContext();
-
         public ActionResult Index()
         {
             var eventVMs = EventViewModel.GetAllAsOrderedList();
             return View(eventVMs);
         }
 
-        public ActionResult NewEvent()
+        public ActionResult Create()
         {
             var eventVM = new EventViewModel();
             return View(eventVM);
         }
 
         [HttpPost]
-        public ActionResult NewEvent(EventViewModel eventVM)
+        public ActionResult Create(EventViewModel eventVM)
         {
             if (ModelState.IsValid)
             {
@@ -45,8 +43,11 @@ namespace KonneyTM.Controllers
 
         public ActionResult Event(int id)
         {
-            var eventVM = EventViewModel.FromEvent(db.Events.First(e => e.ID == id));
-            return View(eventVM);
+            using (var db = new KonneyContext())
+            { 
+                var eventVM = EventViewModel.FromEvent(db.Events.First(e => e.ID == id));
+                return View(eventVM);
+            }
         }
 
         [HttpPost]
@@ -64,9 +65,9 @@ namespace KonneyTM.Controllers
                 }
 
                 eventVM.SubmitChanges();
-                return RedirectToAction("Event", new { id = eventVM.ID });
+                return RedirectToAction("Index", new { id = eventVM.ID });
             }
-            return RedirectToAction("Event", new { id = eventVM.ID });
+            return RedirectToAction("Index", new { id = eventVM.ID });
         }
 
         public ActionResult ChangeVenue(int eventID)
@@ -77,44 +78,56 @@ namespace KonneyTM.Controllers
 
         public ActionResult SubmitVenueChange(int eventID, int venueID)
         {
-            var eventToChange = db.Events.First(e => e.ID == eventID);
-            eventToChange.Place = db.Venues.First(v => v.ID == venueID);
-            db.SaveChanges();
+            using (var db = new KonneyContext())
+            {
+                var eventToChange = db.Events.First(e => e.ID == eventID);
+                eventToChange.Place = db.Venues.First(v => v.ID == venueID);
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Event", new { id = eventID });
         }
 
         public ActionResult AddPerson(int eventID)
         {
-            var addPerson = new AddPersonVM { EventID = eventID };
-            var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
-            var allPeople = PersonViewModel.GetAllAsOrderedList();
-
-            foreach (var p in allPeople)
+            using (var db = new KonneyContext())
             {
-                if (!relatedEvent.InvitedPeopleIDs.Contains(p.ID))
-                {
-                    addPerson.People.Add(p);
-                }
-            }
+                var addPerson = new AddPersonVM { EventID = eventID };
+                var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
+                var allPeople = PersonViewModel.GetAllAsOrderedList();
 
-            return View(addPerson);
+                foreach (var p in allPeople)
+                {
+                    if (!relatedEvent.InvitedPeopleIDs.Contains(p.ID))
+                    {
+                        addPerson.People.Add(p);
+                    }
+                }
+                
+                return View(addPerson);
+            }
         }
 
         public ActionResult SubmitPerson(int eventID, int personID)
         {
-            var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
-            var relatedPerson = PersonViewModel.FromPerson(db.People.First(p => p.ID == personID));
-            relatedEvent.InvitedPeopleIDs.Add(relatedPerson.ID);
-            relatedEvent.SubmitChanges();
+            using (var db = new KonneyContext())
+            { 
+                var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
+                var relatedPerson = PersonViewModel.FromPerson(db.People.First(p => p.ID == personID));
+                relatedEvent.InvitedPeopleIDs.Add(relatedPerson.ID);
+                relatedEvent.SubmitChanges();
+            }
             return RedirectToAction("Event", new { id = eventID });
         }
 
         public ActionResult RemovePerson(int eventID, int personID)
         {
-            var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
-            relatedEvent.InvitedPeopleIDs.RemoveAll(i => i == personID);
-            relatedEvent.SubmitChanges();
+            using (var db = new KonneyContext())
+            { 
+                var relatedEvent = EventViewModel.FromEvent(db.Events.First(e => e.ID == eventID));
+                relatedEvent.InvitedPeopleIDs.RemoveAll(i => i == personID);
+                relatedEvent.SubmitChanges();
+            }
             return RedirectToAction("Event", new { id = eventID });
         }
     }

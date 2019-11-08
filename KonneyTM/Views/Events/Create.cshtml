@@ -4,12 +4,12 @@
 }
 @Styles.Render("~/PanelStyles")
 
-<section class="Panel-NewEvent">
+<section class="Events-Create">
     <div class="Header">
         <h2>New Event</h2>
     </div>
 
-    @using (Html.BeginForm("NewEvent", "Demo", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("Create", "Events", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
         @Html.AntiForgeryToken()
 

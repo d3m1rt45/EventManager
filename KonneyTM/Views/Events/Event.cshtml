@@ -4,7 +4,7 @@
 }
 @Styles.Render("~/PanelStyles")
 
-    <section class="Panel-Events">
+    <section class="Events-Event">
 
         <div class="Header">
             <h2>Event Details</h2>
@@ -64,7 +64,7 @@
                                 <h5 class="VenuePostCode lead d-block">@Model.Place.PostCode</h5>
                                 <a class="ChangeVenueButton" data-toggle="modal" data-target="#ConfirmModal"
                                    onclick="$('#ConfirmModal .modal-body').html('Change venue for this event?'); $('.modal-title').html('Venue Change');
-                                             $('#ConfirmModal .Confirm').attr('href', '@Url.Action("ChangeVenue", "Demo", new { eventID = Model.ID })')">
+                                             $('#ConfirmModal .Confirm').attr('href', '@Url.Action("ChangeVenue", new { eventID = Model.ID })')">
                                     <i class="ChangeVenue fas fa-exchange-alt fa-2x"></i>
                                 </a><!--/.ChangeVenueButton-->
                             </div>
@@ -83,7 +83,7 @@
 
                             <a class="RemoveButton" data-toggle="modal" data-target="#ConfirmModal"
                                onclick="$('#ConfirmModal .modal-body').html('Remove @item.FirstName @item.LastName from this event?'); $('.modal-title').html('Remove Person');
-                                         $('#ConfirmModal .Confirm').attr('href', '@Url.Action("RemovePerson", "Demo", new { eventID = Model.ID, personID = item.ID })')">
+                                         $('#ConfirmModal .Confirm').attr('href', '@Url.Action("RemovePerson", new { eventID = Model.ID, personID = item.ID })')">
                                 <i class="RemovePerson fas fa-trash-alt fa-2x"></i>
                             </a><!--/.DeleteButton-->
                         </div><!--/.PersonCard-->
@@ -92,7 +92,7 @@
                 @if (Model.PeopleAttending == null || Model.PeopleAttending.Count < Model.PeopleList.Count)
                 {
                     <div class="NewPersonColumn col-2 pt-3">
-                        <a class="NewPersonLink" href="@Url.Action("AddPerson", "Demo", new { eventID = Model.ID })">
+                        <a class="NewPersonLink" href="@Url.Action("AddPerson", new { eventID = Model.ID })">
                             <div class="NewPerson">
                                 <i class="fas fa-plus fa-4x"></i>
                             </div><!--/.NewPerson-->

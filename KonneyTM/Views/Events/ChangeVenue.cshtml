@@ -15,7 +15,7 @@
         @foreach (var item in Model.Venues)
         {
             <div class="VenueCol col-md-4">
-                <a href="@Url.Action("SubmitVenueChange", "Demo", new { eventID = Model.EventID, venueID = item.ID })">
+                <a href="@Url.Action("SubmitVenueChange", new { eventID = Model.EventID, venueID = item.ID })">
                     <div class="VenueCard" id="@item.ID" style="background-image: url(/Images/Venues/@item.ImagePath)">
                         <div class="overlay text-center d-flex justify-content-center align-items-center">
                             <div class="Align">

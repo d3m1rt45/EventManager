@@ -15,7 +15,7 @@
         @foreach (var item in Model.People)
         {
             <div class="PersonCol col-2">
-                <a href="@Url.Action("SubmitPerson", "Demo", new { eventID = Model.EventID, personID = item.ID })">
+                <a href="@Url.Action("SubmitPerson", new { eventID = Model.EventID, personID = item.ID })">
                     <div class="PersonCard text-center pt-4">
                         <h4 class="PersonName d-block">@item.FirstName</h4>
                         <h4 class="PersonName d-block">@item.LastName</h4>

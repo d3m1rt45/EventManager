@@ -5,12 +5,12 @@
 }
 @Styles.Render("~/PanelStyles")
 
-<section class="Panel-NewPerson">
+<section class="Venues-Create">
     <div class="Header mb-5">
         <h2>New Person</h2>
     </div>
 
-    @using (Html.BeginForm("NewVenue", "Demo", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("Create", "Venues", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
         @Html.AntiForgeryToken()
 
