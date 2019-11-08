@@ -122,7 +122,7 @@ span {
 .ChangeImage {
     position: absolute;
     color: #00fffb;
-    right: 1.07em;
+    right: 1em;
     top: 2em;
     cursor: pointer;
 }
@@ -139,8 +139,8 @@ span {
     z-index: 2 !important;
     position: absolute;
     color: #00fffb;
-    right: 1.07em;
-    top: 0.7em;
+    right: 1em;
+    top: 0.5em;
     cursor: pointer;
 }
 

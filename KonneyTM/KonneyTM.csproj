@@ -328,6 +328,8 @@
     <Content Include="Views\Demo\ChangeVenue.cshtml" />
     <Content Include="Views\Demo\AddPerson.cshtml" />
     <Content Include="Views\Demo\EditEvent.cshtml" />
+    <Content Include="Views\Shared\_EditModalsPartial.cshtml" />
+    <Content Include="Views\Shared\_ConfirmModalPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

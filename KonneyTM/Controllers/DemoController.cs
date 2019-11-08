@@ -54,12 +54,21 @@ namespace KonneyTM.Controllers
             return View(eventVM);
         }
 
+        [HttpPost]
         public ActionResult EditEvent(EventViewModel eventVM)
         {
             if (ModelState.IsValid)
             {
-                eventVM.SubmitChanges();
+                if(eventVM.ImageFile != null)
+                {
+                    string extension = Path.GetExtension(eventVM.ImageFile.FileName);
+                    string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
+                    eventVM.ImagePath = imageFileName;
+                    imageFileName = Path.Combine(Server.MapPath("~/Images/Events"), imageFileName);
+                    eventVM.ImageFile.SaveAs(imageFileName);
+                }
 
+                eventVM.SubmitChanges();
                 return RedirectToAction("EventDetails", new { id = eventVM.ID });
             }
             return RedirectToAction("EventDetails", new { id = eventVM.ID });

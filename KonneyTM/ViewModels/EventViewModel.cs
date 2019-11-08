@@ -159,7 +159,6 @@ namespace KonneyTM.ViewModels
             ev.Place = db.Venues.First(v => v.ID == this.PlaceID);
             ev.ImagePath = this.ImagePath;
 
-
             ev.PeopleAttending.Clear();
             foreach (var id in this.InvitedPeopleIDs)
             {
