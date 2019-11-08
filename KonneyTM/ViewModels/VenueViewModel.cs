@@ -66,20 +66,6 @@ namespace KonneyTM.ViewModels
             return venueVM;
         }
 
-        public Venue ToVenue()
-        {
-            var venue = new Venue
-            {
-                Name = this.Name,
-                Address = this.Address,
-                PostCode = this.PostCode,
-                PhoneNumber = this.PhoneNumber,
-                ImagePath = this.ImagePath
-            };
-
-            return venue;
-        }
-
         public static List<VenueViewModel> GetAllAsOrderedList()
         {
             var db = new KonneyContext();

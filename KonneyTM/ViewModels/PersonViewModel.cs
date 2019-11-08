@@ -34,24 +34,25 @@ namespace KonneyTM.ViewModels
         //Returns all the Persons in the Database as a List of PersonViewModel instances ordered by FirstName
         public static List<PersonViewModel> GetAllAsOrderedList()
         {
-            var db = new KonneyContext();
-            var people = db.People.ToList();
-            db.Dispose();
-            
-            var peopleVM = new List<PersonViewModel>();
-            foreach (var p in people)
+            using (var db = new KonneyContext())
             {
-                peopleVM.Add(new PersonViewModel
-                {
-                    ID = p.ID,
-                    FirstName = p.FirstName,
-                    LastName = p.LastName,
-                    PhoneNumber = p.PhoneNumber,
-                    Email = p.Email
-                });
-            }
+                var people = db.People.ToList();
+                var peopleVM = new List<PersonViewModel>();
 
-            return peopleVM.OrderBy(p => p.FirstName).ToList();
+                foreach (var p in people)
+                {
+                    peopleVM.Add(new PersonViewModel
+                    {
+                        ID = p.ID,
+                        FirstName = p.FirstName,
+                        LastName = p.LastName,
+                        PhoneNumber = p.PhoneNumber,
+                        Email = p.Email
+                    });
+                }
+
+                return peopleVM.OrderBy(p => p.FirstName).ToList();
+            }
         }
 
         //Takes a Person instance and returns a PersonViewModel instance
@@ -88,63 +89,35 @@ namespace KonneyTM.ViewModels
             return personVMList;
         }
 
-        //Takes a PersonViewModel list and returns a Person list
-        public static List<Person> ToPersonList(ICollection<PersonViewModel> people)
-        {
-            var personList = new List<Person>();
-
-            foreach (var p in people)
-            {
-                personList.Add(new Person
-                {
-                    ID = p.ID,
-                    FirstName = p.FirstName,
-                    LastName = p.LastName,
-                    Email = p.Email,
-                    PhoneNumber = p.PhoneNumber
-                });
-            }
-
-            return personList;
-        }
-
-        //Converts this instance of this ViewModel to a Person instance
-        public Person ToPerson()
-        {
-            var db = new KonneyContext();
-            var person = db.People.First(p => p.ID == this.ID);
-            return person;
-        }
-
         //Converts this instance to Person and saves it to the database all at once.
         public void SaveToDB()
         {
-            var db = new KonneyContext();
-
-            db.People.Add(new Person
+            using (var db = new KonneyContext())
             {
-                FirstName = this.FirstName,
-                LastName = this.LastName,
-                PhoneNumber = this.PhoneNumber,
-                Email = this.Email
-            });
+                db.People.Add(new Person
+                {
+                    FirstName = this.FirstName,
+                    LastName = this.LastName,
+                    PhoneNumber = this.PhoneNumber,
+                    Email = this.Email
+                });
 
-            db.SaveChanges();
-            db.Dispose();
+                db.SaveChanges();
+            }
         }
         public void SubmitChanges()
         {
-            var db = new KonneyContext();
+            using (var db = new KonneyContext())
+            {
+                var person = db.People.First(p => p.ID == this.ID);
 
-            var person = db.People.First(p => p.ID == this.ID);
+                person.FirstName = this.FirstName;
+                person.LastName = this.LastName;
+                person.Email = this.Email;
+                person.PhoneNumber = this.PhoneNumber;
 
-            person.FirstName = this.FirstName;
-            person.LastName = this.LastName;
-            person.Email = this.Email;
-            person.PhoneNumber = this.PhoneNumber;
-
-            db.SaveChanges();
-            db.Dispose();
+                db.SaveChanges();
+            }
         }
     }
 }

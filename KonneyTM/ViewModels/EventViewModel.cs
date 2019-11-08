@@ -15,17 +15,17 @@ namespace KonneyTM.ViewModels
     {
         public EventViewModel()
         {
-            var db = new KonneyContext();
-            
-            this.VenueList = db.Venues.ToList();
-            this.PeopleList = new List<SelectListItem>();
-            this.PeopleAttending = new List<PersonViewModel>();
+            using (var db = new KonneyContext())
+            { 
+                this.VenueList = db.Venues.ToList();
+                this.PeopleList = new List<SelectListItem>();
+                this.PeopleAttending = new List<PersonViewModel>();
 
-            foreach (var p in db.People)
-            {
-                this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
+                foreach (var p in db.People)
+                {
+                    this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
+                }
             }
-            db.Dispose();
         }
 
         public int ID { get; set; }
@@ -96,26 +96,26 @@ namespace KonneyTM.ViewModels
         //Converts the ViewModel instance to an Event and saves it to the database.
         public void SaveToDB() 
         {
-            var db = new KonneyContext();
-
-            var newEvent = new Event
+            using (var db = new KonneyContext())
             {
-                Title = this.Title,
-                Date = Convert.ToDateTime(this.Date),
-                Time = Convert.ToDateTime(this.Time),
-                Place = db.Venues.First(v => v.ID == this.PlaceID),
-                PeopleAttending = new List<Person>(),
-                ImagePath = this.ImagePath
-            };
+                var newEvent = new Event
+                {
+                    Title = this.Title,
+                    Date = Convert.ToDateTime(this.Date),
+                    Time = Convert.ToDateTime(this.Time),
+                    Place = db.Venues.First(v => v.ID == this.PlaceID),
+                    PeopleAttending = new List<Person>(),
+                    ImagePath = this.ImagePath
+                };
 
-            foreach(var id in this.InvitedPeopleIDs)
-            {
-                newEvent.PeopleAttending.Add(db.People.First(p => p.ID == id));
+                foreach(var id in this.InvitedPeopleIDs)
+                {
+                    newEvent.PeopleAttending.Add(db.People.First(p => p.ID == id));
+                }
+
+                db.Events.Add(newEvent);
+                db.SaveChanges();
             }
-
-            db.Events.Add(newEvent);
-            db.SaveChanges();
-            db.Dispose();
         }
 
         //Returns all the Events in the Database as a List of EventViewModels ordered by date.
@@ -149,24 +149,24 @@ namespace KonneyTM.ViewModels
 
         public void SubmitChanges()
         {
-            var db = new KonneyContext();
-
-            var ev = db.Events.First(p => p.ID == this.ID);
-
-            ev.Title = this.Title;
-            ev.Date = Convert.ToDateTime(this.Date);
-            ev.Time = Convert.ToDateTime(this.Time);
-            ev.Place = db.Venues.First(v => v.ID == this.PlaceID);
-            ev.ImagePath = this.ImagePath;
-
-            ev.PeopleAttending.Clear();
-            foreach (var id in this.InvitedPeopleIDs)
+            using (var db = new KonneyContext())
             {
-                ev.PeopleAttending.Add(db.People.First(p => p.ID == id));
-            }
+                var ev = db.Events.First(p => p.ID == this.ID);
 
-            db.SaveChanges();
-            db.Dispose();
+                ev.Title = this.Title;
+                ev.Date = Convert.ToDateTime(this.Date);
+                ev.Time = Convert.ToDateTime(this.Time);
+                ev.Place = db.Venues.First(v => v.ID == this.PlaceID);
+                ev.ImagePath = this.ImagePath;
+
+                ev.PeopleAttending.Clear();
+                foreach (var id in this.InvitedPeopleIDs)
+                {
+                    ev.PeopleAttending.Add(db.People.First(p => p.ID == id));
+                }
+
+                db.SaveChanges();
+            }
         }
     }
 }
