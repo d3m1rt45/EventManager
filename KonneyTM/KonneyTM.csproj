@@ -327,7 +327,7 @@
     <Content Include="Views\Events\Event.cshtml" />
     <Content Include="Views\Events\ChangeVenue.cshtml" />
     <Content Include="Views\Events\AddPerson.cshtml" />
-    <Content Include="Views\Shared\_EditModalsPartial.cshtml" />
+    <Content Include="Views\Events\_EditModalsPartial.cshtml" />
     <Content Include="Views\Shared\_ConfirmModalPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
