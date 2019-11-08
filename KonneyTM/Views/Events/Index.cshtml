@@ -4,14 +4,14 @@
 }
 @Styles.Render("~/PanelStyles")
 
-    <section class="Panel-Events">
+    <section class="Events-Index">
 
         <div class="Header">
             <h2>Events</h2>
         </div><!--/.Header-->
 
         <article class="EventsContainer container-fluid">
-            <div class="OuterRow row gutter">
+            <div class="OuterRow row">
                 @foreach (var item in Model)
                 {
                     <div class="OuterColumn col-6">
@@ -29,14 +29,27 @@
                             </div><!--/.overlay-->
                         </div><!--/.EventCard-->
                     </div><!--/.OuterColumn-->
-                 }
-                <div class="NewEventColumn col-6">
-                    <a class="NewEventLink" href="@Url.Action("Create")">
-                        <div class="NewEvent">
-                            <i class="fas fa-plus fa-9x"></i>
-                        </div>
-                    </a><!--/.NewEventLink-->
-                </div><!--/.NewEventColumn-->
+                }
+                @if (Model.Count() % 2 == 0)
+                {
+                    <div class="NewEventColumn col-12 pt-4">
+                        <a class="NewEventLink" href="@Url.Action("Create")">
+                            <div class="NewEvent">
+                                <i class="Plus fas fa-plus fa-5x"></i>
+                            </div>
+                        </a><!--/.NewEventLink-->
+                    </div><!--/.NewEventColumn-->
+                }
+                else
+                {
+                    <div class="NewEventColumn col-6 pt-4">
+                        <a class="NewEventLink" href="@Url.Action("Create")">
+                            <div class="NewEvent">
+                                <i class="Plus fas fa-plus fa-5x"></i>
+                            </div>
+                        </a><!--/.NewEventLink-->
+                    </div><!--/.NewEventColumn-->
+                }
             </div><!--/.OuterRow-->
         </article><!--/.EventsContainer-->
 

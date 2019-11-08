@@ -15,6 +15,11 @@ section {
     color: #EEFBEE;
 }
 
+.Danger {
+    font-weight: 700;
+    color: #0F410D;
+}
+
 .EventCard {
     height: 16rem;
     background-size: cover;
@@ -63,8 +68,9 @@ span {
 }
 
 .NewEvent {
-    height: 13rem;
-    width: 13rem;
+    margin-top: 0.5rem;
+    height: 9rem;
+    width: 9rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,7 +82,7 @@ span {
     transition-duration: 0.5s;
 }
     .NewEvent:hover, .NewPerson:hover, .NewVenue:hover {
-        margin-top: -0.4rem;
+        margin-top: 0.3rem;
         transition-duration: 0.5s;
     }
 
@@ -85,7 +91,7 @@ span {
 }
 
 .NewEvent i, .NewPerson i, .NewVenue i {
-    color: #EEFBEE;
+    color: #00fffb;
 }
 
 .EventDetailsTitle {
@@ -139,7 +145,7 @@ span {
     z-index: 2 !important;
     position: absolute;
     color: #00fffb;
-    right: 1em;
+    right: 1.1em;
     top: 0.5em;
     cursor: pointer;
 }
@@ -283,6 +289,14 @@ th {
 
 .VenueName, .VenuePhone, .VenueAddress, .VenuePostCode {
     color: #EEFBEE;
+}
+
+.ChangeVenueImage {
+    position: absolute;
+    color: #00fffb;
+    left: 1.2em;
+    top: 0.7em;
+    cursor: pointer;
 }
 
 .EditVenue {

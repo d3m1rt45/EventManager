@@ -60,6 +60,9 @@
                         <h5>New Date</h5>
                         @Html.EditorFor(m => m.Date, new { htmlAttributes = new { @class = "form-control text-center pl-5 ml-2" } })
                     </div><!--/.Title-->
+                    <div class="Danger px-5 text-center">
+                        Please pick a date between tomorrow and three years from now.
+                    </div>
                 </p>
 
                 <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
@@ -130,7 +133,7 @@
                 <p class="modal-body text-center font-weight-bold mb-0">
                     <div class="form-group form-group col-md-4 offset-md-4 text-center">
                         <h4>New Image</h4>
-                        <input type="file" name="ImageFile" required />
+                        <input type="file" name="ImageFile" accept="Image/*" required />
                     </div>
                 </p>
 

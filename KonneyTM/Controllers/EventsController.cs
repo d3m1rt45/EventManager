@@ -65,9 +65,9 @@ namespace KonneyTM.Controllers
                 }
 
                 eventVM.SubmitChanges();
-                return RedirectToAction("Index", new { id = eventVM.ID });
+                return RedirectToAction("Event", new { id = eventVM.ID });
             }
-            return RedirectToAction("Index", new { id = eventVM.ID });
+            return RedirectToAction("Event", new { id = eventVM.ID });
         }
 
         public ActionResult ChangeVenue(int eventID)

@@ -82,9 +82,9 @@
                             <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
 
                             <a class="RemoveButton" data-toggle="modal" data-target="#ConfirmModal"
-                               onclick="$('#ConfirmModal .modal-body').html('Remove @item.FirstName @item.LastName from this event?'); $('.modal-title').html('Remove Person');
+                               onclick="$('#ConfirmModal .modal-body').html('@item.FirstName @item.LastName will be removed from this event.'); $('#ConfirmModal .modal-title').html('Remove Person');
                                          $('#ConfirmModal .Confirm').attr('href', '@Url.Action("RemovePerson", new { eventID = Model.ID, personID = item.ID })')">
-                                <i class="RemovePerson fas fa-trash-alt fa-2x"></i>
+                                <i class="RemovePerson fas fa-times text-danger fa-2x"></i>
                             </a><!--/.DeleteButton-->
                         </div><!--/.PersonCard-->
                     </div><!--/.PersonCol-->

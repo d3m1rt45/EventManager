@@ -55,6 +55,15 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (venueVM.ImageFile != null)
+                {
+                    string extension = Path.GetExtension(venueVM.ImageFile.FileName);
+                    string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
+                    venueVM.ImagePath = imageFileName;
+                    imageFileName = Path.Combine(Server.MapPath("~/Images/Venues"), imageFileName);
+                    venueVM.ImageFile.SaveAs(imageFileName);
+                }
+
                 venueVM.SubmitChanges();
                 return RedirectToAction("Index");
             }

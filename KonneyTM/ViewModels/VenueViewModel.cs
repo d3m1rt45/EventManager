@@ -91,17 +91,19 @@ namespace KonneyTM.ViewModels
 
         internal void SubmitChanges()
         {
-            var db = new KonneyContext();
+            using (var db = new KonneyContext())
+            {
+                var venue = db.Venues.First(p => p.ID == this.ID);
 
-            var venue = db.Venues.First(p => p.ID == this.ID);
+                venue.Name = this.Name;
+                venue.PhoneNumber = this.PhoneNumber;
+                venue.Address = this.Address;
+                venue.PostCode = this.PostCode;
+                if(this.ImagePath != null)
+                    venue.ImagePath = this.ImagePath;
 
-            venue.Name = this.Name;
-            venue.PhoneNumber = this.PhoneNumber;
-            venue.Address = this.Address;
-            venue.PostCode = this.PostCode;
-
-            db.SaveChanges();
-            db.Dispose();
+                db.SaveChanges();
+            }
         }
     }
 }
