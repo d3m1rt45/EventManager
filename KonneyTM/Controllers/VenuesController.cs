@@ -29,6 +29,7 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Image Upload Logic
                 string extension = Path.GetExtension(venueVM.ImageFile.FileName);
                 string imageFileName = venueVM.PhoneNumber.RemoveWhitespace() + venueVM.PostCode.RemoveWhitespace() + extension;
                 venueVM.ImagePath = imageFileName;
@@ -57,6 +58,7 @@ namespace KonneyTM.Controllers
             {
                 if (venueVM.ImageFile != null)
                 {
+                    //Image Upload Logic
                     string extension = Path.GetExtension(venueVM.ImageFile.FileName);
                     string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
                     venueVM.ImagePath = imageFileName;
@@ -81,7 +83,6 @@ namespace KonneyTM.Controllers
                     db.Events.Remove(ev);
                 }
 
-                //Remove the venue and save changes
                 var venue = db.Venues.First(v => v.ID == id);
                 db.Venues.Remove(venue);
                 db.SaveChanges();

@@ -3,9 +3,10 @@
 @{
     ViewBag.Title = "Select New Venue for Event";
 }
+
 @Styles.Render("~/PanelStyles")
 
-<section class="Panel-Venues">
+<section class="Events-ChangeVenue">
 
     <div class="Header">
         <h2>Select Venue</h2>
@@ -30,22 +31,5 @@
             </div><!--/.VenueCol-->
         }
     </article><!--/.VenueRow-->
-</section>
 
-<article class="DeleteVenueModal modal fade" id="DeleteVenueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-danger">Delete Venue</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div><!--/.modal-header-->
-            <p class="modal-body font-weight-bold mb-0"></p>
-            <div class="modal-footer">
-                <a class="CloseModal btn btn-secondary text-light" data-dismiss="modal">Close</a>
-                <a class="ConfirmDelete btn btn-danger text-light">Delete</a>
-            </div><!--/.modal-footer-->
-        </div><!--/.modal-content-->
-    </div><!--/.modal-dialog-->
-</article><!--/.DeleteVenueModal-->
+</section>

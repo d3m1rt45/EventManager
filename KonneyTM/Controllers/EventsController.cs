@@ -28,13 +28,14 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Image Upload Logic
                 string extension = Path.GetExtension(eventVM.ImageFile.FileName);
                 string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
                 eventVM.ImagePath = imageFileName;
                 imageFileName = Path.Combine(Server.MapPath("~/Images/Events"), imageFileName);
                 eventVM.ImageFile.SaveAs(imageFileName);
 
-                eventVM.SaveToDB(); //Converts the EventViewModel instance to an Event instance and saves to to the database.
+                eventVM.SaveToDB();
                 return RedirectToAction("Index");
             }
 
@@ -57,6 +58,7 @@ namespace KonneyTM.Controllers
             {
                 if (eventVM.ImageFile != null)
                 {
+                    //Image Upload Logic
                     string extension = Path.GetExtension(eventVM.ImageFile.FileName);
                     string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
                     eventVM.ImagePath = imageFileName;
@@ -74,7 +76,8 @@ namespace KonneyTM.Controllers
         {
             using (var db = new KonneyContext())
             {
-                db.Events.Remove(db.Events.First(e => e.ID == id));
+                var ev = db.Events.First(e => e.ID == id);
+                db.Events.Remove(ev);
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
@@ -90,8 +93,8 @@ namespace KonneyTM.Controllers
         {
             using (var db = new KonneyContext())
             {
-                var eventToChange = db.Events.First(e => e.ID == eventID);
-                eventToChange.Place = db.Venues.First(v => v.ID == venueID);
+                var ev = db.Events.First(e => e.ID == eventID);
+                ev.Place = db.Venues.First(v => v.ID == venueID);
                 db.SaveChanges();
             }
 

@@ -164,7 +164,7 @@ span {
     cursor: pointer;
 }
 
-.DeleteButton {
+.DeleteEvent .DeleteButton {
     margin: 1rem 0.5rem 3rem 0.5rem;
     border: #00EBC3 0.2rem solid;
     width: 14rem;
@@ -177,16 +177,16 @@ span {
     align-items: center;
     padding-top: 0.2rem;
 }
-.DeleteButton a {
+.DeleteEvent a {
     font-family: 'Overlock SC', sans-serif;
     font-size: 19pt;
     color: #EEFBEE;
     padding: 0;
     background: none;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
 }
-    .DeleteButton a:hover {
+    .DeleteEvent a:hover {
         color: #CED9CE;
         text-decoration: none;
     }

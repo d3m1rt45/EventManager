@@ -31,7 +31,8 @@ namespace KonneyTM.ViewModels
         public string Email { get; set; }
 
 
-        //Returns all the Persons in the Database as a List of PersonViewModel instances ordered by FirstName
+
+        //Returns all the Persons in the Database as a List of PersonViewModel objects ordered by FirstName
         public static List<PersonViewModel> GetAllAsOrderedList()
         {
             using (var db = new KonneyContext())
@@ -55,7 +56,7 @@ namespace KonneyTM.ViewModels
             }
         }
 
-        //Takes a Person instance and returns a PersonViewModel instance
+        //Converts a Person object to a PersonViewModel object
         public static PersonViewModel FromPerson(Person person)
         {
             var personVM = new PersonViewModel
@@ -69,7 +70,7 @@ namespace KonneyTM.ViewModels
             return personVM;
         }
 
-        //Takes a Person list and returns a PersonViewModels list
+        //Converts a Person object list to a PersonViewModel object list
         public static List<PersonViewModel> FromPersonList(ICollection<Person> people)
         {
             var personVMList = new List<PersonViewModel>();
@@ -89,7 +90,7 @@ namespace KonneyTM.ViewModels
             return personVMList;
         }
 
-        //Converts this instance to Person and saves it to the database all at once.
+        //Saves this PersonViewModel object to the database as a Person entity
         public void SaveToDB()
         {
             using (var db = new KonneyContext())
@@ -105,6 +106,8 @@ namespace KonneyTM.ViewModels
                 db.SaveChanges();
             }
         }
+
+        //Updates the Person entity in the database that corresponds to this PersonViewModel object
         public void SubmitChanges()
         {
             using (var db = new KonneyContext())

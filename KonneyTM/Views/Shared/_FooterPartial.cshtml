@@ -1,19 +1,6 @@
-﻿@using Microsoft.AspNet.Identity
+﻿
 
-@if (Request.IsAuthenticated)
-{
-    <div class="Footer UserFooter d-flex w-100 justify-content-between fixed-bottom">
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right ml-auto align-self-end" }))
-        {
-            @Html.AntiForgeryToken()
-
-            <ul class="LogOff nav navbar-nav navbar-right">
-                <li class="nav-item "><a class="nav-link text-light" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-            </ul>
-        }
-    </div>
-}
-else if (Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
+@if (Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
 {
 <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
     <ul class="Back">

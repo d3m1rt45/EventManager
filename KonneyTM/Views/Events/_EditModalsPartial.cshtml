@@ -1,147 +1,151 @@
 ﻿@model KonneyTM.ViewModels.EventViewModel
 
-<article id="EditTitleModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100">Edit Event</h4>
-            </div><!--/.modal-header-->
+    <section class="Events-EditModals">
 
-            @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
-            {
-                @Html.HiddenFor(m => m.ID, new { value = Model.ID })
-                @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
-                @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
-                @Html.HiddenFor(m => m.Time, new { value = Model.Time })
-                @Html.HiddenFor(m => m.Date, new { value = Model.Date })
+        <article id="EditTitleModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100">Edit Event</h4>
+                    </div><!--/.modal-header-->
 
-                for (var i = 0; i < Model.PeopleAttending.Count; i++)
-                {
-                    @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
-                }
+                    @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
+                        @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
+                        @Html.HiddenFor(m => m.Time, new { value = Model.Time })
+                        @Html.HiddenFor(m => m.Date, new { value = Model.Date })
 
-                <p class="modal-body text-center font-weight-bold mb-0">
-                    <div class="Title form-group text-center px-5">
-                        <h5>New Name</h5>
-                        @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control text-center" } })
-                    </div><!--/.Title-->
-                </p>
-                <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
-                    <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
-                    <input type="submit" value="Confirm" class="Confirm btn" />
-                </div><!--/.modal-footer-->
-            }
-        </div><!--/.modal-content-->
-    </div><!--/.modal-dialog-->
-</article><!--/.EditTitleModal-->
+                        for (var i = 0; i < Model.PeopleAttending.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
+                        }
 
-<article id="EditDateModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100">Edit Event</h4>
-            </div><!--/.modal-header-->
+                        <p class="modal-body text-center font-weight-bold mb-0">
+                            <div class="Title form-group text-center px-5">
+                                <h5>New Name</h5>
+                                @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control text-center" } })
+                            </div><!--/.Title-->
+                        </p>
+                        <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
+                            <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <input type="submit" value="Confirm" class="Confirm btn" />
+                        </div><!--/.modal-footer-->
+                    }
+                </div><!--/.modal-content-->
+            </div><!--/.modal-dialog-->
+        </article><!--/.EditTitleModal-->
 
-            @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
-            {
-                @Html.HiddenFor(m => m.ID, new { value = Model.ID })
-                @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
-                @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
-                @Html.HiddenFor(m => m.Time, new { value = Model.Time })
-                @Html.HiddenFor(m => m.Title, new { value = Model.Title })
+        <article id="EditDateModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100">Edit Event</h4>
+                    </div><!--/.modal-header-->
 
-                for (var i = 0; i < Model.PeopleAttending.Count; i++)
-                {
-                    @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
-                }
+                    @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
+                        @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
+                        @Html.HiddenFor(m => m.Time, new { value = Model.Time })
+                        @Html.HiddenFor(m => m.Title, new { value = Model.Title })
 
-                <p class="modal-body text-center font-weight-bold mb-0">
-                    <div class="Title form-group text-center px-5">
-                        <h5>New Date</h5>
-                        @Html.EditorFor(m => m.Date, new { htmlAttributes = new { @class = "form-control text-center pl-5 ml-2" } })
-                    </div><!--/.Title-->
-                    <div class="Danger px-5 text-center">
-                        Please pick a date between tomorrow and three years from now.
-                    </div>
-                </p>
+                        for (var i = 0; i < Model.PeopleAttending.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
+                        }
 
-                <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
-                    <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
-                    <input type="submit" value="Confirm" class="Confirm btn" />
-                </div><!--/.modal-footer-->
-            }
-        </div><!--/.modal-content-->
-    </div><!--/.modal-dialog-->
-</article><!--/.EditDateModal-->
+                        <p class="modal-body text-center font-weight-bold mb-0">
+                            <div class="Title form-group text-center px-5">
+                                <h5>New Date</h5>
+                                @Html.EditorFor(m => m.Date, new { htmlAttributes = new { @class = "form-control text-center pl-5 ml-2" } })
+                            </div><!--/.Title-->
+                            <div class="Danger px-5 text-center">
+                                Please pick a date between tomorrow and three years from now.
+                            </div>
+                        </p>
 
-<article id="EditTimeModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100">Edit Event</h4>
-            </div><!--/.modal-header-->
+                        <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
+                            <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <input type="submit" value="Confirm" class="Confirm btn" />
+                        </div><!--/.modal-footer-->
+                    }
+                </div><!--/.modal-content-->
+            </div><!--/.modal-dialog-->
+        </article><!--/.EditDateModal-->
 
-            @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
-            {
-                @Html.HiddenFor(m => m.ID, new { value = Model.ID })
-                @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
-                @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
-                @Html.HiddenFor(m => m.Date, new { value = Model.Date })
-                @Html.HiddenFor(m => m.Title, new { value = Model.Title })
+        <article id="EditTimeModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100">Edit Event</h4>
+                    </div><!--/.modal-header-->
 
-                for (var i = 0; i < Model.PeopleAttending.Count; i++)
-                {
-                    @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
-                }
+                    @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
+                        @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
+                        @Html.HiddenFor(m => m.Date, new { value = Model.Date })
+                        @Html.HiddenFor(m => m.Title, new { value = Model.Title })
 
-                <p class="modal-body text-center font-weight-bold pb-2 pt-2">
-                    <div class="Title form-group text-center px-5">
-                        <h5>New Time</h5>
-                        @Html.EditorFor(m => m.Time, new { htmlAttributes = new { @class = "form-control text-center pl-5" } })
-                    </div><!--/.Title-->
-                </p>
-                <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
-                    <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
-                    <input type="submit" value="Confirm" class="Confirm btn" />
-                </div><!--/.modal-footer-->
-            }
-        </div><!--/.modal-content-->
-    </div><!--/.modal-dialog-->
-</article><!--/.EditTimeModal-->
+                        for (var i = 0; i < Model.PeopleAttending.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
+                        }
 
-<article id="ChangeImageModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100">Edit Event</h4>
-            </div><!--/.modal-header-->
+                        <p class="modal-body text-center font-weight-bold pb-2 pt-2">
+                            <div class="Title form-group text-center px-5">
+                                <h5>New Time</h5>
+                                @Html.EditorFor(m => m.Time, new { htmlAttributes = new { @class = "form-control text-center pl-5" } })
+                            </div><!--/.Title-->
+                        </p>
+                        <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
+                            <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <input type="submit" value="Confirm" class="Confirm btn" />
+                        </div><!--/.modal-footer-->
+                    }
+                </div><!--/.modal-content-->
+            </div><!--/.modal-dialog-->
+        </article><!--/.EditTimeModal-->
 
-            @using (Html.BeginForm("Edit", "Events", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                @Html.HiddenFor(m => m.ID, new { value = Model.ID })
-                @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
-                @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
-                @Html.HiddenFor(m => m.Time, new { value = Model.Time })
-                @Html.HiddenFor(m => m.Date, new { value = Model.Date })
-                @Html.HiddenFor(m => m.Title, new { value = Model.Title })
+        <article id="ChangeImageModal" class="ConfirmModal modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit Modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100">Edit Event</h4>
+                    </div><!--/.modal-header-->
 
-                for (var i = 0; i < Model.PeopleAttending.Count; i++)
-                {
-                    @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
-                }
+                    @using (Html.BeginForm("Edit", "Events", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
+                        @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
+                        @Html.HiddenFor(m => m.Time, new { value = Model.Time })
+                        @Html.HiddenFor(m => m.Date, new { value = Model.Date })
+                        @Html.HiddenFor(m => m.Title, new { value = Model.Title })
 
-                <p class="modal-body text-center font-weight-bold mb-0">
-                    <div class="form-group form-group col-md-4 offset-md-4 text-center">
-                        <h4>New Image</h4>
-                        <input type="file" name="ImageFile" accept="Image/*" required />
-                    </div>
-                </p>
+                        for (var i = 0; i < Model.PeopleAttending.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.InvitedPeopleIDs[i], new { value = Model.PeopleAttending[i].ID })
+                        }
 
-                <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
-                    <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
-                    <input type="submit" value="Confirm" class="Confirm btn" />
-                </div><!--/.modal-footer-->
-            }
-        </div><!--/.modal-content-->
-    </div><!--/.modal-dialog-->
-</article><!--/.ChangeImageModal-->
+                        <p class="modal-body text-center font-weight-bold mb-0">
+                            <div class="form-group form-group col-md-4 offset-md-4 text-center">
+                                <h4>New Image</h4>
+                                <input type="file" name="ImageFile" accept="Image/*" required />
+                            </div>
+                        </p>
+
+                        <div class="modal-footer d-flex justify-content-center pt-3 mt-1">
+                            <a class="CloseModal btn btn-danger" data-dismiss="modal">Cancel</a>
+                            <input type="submit" value="Confirm" class="Confirm btn" />
+                        </div><!--/.modal-footer-->
+                    }
+                </div><!--/.modal-content-->
+            </div><!--/.modal-dialog-->
+        </article><!--/.ChangeImageModal-->
+
+    </section>

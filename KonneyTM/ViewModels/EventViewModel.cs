@@ -45,24 +45,23 @@ namespace KonneyTM.ViewModels
         [DisplayFormat(DataFormatString = "{0:hh-mm}", ApplyFormatInEditMode = true)]
         public DateTime Time { get; set; }
 
+        [Required]
+        public int PlaceID { get; set; }
         public VenueViewModel Place { get; set; }
+        public List<Venue> VenueList { get; set; }
 
+        [Required]
+        public List<int> InvitedPeopleIDs { get; set; }
         public List<PersonViewModel> PeopleAttending { get; set; }
+        public List<SelectListItem> PeopleList { get; set; }
 
         [DataType(DataType.ImageUrl)]
         public string ImagePath { get; set; }
         public HttpPostedFileBase ImageFile { get; set; }
 
-        //IDs for populating the above lists
-        [Required]
-        public int PlaceID { get; set; }
-        [Required]
-        public List<int> InvitedPeopleIDs { get; set; }
 
-        //CHECKBOX and RADIOBUTTON Properties
-        public List<Venue> VenueList { get; set; }
-        public List<SelectListItem> PeopleList { get; set; }
 
+        //Converts an Event object to an EventViewModel object
         public static EventViewModel FromEvent(Event ev)
         {
             var eventVM = new EventViewModel
@@ -81,6 +80,7 @@ namespace KonneyTM.ViewModels
             return eventVM;
         }
 
+        //Creates a list of int based on the ID properties of a List of Person
         public static List<int> GetIDsFromPersonList(ICollection<Person> people)
         {
             var ids = new List<int>();
@@ -91,31 +91,6 @@ namespace KonneyTM.ViewModels
             }
 
             return ids;
-        }
-
-        //Converts the ViewModel instance to an Event and saves it to the database.
-        public void SaveToDB() 
-        {
-            using (var db = new KonneyContext())
-            {
-                var newEvent = new Event
-                {
-                    Title = this.Title,
-                    Date = Convert.ToDateTime(this.Date),
-                    Time = Convert.ToDateTime(this.Time),
-                    Place = db.Venues.First(v => v.ID == this.PlaceID),
-                    PeopleAttending = new List<Person>(),
-                    ImagePath = this.ImagePath
-                };
-
-                foreach(var id in this.InvitedPeopleIDs)
-                {
-                    newEvent.PeopleAttending.Add(db.People.First(p => p.ID == id));
-                }
-
-                db.Events.Add(newEvent);
-                db.SaveChanges();
-            }
         }
 
         //Returns all the Events in the Database as a List of EventViewModels ordered by date.
@@ -147,6 +122,32 @@ namespace KonneyTM.ViewModels
             return eventsVM.OrderBy(ev => ev.Date).ToList();
         }
 
+        //Saves this EventViewModel object as an Event entity to the database.
+        public void SaveToDB() 
+        {
+            using (var db = new KonneyContext())
+            {
+                var newEvent = new Event
+                {
+                    Title = this.Title,
+                    Date = Convert.ToDateTime(this.Date),
+                    Time = Convert.ToDateTime(this.Time),
+                    Place = db.Venues.First(v => v.ID == this.PlaceID),
+                    PeopleAttending = new List<Person>(),
+                    ImagePath = this.ImagePath
+                };
+
+                foreach(var id in this.InvitedPeopleIDs)
+                {
+                    newEvent.PeopleAttending.Add(db.People.First(p => p.ID == id));
+                }
+
+                db.Events.Add(newEvent);
+                db.SaveChanges();
+            }
+        }
+
+        //Updates the Event in the database that corresponds to this EventViewModel object
         public void SubmitChanges()
         {
             using (var db = new KonneyContext())

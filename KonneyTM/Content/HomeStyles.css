@@ -1,4 +1,4 @@
-﻿/* WELCOME PANE STARTS */
+﻿/* WelcomePane */
 .WelcomePane {
     height: 25rem;
     width: 100%;
@@ -29,7 +29,6 @@
     font-family: Overlock, sans-serif;
 }
 
-
 .Logo {
     font-family: Oregano, cursive;
     font-size: 120%;
@@ -54,10 +53,8 @@
     border-bottom-right-radius: 30rem;
     box-shadow: inset 0.3rem 0.3rem 0.3rem black;
 }
-/* WELCOME PANE ENDS */
 
-
-/* NAVIGATE STARTS */
+/* Navigate Section */
 .Navigate .Text {
     font-family: Overlock, sans-serif;
     font-size: 22pt;
@@ -72,4 +69,3 @@
         color: #0F410D;
         margin-right: 0.2rem;
     }
-/* NAVIGATE ENDS */

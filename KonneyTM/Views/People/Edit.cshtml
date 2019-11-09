@@ -5,12 +5,12 @@
 }
 @Styles.Render("~/PanelStyles")
 
-<section class="Panel-EditPerson">
+<section class="People-Edit">
     <div class="Header mb-5">
         <h2>Edit Person</h2>
     </div><!--/.Header-->
 
-        @using (Html.BeginForm())
+    @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
@@ -48,4 +48,5 @@
                 </div><!--/.form-group-->
             </div><!--/.form-horizontal-->
         }
+
 </section><!--/.Panel-EditPerson-->

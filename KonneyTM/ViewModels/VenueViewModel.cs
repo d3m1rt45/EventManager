@@ -34,23 +34,8 @@ namespace KonneyTM.ViewModels
         
         public HttpPostedFileBase ImageFile { get; set; }
 
-        public void SaveToDB()
-        {
-            var db = new KonneyContext();
 
-            db.Venues.Add(new Venue
-            {
-                Name = this.Name,
-                Address = this.Address,
-                PostCode = this.PostCode,
-                PhoneNumber = this.PhoneNumber,
-                ImagePath = this.ImagePath
-            });
-
-            db.SaveChanges();
-            db.Dispose();
-        }
-
+        //Converts a Venue object to a VenueViewModel object
         public static VenueViewModel FromVenue(Venue venue)
         {
             var venueVM = new VenueViewModel
@@ -89,6 +74,25 @@ namespace KonneyTM.ViewModels
             return venuesVM.OrderBy(v => v.Name).ToList();
         }
 
+        //Saves this VenueViewModel object to the database as a Venue entity
+        public void SaveToDB()
+        {
+            var db = new KonneyContext();
+
+            db.Venues.Add(new Venue
+            {
+                Name = this.Name,
+                Address = this.Address,
+                PostCode = this.PostCode,
+                PhoneNumber = this.PhoneNumber,
+                ImagePath = this.ImagePath
+            });
+
+            db.SaveChanges();
+            db.Dispose();
+        }
+
+        //Updates the Venue entity in the database that corresponds to this VenueViewModel object
         internal void SubmitChanges()
         {
             using (var db = new KonneyContext())

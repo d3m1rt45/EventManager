@@ -5,6 +5,7 @@
 @Styles.Render("~/PanelStyles")
 
 <section class="Events-Create">
+
     <div class="Header">
         <h2>New Event</h2>
     </div>
@@ -32,7 +33,7 @@
                 <h4>Time</h4>
                 @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control text-center pl-5", placeholder = "HH:MM (24h)" } })
                 @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
-            </div><!--/.Date-->
+            </div><!--/.Time-->
 
             <div class="Venue form-group text-center">
                 <h4>Select Venue</h4>
@@ -63,18 +64,19 @@
                         </div>
                     }
                 </div>
-            </div><!--/.Venue-->
+            </div><!--/.People-->
 
-            <div class="form-group form-group col-md-4 offset-md-4 text-center">
+            <div class="ImageUplad form-group form-group col-md-4 offset-md-4 text-center">
                 <h4>Upload Image</h4>
                 <input type="file" name="ImageFile" required />
-            </div>
+            </div><!--/.ImageUpload-->
 
             <div class="form-group w-100 d-flex justify-content-center pt-4">
                 <div class="ButtonOut">
                     <input type="submit" value="Save" class="ButtonIn btn btn-default" />
                 </div>
-            </div>
+            </div><!--/.SubmitButton-->
         </div>
     }
+
 </section>

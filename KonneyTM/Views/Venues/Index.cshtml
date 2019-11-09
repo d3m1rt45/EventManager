@@ -12,10 +12,11 @@
     </div><!--/.Header-->
 
     <article class="VenueRow row">
+
         @foreach (var item in Model)
         {
             <div class="VenueCol col-md-4">
-                <div class="VenueCard" id="@item.ID" style="background-image: url(/Images/Venues/@item.ImagePath)">
+                <div class="VenueCard" style="background-image: url(/Images/Venues/@item.ImagePath)">
                     <div class="overlay text-center d-flex justify-content-center align-items-center">
                         <div class="Align">
                             <a class="EditButton" href="@Url.Action("Edit", new { id = item.ID })">
@@ -42,6 +43,7 @@
                 </div><!--/.NewVenue-->
             </a><!--/.NewVenueLink-->
         </div><!--/.NewVenueColumn-->
+
     </article><!--/.VenueRow-->
 
     @Html.Partial("_ConfirmModalPartial")

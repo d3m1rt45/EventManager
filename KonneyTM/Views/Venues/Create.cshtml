@@ -3,12 +3,14 @@
 @{
     ViewBag.Title = "NewVenue";
 }
+
 @Styles.Render("~/PanelStyles")
 
 <section class="Venues-Create">
+
     <div class="Header mb-5">
         <h2>New Person</h2>
-    </div>
+    </div><!--/.Header-->
 
     @using (Html.BeginForm("Create", "Venues", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
@@ -54,4 +56,5 @@
 
         </div>
     }
+
 </section>

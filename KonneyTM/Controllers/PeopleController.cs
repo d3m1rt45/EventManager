@@ -12,13 +12,13 @@ namespace KonneyTM.Controllers
     {
         public ActionResult Index()
         {
-            //Returns a list of PersonViewModel populated by each person in db.People, ordered by their first name
             return View(PersonViewModel.GetAllAsOrderedList());
         }
 
         public ActionResult Create()
         {
-            return View(new PersonViewModel());
+            var person = new PersonViewModel();
+            return View(person);
         }
 
         [HttpPost]

@@ -7,8 +7,13 @@ namespace KonneyTM.ViewModels
 {
     public class ChangeVenueVM
     {
+        public ChangeVenueVM()
+        {
+            this.Venues = VenueViewModel.GetAllAsOrderedList();
+        }
+
         public int EventID { get; set; }
 
-        public List<VenueViewModel> Venues = VenueViewModel.GetAllAsOrderedList();
+        public List<VenueViewModel> Venues { get; set; }
     }
 }
