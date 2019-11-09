@@ -18,7 +18,11 @@ else
         @Html.ActionLink("Demo", "Index", "Events", null, new { @class = "nav-link text-light" })
     </li>
     <li class="nav-item">
-        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-light" })
+        <a class="nav-link text-light" data-toggle="modal" data-target="#ConfirmModal"
+        onclick="$('#ConfirmModal .modal-body').html('This is a demo app. User functionalities have therefore been disabled. <br/> Run a demo?'); $('#ConfirmModal .modal-title').html('Run a Demo');
+        $('#ConfirmModal .Confirm').attr('href', '@Url.Action("Index", "Events")')">
+            Log In
+        </a>
     </li>
     <li class="nav-item">
         @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link text-light" })

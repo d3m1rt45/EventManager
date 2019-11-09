@@ -30,26 +30,13 @@
                         </div><!--/.EventCard-->
                     </div><!--/.OuterColumn-->
                 }
-                @if (Model.Count() % 2 == 0)
-                {
-                    <div class="NewEventColumn col-12 pt-4">
-                        <a class="NewEventLink" href="@Url.Action("Create")">
-                            <div class="NewEvent">
-                                <i class="Plus fas fa-plus fa-5x"></i>
-                            </div>
-                        </a><!--/.NewEventLink-->
-                    </div><!--/.NewEventColumn-->
-                }
-                else
-                {
-                    <div class="NewEventColumn col-6 pt-4">
-                        <a class="NewEventLink" href="@Url.Action("Create")">
-                            <div class="NewEvent">
-                                <i class="Plus fas fa-plus fa-5x"></i>
-                            </div>
-                        </a><!--/.NewEventLink-->
-                    </div><!--/.NewEventColumn-->
-                }
+                <div class="NewEventColumn col-6 pt-4">
+                    <a class="NewEventLink" href="@Url.Action("Create")">
+                        <div class="NewEvent">
+                            <i class="Plus fas fa-plus fa-5x"></i>
+                        </div>
+                    </a><!--/.NewEventLink-->
+                </div><!--/.NewEventColumn-->
             </div><!--/.OuterRow-->
         </article><!--/.EventsContainer-->
 

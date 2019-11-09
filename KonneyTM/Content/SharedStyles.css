@@ -1,6 +1,6 @@
 ﻿body {
     background-color: #EEFBEE;
-    padding-bottom: 10rem;
+    padding-bottom: 5rem;
 }
 
 .ExceptFooter {
@@ -54,6 +54,8 @@ nav {
     background-color: #0F410D;
     border-bottom-right-radius: 3rem;
     border-top-left-radius: 3rem;
+    box-shadow: black 0.1rem 0.3rem 0.4rem;
+    cursor:pointer;
 }
 
 .nav-link {
@@ -107,9 +109,6 @@ nav {
 .LogOff {
     margin-bottom: 1rem;
 }
-.LogOff li {
-    background-color: darkolivegreen;
-}
 
 @media only screen and (max-width: 992px) {
     .Footer {
@@ -142,3 +141,51 @@ nav {
     border-top-right-radius: 3rem;
 }
 /* FOOTER ENDS */
+
+/* MODALS */
+.modal-dialog {
+    border: #00EBC3 0.17rem solid;
+    border-radius: 0.6rem;
+    background-color: #00EBC3;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+}
+
+.modal form {
+    background-color: #EEFBEE;
+}
+
+.modal-header {
+    background-color: rgb(15,65,13);
+}
+
+    .modal-header h4 {
+        color: #EEFBEE;
+    }
+
+.modal-body {
+    font-family: Overlock, sans-serif;
+    font-weight: 700;
+    font-size: 17pt;
+    background-color: #EEFBEE;
+}
+
+.modal-footer {
+    background-color: rgb(15,65,13);
+}
+
+.Confirm {
+    cursor: pointer;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 15pt;
+    font-family: 'Overlock SC', sans-serif;
+    font-weight: 900;
+    background-color: #00EBC3;
+}
+
+.CloseModal {
+    cursor: pointer;
+    padding: 0.5rem 1.8rem 0.5rem 1.8rem;
+    font-size: 15pt;
+    font-family: 'Overlock SC', sans-serif;
+    font-weight: 900;
+}

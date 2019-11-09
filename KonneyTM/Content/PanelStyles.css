@@ -41,6 +41,20 @@ section {
     margin-right: 1rem;
 }
 
+.nav-item {
+    font-family: 'Overlock SC', sans-serif;
+    margin: 0 0.5rem 0 0.5rem;
+    border: #00EBC3 0.2rem solid;
+    width: 10rem;
+    height: 2.7rem;
+    text-align: center;
+    font-size: 19pt;
+    background-color: #0F410D;
+    border-bottom-right-radius: 3rem;
+    border-top-left-radius: 3rem;
+    box-shadow: black 0.1rem 0.3rem 0.4rem;
+}
+
 span {
     color: #EEFBEE;
     font-family: Overlock, sans-serif;
@@ -82,7 +96,7 @@ span {
     transition-duration: 0.5s;
 }
     .NewEvent:hover, .NewPerson:hover, .NewVenue:hover {
-        margin-top: 0.3rem;
+        margin-top: 1rem;
         transition-duration: 0.5s;
     }
 
@@ -91,7 +105,7 @@ span {
 }
 
 .NewEvent i, .NewPerson i, .NewVenue i {
-    color: #00fffb;
+    color: #EEFBEE;
 }
 
 .EventDetailsTitle {
@@ -161,6 +175,7 @@ span {
     background-color: #0F410D;
     border-bottom-right-radius: 3rem;
     border-top-left-radius: 3rem;
+    box-shadow: black 0.1rem 0.3rem 0.4rem;
 }
 
 .form-group {
@@ -184,11 +199,6 @@ span {
         color: #CED9CE; 
         text-decoration: none;
     }
-
-.Panel-People .PeopleTable {
-    padding-left: 1rem;
-    padding-right: 0.8rem;
-}
 
 th {
     font-family: 'Overlock SC', sans-serif;
@@ -315,8 +325,8 @@ th {
 }
 
 .NewVenue {
-    height: 10em;
-    width: 10em;
+    height: 8em;
+    width: 8em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -328,50 +338,12 @@ th {
     transition-duration: 0.5s;
 }
 
-/* MODALS */
-.modal-dialog {
-    border: #00EBC3 0.17rem solid;
-    border-radius: 0.6rem;
-    background-color: #00EBC3;
-    box-shadow: black 0.1rem 0.5rem 0.4rem;
-}
-
-.modal form {
-    background-color: #EEFBEE;
-}
-
-.modal-header {
-    background-color: rgb(15,65,13);
-}
-
-.modal-header h4 {
-    color: #EEFBEE;
-}
-
-.modal-body {
+div.col-3 {
     font-family: Overlock, sans-serif;
-    font-weight: 700;
-    font-size: 17pt;
-    background-color: #EEFBEE;
+    font-size: 16pt;
 }
 
-.modal-footer {
-    background-color: rgb(15,65,13);
-}
-
-.Confirm {
-    cursor: pointer;
-    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-    font-size: 15pt;
-    font-family: 'Overlock SC', sans-serif;
-    font-weight: 900;
-    background-color: #00EBC3;
-}
-
-.CloseModal {
-    cursor: pointer;
-    padding: 0.5rem 1.8rem 0.5rem 1.8rem;
-    font-size: 15pt;
-    font-family: 'Overlock SC', sans-serif;
-    font-weight: 900;
+.checkbox label {
+    font-family: Overlock, sans-serif;
+    font-size: 16pt;
 }
