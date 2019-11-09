@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row text-center">
 
-                <article class="Event col-6">
+                <article class="Event col-12 col-xl-6">
                     <h2>Event</h2>
                     <div class="EventDetailsCard" style="background-image:url(/Images/Events/@Model.ImagePath)">
                         <div class="overlay text-center d-flex justify-content-center align-items-center">
@@ -44,7 +44,7 @@
                     </div><!--/.EventCard-->
                 </article><!--/.Event-->
 
-                <article class="Venue col-6">
+                <article class="Venue col-12 col-xl-6">
                     <h2>Venue</h2>
                     <div class="EventVenueCard" style="background-image: url(/Images/Venues/@Model.Place.ImagePath)">
                         <div class="overlay text-center d-flex justify-content-center align-items-center">
@@ -67,13 +67,22 @@
                 <h2 class="PeopleAttending mb-3 mt-3 col-xl-12">People Attending</h2>
                 @foreach (var item in Model.PeopleAttending)
                 {
-                    <div class="PersonCol col-2">
-                        <div class="PersonCard text-center pt-4">
-                            <h4 class="PersonName d-block">@item.FirstName</h4>
-                            <h4 class="PersonName d-block">@item.LastName</h4>
-                            <h5 class="PersonEmail lead d-block">@item.Email</h5>
-                            <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
-
+                    <div class="PersonCol col-6 col-md-4 col-xl-3">
+                        <div class="PersonCard text-center pt-4 d-flex justify-content-center align-items-center">
+                            <div class="Align">
+                                <h4 class="PersonName d-block">@item.FirstName</h4>
+                                <h4 class="PersonName d-block">@item.LastName</h4>
+                                @if (item.Email.Length > 15)
+                                {
+                                    <h5 class="PersonEmail lead d-lg-none">@item.Email.Substring(0, 15)...</h5>
+                                    <h5 class="PersonEmail lead d-none d-lg-block">@item.Email</h5>
+                                }
+                                else
+                                {
+                                    <h5 class="PersonEmail lead d-md-block">@item.Email</h5>
+                                }
+                                <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
+                            </div>
                             <a class="RemoveButton" data-toggle="modal" data-target="#ConfirmModal"
                                 onclick="$('#ConfirmModal .modal-body').html('@item.FirstName @item.LastName will be removed from this event.');
                                         $('#ConfirmModal .modal-title').html('Remove Person');

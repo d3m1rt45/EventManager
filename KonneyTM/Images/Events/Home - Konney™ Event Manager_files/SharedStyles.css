@@ -13,9 +13,6 @@
     .ExceptFooter {
         padding: 0 1rem 0 1rem;
     }
-    nav {
-        margin-bottom: 1rem;
-    }
 }
 
 h1, h2, h3, h4, h5 {
@@ -28,6 +25,12 @@ nav {
     margin-bottom: 2.5rem;
 }
 
+@media only screen and (max-width: 992px)
+{
+    nav {
+        margin-bottom: 1rem;
+    }
+}
 
 .Brand h1 {
     font-family: Oregano, cursive;
@@ -117,8 +120,8 @@ nav {
         font-size: 14pt;
     }
 
-    .DemoFooter .nav-item {
-        width: 9rem !important;
+    .Footer a, .Footer p {
+        font-size: 12pt;
     }
 }
 
@@ -185,27 +188,4 @@ nav {
     font-size: 15pt;
     font-family: 'Overlock SC', sans-serif;
     font-weight: 900;
-}
-
-@media only screen and (max-width: 900px)
-{
-    .modal-dialog {
-        justify-self: center !important;
-        width: 50%;
-    }
-    .modal-header h4 {
-        font-size: 14pt !important;
-    }
-
-    .Confirm {
-        padding: 0.3rem 0.9rem 0.3rem 0.9rem;
-        font-size: 12pt;
-    }
-    .CloseModal {
-        padding: 0.3rem 0.9rem 0.3rem 0.9rem;
-        font-size: 12pt;
-    }
-    .modal-body {
-        font-size: 14pt;
-    }
 }

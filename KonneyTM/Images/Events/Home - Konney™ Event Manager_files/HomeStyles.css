@@ -12,6 +12,30 @@
     border: solid #00EBC3 0.2rem;
     box-shadow: black 0.1rem 0.5rem 0.4rem;
 }
+@media only screen and (max-width: 900px) {
+    .WelcomePane {
+        transition-duration: 1s;
+        border-radius: 1rem !important; 
+    }
+    .WelcomePic {
+        border-radius: 1rem !important;
+    }
+    .WelcomeLeft .AlignmentDiv {
+        padding: 0 !important;
+    }
+    .WelcomeHeader {
+        font-size: 20pt !important;
+    }
+
+    .WelcomeText {
+        font-size: 15pt !important;
+    }
+
+    .Logo {
+        font-family: Oregano, cursive;
+        font-size: 120%;
+    }
+}
 
 .WelcomeLeft .AlignmentDiv {
     padding-left: 6rem;
@@ -34,6 +58,13 @@
     font-size: 120%;
 }
 
+.tm {
+    font-family: Oregano, cursive;
+    font-size: 90%;
+    margin-right: 0.2rem;
+    margin-left: 0.1rem;
+}
+
 .WelcomePic {
     height: 90%;
     margin-top: 1.2rem;
@@ -48,10 +79,6 @@
 }
 
 /* Navigate Section */
-.Navigate {
-    margin-bottom: 5em;
-}   
-
 .Navigate .Text {
     font-family: Overlock, sans-serif;
     font-size: 22pt;
@@ -65,49 +92,4 @@
         font-family: 'Overlock SC', sans-serif;
         color: #0F410D;
         margin-right: 0.2rem;
-    }
-
-@media only screen and (max-width: 1200px) {
-    .WelcomePane{
-        margin-top: 1rem !important;
-    }
-}
-
-    @media only screen and (max-width: 900px) {
-        .WelcomePane {
-            transition-duration: 1s;
-            border-radius: 1rem !important;
-            
-        }
-
-        .WelcomePic {
-            transition-duration: 1s;
-            border-radius: 1rem !important;
-        }
-
-        .WelcomeLeft .AlignmentDiv {
-            padding: 0 !important;
-        }
-
-        .WelcomeHeader {
-            font-size: 20pt !important;
-        }
-
-        .WelcomeText {
-            font-size: 15pt !important;
-        }
-
-        .Navigate {
-            margin-bottom: 1em !important;
-        }
-
-            .Navigate .Text {
-                font-size: 17pt !important;
-                padding-bottom: 0.7rem !important;
-            }
-
-                .Navigate .Text a {
-                    font-size: 19pt !important;
-                    margin-right: 0.02rem !important;
-                }
     }

@@ -14,7 +14,7 @@
             <div class="OuterRow row">
                 @foreach (var item in Model)
                 {
-                    <div class="OuterColumn col-6">
+                    <div class="OuterColumn col-12 col-md-6">
                         <div class="EventCard" style="background-image:url(/Images/Events/@item.ImagePath)">
                             <div class="overlay text-center d-flex justify-content-center align-items-center">
                                 <div class="Align w-100">
@@ -30,7 +30,7 @@
                         </div><!--/.EventCard-->
                     </div><!--/.OuterColumn-->
                 }
-                <div class="NewEventColumn col-6 pt-4">
+                <div class="NewEventColumn col-12 col-md-6 pt-md-4">
                     <a class="NewEventLink" href="@Url.Action("Create")">
                         <div class="NewEvent">
                             <i class="Plus fas fa-plus fa-5x"></i>

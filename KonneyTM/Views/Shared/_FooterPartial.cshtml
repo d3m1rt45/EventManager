@@ -26,7 +26,8 @@
 
     <ul class="Quit ml-auto">
         <li class="nav-item">
-            @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light" })
+            @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light d-lg-block d-none" })
+            @Html.ActionLink("Quit", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light d-block d-lg-none" })
         </li>
     </ul>
 </div>

@@ -15,8 +15,8 @@
         <article class="PeopleRow row">
             @foreach (var item in Model)
             {
-                <div class="PersonCol col-2">
-                    <div class="PersonCard text-center pt-4">
+                <div class="PersonCol col-6 col-md-4 col-xl-3">
+                    <div class="PersonCard text-center pt-4 d-flex align-items-center justify-content-center pb-4">
                         <a class="EditButton" href="@Url.Action("Edit", new { id = item.ID})">
                             <i class="EditPerson fas fa-edit fa-2x"></i>
                         </a><!--/.EditButton-->
@@ -25,14 +25,24 @@
                                                 $('#ConfirmModal .Confirm').attr('href', '@Url.Action("Delete", new { id = @item.ID })')">
                             <i class="DeletePerson fas fa-trash-alt fa-2x"></i>
                         </a><!--/.DeleteButton-->
-                        <h4 class="PersonName d-block">@item.FirstName</h4>
-                        <h4 class="PersonName d-block">@item.LastName</h4>
-                        <h5 class="PersonEmail lead d-block">@item.Email</h5>
-                        <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
+                        <div class="Align">
+                            <h4 class="PersonName d-block">@item.FirstName</h4>
+                            <h4 class="PersonName d-block">@item.LastName</h4>
+                            @if (item.Email.Length > 15)
+                            {
+                                <h5 class="PersonEmail lead d-lg-none">@item.Email.Substring(0, 15)...</h5>
+                                <h5 class="PersonEmail lead d-none d-lg-block">@item.Email</h5>
+                            }
+                            else
+                            {
+                                <h5 class="PersonEmail lead d-md-block">@item.Email</h5>
+                            }
+                            <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
+                        </div>
                     </div><!--/.PersonCard-->
                 </div><!--/.PersonCol-->
             }
-            <div class="NewPersonColumn col-2 pt-3">
+            <div class="NewPersonColumn col-6 col-md-4 col-xl-3 pt-3">
                 <a class="NewPersonLink" href="@Url.Action("Create")">
                     <div class="NewPerson">
                         <i class="fas fa-plus fa-4x"></i>
