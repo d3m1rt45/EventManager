@@ -164,7 +164,32 @@ span {
     cursor: pointer;
 }
 
-
+.DeleteButton {
+    margin: 1rem 0.5rem 3rem 0.5rem;
+    border: #00EBC3 0.2rem solid;
+    width: 14rem;
+    height: 3rem;
+    text-align: center;
+    background-color: #0F410D;
+    border-top-right-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    box-shadow: black 0.1rem 0.3rem 0.4rem;
+    align-items: center;
+    padding-top: 0.2rem;
+}
+.DeleteButton a {
+    font-family: 'Overlock SC', sans-serif;
+    font-size: 19pt;
+    color: #EEFBEE;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor:pointer;
+}
+    .DeleteButton a:hover {
+        color: #CED9CE;
+        text-decoration: none;
+    }
 
 .ButtonOut {
     margin: 0 0.5rem 0 0.5rem;

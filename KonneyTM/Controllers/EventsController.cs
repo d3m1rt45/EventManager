@@ -16,7 +16,7 @@ namespace KonneyTM.Controllers
             var eventVMs = EventViewModel.GetAllAsOrderedList();
             return View(eventVMs);
         }
-
+        
         public ActionResult Create()
         {
             var eventVM = new EventViewModel();
@@ -68,6 +68,16 @@ namespace KonneyTM.Controllers
                 return RedirectToAction("Event", new { id = eventVM.ID });
             }
             return RedirectToAction("Event", new { id = eventVM.ID });
+        }
+
+        public ActionResult Delete(int id)
+        {
+            using (var db = new KonneyContext())
+            {
+                db.Events.Remove(db.Events.First(e => e.ID == id));
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult ChangeVenue(int eventID)
