@@ -189,6 +189,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\AddPersonVM.cs" />
     <Compile Include="ViewModels\ChangeVenueVM.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
@@ -327,8 +328,14 @@
     <Content Include="Views\Events\Event.cshtml" />
     <Content Include="Views\Events\ChangeVenue.cshtml" />
     <Content Include="Views\Events\AddPerson.cshtml" />
-    <Content Include="Views\Events\_EditModalsPartial.cshtml" />
+    <Content Include="Views\Shared\_EditModalsPartial.cshtml" />
     <Content Include="Views\Shared\_ConfirmModalPartial.cshtml" />
+    <Content Include="Views\Demo\AddPerson.cshtml" />
+    <Content Include="Views\Demo\ChangeVenue.cshtml" />
+    <Content Include="Views\Demo\CreateEvent.cshtml" />
+    <Content Include="Views\Demo\Event.cshtml" />
+    <Content Include="Views\Demo\Index.cshtml" />
+    <Content Include="Views\Demo\CreatePerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

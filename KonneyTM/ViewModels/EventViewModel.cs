@@ -94,10 +94,10 @@ namespace KonneyTM.ViewModels
         }
 
         //Returns all the Events in the Database as a List of EventViewModels ordered by date.
-        public static List<EventViewModel> GetAllAsOrderedList()
+        public static List<EventViewModel> GetAll(string userID)
         {
             var db = new KonneyContext();
-            var events = db.Events.ToList();
+            var events = db.Events.Where(x => x.User.ID == userID).ToList();
 
             var eventsVM = new List<EventViewModel>();
             foreach (var ev in events)
@@ -123,7 +123,7 @@ namespace KonneyTM.ViewModels
         }
 
         //Saves this EventViewModel object as an Event entity to the database.
-        public void SaveToDB() 
+        public void SaveToDB(string userID)
         {
             using (var db = new KonneyContext())
             {
@@ -142,7 +142,7 @@ namespace KonneyTM.ViewModels
                     newEvent.PeopleAttending.Add(db.People.First(p => p.ID == id));
                 }
 
-                db.Events.Add(newEvent);
+                db.Users.Single(x => x.ID == userID).Events.Add(newEvent);
                 db.SaveChanges();
             }
         }

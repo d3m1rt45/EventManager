@@ -21,6 +21,8 @@ namespace KonneyTM.Models
         [DataType(DataType.ImageUrl)]
         public string ImagePath { get; set; }
 
+        public virtual User User { get; set; }
+
         public virtual ICollection<Event> Events { get; set; }
     }
 }

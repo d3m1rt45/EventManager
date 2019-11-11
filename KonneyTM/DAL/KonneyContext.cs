@@ -16,6 +16,7 @@ namespace KonneyTM.DAL
         public DbSet<Person> People { get; set; }
         public DbSet<Venue> Venues { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

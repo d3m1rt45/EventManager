@@ -1,0 +1,82 @@
+﻿@model KonneyTM.ViewModels.EventViewModel
+@{
+    ViewBag.Title = "New Event";
+}
+@Styles.Render("~/PanelStyles")
+
+<section class="Events-Create">
+
+    <div class="Header">
+        <h2>New Event</h2>
+    </div>
+
+    @using (Html.BeginForm("Create", "Events", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="Title form-group col-md-4 offset-md-4 text-center">
+                <h4>Name of Event</h4>
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div><!--/.Title-->
+
+            <div class="Date form-group col-md-2 offset-md-5 text-center">
+                <h4>Date</h4>
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control text-center pl-5", placeholder = "DD/MM/YYYY" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div><!--/.Date-->
+            
+            <div class="Time form-group col-md-2 offset-md-5 text-center">
+                <h4>Time</h4>
+                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control text-center pl-5", placeholder = "HH:MM (24h)" } })
+                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+            </div><!--/.Time-->
+
+            <div class="Venue form-group text-center">
+                <h4>Select Venue</h4>
+                <div class="row">
+                    @for (int i = 0; i < Model.VenueList.Count; i++)
+                    {
+                        <div class="col-3">
+                            @Html.RadioButton("PlaceID", Model.VenueList[i].ID)
+                            @Html.DisplayFor(x => x.VenueList[i].Name)
+                            @Html.ValidationMessageFor(model => model.PlaceID, "", new { @class = "text-danger"})
+                        </div>
+                    }
+                </div>
+            </div><!--/.Venue-->
+
+            <div class="People form-group text-center">
+                <h4>Invite People</h4>
+                <div class="row">
+                    @foreach (var p in Model.PeopleList)
+                    {
+                        <div class="checkbox col-3">
+                            <label>
+                                <input type="checkbox"
+                                        name="InvitedPeopleIDs"
+                                        value="@p.Value"
+                                        @if (Model.InvitedPeopleIDs != null && Model.InvitedPeopleIDs.Contains(Convert.ToInt32(p.Value))) { <text> checked </text>  } /> @p.Text
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div><!--/.People-->
+
+            <div class="ImageUplad form-group form-group col-md-4 offset-md-4 text-center">
+                <h4>Upload Image</h4>
+                <input type="file" name="ImageFile" required />
+            </div><!--/.ImageUpload-->
+
+            <div class="form-group w-100 d-flex justify-content-center pt-4">
+                <div class="ButtonOut">
+                    <input type="submit" value="Save" class="ButtonIn btn btn-default" />
+                </div>
+            </div><!--/.SubmitButton-->
+        </div>
+    }
+
+</section>

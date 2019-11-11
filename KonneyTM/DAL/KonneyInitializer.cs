@@ -45,6 +45,16 @@ namespace KonneyTM.DAL
 
             events.ForEach(e => context.Events.Add(e));
             context.SaveChanges();
+
+            var demoUser = new User
+            {
+                ID = "demo",
+                Events = events,
+                People = people,
+                Venues = venues
+            };
+            context.Users.Add(demoUser);
+            context.SaveChanges();
         }
     }
 }
