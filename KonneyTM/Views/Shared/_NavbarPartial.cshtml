@@ -1,5 +1,8 @@
 ﻿
 
+@using Microsoft.AspNet.Identity
+
+
 <nav class="NavbarOuter navbar navbar-expand-lg navbar-light">
     <a class="Brand navbar-brand d-flex" href="@Url.Action("Index", "Home")">
         <h1 class="d-inline"><u>Konney</u></h1>
@@ -9,7 +12,7 @@
     </button><!--/.NavbarToggler-->
     <div class="NavbarInner collapse navbar-collapse" id="navbarNav">
         <ul class="ml-auto navbar-nav">
-            @if (Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
+            @if (Request.IsAuthenticated || Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
             {
                 <li class="Events nav-item">
                     @Html.ActionLink("Events", "Index", "Events", null, new { @class = "nav-link text-light" })
@@ -27,20 +30,10 @@
                     @Html.ActionLink("Demo", "Index", "Events", null, new { @class = "nav-link text-light" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" data-toggle="modal" data-target="#ConfirmModal"
-                       onclick="$('#ConfirmModal .modal-body').html('This is a demo app. User functionalities have therefore been disabled. <br/> Run demo?');
-                                $('#ConfirmModal .modal-title').html('Run a Demo');
-                                $('#ConfirmModal .Confirm').attr('href', '@Url.Action("Index", "Events")')">
-                        Log In
-                    </a>
+                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link text-light" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" data-toggle="modal" data-target="#ConfirmModal"
-                       onclick="$('#ConfirmModal .modal-body').html('This is a demo app. User functionalities have therefore been disabled. <br/> Run demo?');
-                                $('#ConfirmModal .modal-title').html('Run a Demo');
-                                $('#ConfirmModal .Confirm').attr('href', '@Url.Action("Index", "Events")')">
-                        Register
-                    </a>
+                    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-light" })
                 </li>
             }
     </div><!--/.NavbarInner-->

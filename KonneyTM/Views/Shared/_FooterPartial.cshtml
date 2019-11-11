@@ -1,36 +1,59 @@
 ﻿
+@using Microsoft.AspNet.Identity
 
 @if (Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
 {
-<div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
-    <ul class="Back">
-        <li class="nav-item BackInner">
-            @if (Request.Path.Contains("Events/Create") || Request.Path.Contains("Events/Event"))
-            {
-                @Html.ActionLink("Back", "Index", "Events", null, new { @class = "nav-link font-weight-bold text-light" })
-            }
-            else if (Request.Path.Contains("People/Create") || Request.Path.Contains("People/Edit"))
-            {
-                @Html.ActionLink("Back", "Index", "People", null, new { @class = "nav-link font-weight-bold text-light" })
-            }
-            else if (Request.Path.Contains("Venues/Create") || Request.Path.Contains("Venues/Edit"))
-            {
-                @Html.ActionLink("Back", "Index", "Venues", null, new { @class = "nav-link font-weight-bold text-light" })
-            }
-            else
-            {
-                @Html.ActionLink("Back", "Index", "Home", null, new { @class = "nav-link font-weight-bold text-light" })
-            }
-        </li>
-    </ul>
+    <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
+        <ul class="Back">
+            <li class="nav-item BackInner">
+                @if (Request.Path.Contains("Events/Create") || Request.Path.Contains("Events/Event"))
+                {
+                    @Html.ActionLink("Back", "Index", "Events", null, new { @class = "nav-link font-weight-bold text-light" })
+                }
+                else if (Request.Path.Contains("People/Create") || Request.Path.Contains("People/Edit"))
+                {
+                    @Html.ActionLink("Back", "Index", "People", null, new { @class = "nav-link font-weight-bold text-light" })
+                }
+                else if (Request.Path.Contains("Venues/Create") || Request.Path.Contains("Venues/Edit"))
+                {
+                    @Html.ActionLink("Back", "Index", "Venues", null, new { @class = "nav-link font-weight-bold text-light" })
+                }
+                else
+                {
+                    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "nav-link font-weight-bold text-light" })
+                }
+            </li>
+        </ul>
 
-    <ul class="Quit ml-auto">
-        <li class="nav-item">
-            @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light d-lg-block d-none" })
-            @Html.ActionLink("Quit", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light d-block d-lg-none" })
-        </li>
-    </ul>
-</div>
+
+        @if (Request.IsAuthenticated)
+        {
+
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <ul class="Quit ml-auto">
+                    <li class="nav-item">
+                        <a class="QuitDemo nav-link font-weight-bold text-light d-lg-block d-none" 
+                           href="javascript:document.getElementById('logoutForm').submit()">
+                        Log off
+                        </a>
+                    </li>
+                </ul>
+            }
+        }
+        else
+        {
+            <ul class="Quit ml-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Quit Demo", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light d-lg-block d-none" })
+                    @Html.ActionLink("Quit", "Index", "Home", null, new { @class = "QuitDemo nav-link font-weight-bold text-light d-block d-lg-none" })
+                </li>
+            </ul>
+
+        }
+    </div>
 }
 else
 {
