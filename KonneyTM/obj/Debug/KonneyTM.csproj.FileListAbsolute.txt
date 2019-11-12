@@ -98,7 +98,7 @@ C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\bin\Microsoft.Owin
 C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\obj\Debug\KonneyTM.csprojAssemblyReference.cache
 C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\obj\Debug\KonneyTM.csproj.CopyComplete
 C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\obj\Debug\KonneyTM.dll
 C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\obj\Debug\KonneyTM.pdb
+C:\Users\d3m1r\OneDrive\D3M1RT45\GitHub\EventManager\KonneyTM\obj\Debug\KonneyTM.csprojAssemblyReference.cache

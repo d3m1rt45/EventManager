@@ -20,6 +20,16 @@ namespace KonneyTM.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
+                using (var db = new KonneyContext())
+                {
+                    var user = new User { ID = User.Identity.GetUserId() };
+                    if(!db.Users.Contains(user))
+                    {
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                    }
+                }
+                
                 eventVMs = EventViewModel.GetAll(User.Identity.GetUserId());
             }
             else
@@ -42,26 +52,17 @@ namespace KonneyTM.Controllers
             if (ModelState.IsValid)
             {
                 //Image Upload Logic
-                string extension = Path.GetExtension(eventVM.ImageFile.FileName);
-                string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
-                eventVM.ImagePath = imageFileName;
                 
+
                 if (User.Identity.IsAuthenticated)
                 {
-                    var directory = Server.MapPath($"~/Images/{User.Identity.GetUserId()}/Events");
-                    Directory.CreateDirectory(directory);
-
-                    imageFileName = Path.Combine(directory, imageFileName) ;
-                    eventVM.ImageFile.SaveAs(imageFileName);
-                    eventVM.SaveToDB(User.Identity.GetUserId());
+                    var userID = User.Identity.GetUserId();
+                    UploadImage(eventVM, userID);
+                    eventVM.SaveToDB(userID);
                 }
                 else
                 {
-                    var directory = Server.MapPath($"~/Images/demo/Events");
-                    Directory.CreateDirectory(directory);
-
-                    imageFileName = Path.Combine(directory, imageFileName);
-                    eventVM.ImageFile.SaveAs(imageFileName);
+                    UploadImage(eventVM, "demo");
                     eventVM.SaveToDB("demo");
                 }
 
@@ -116,25 +117,17 @@ namespace KonneyTM.Controllers
                     //If the user is logged in
                     if (User.Identity.IsAuthenticated)
                     {
+                        //Get User ID
+                        var userID = User.Identity.GetUserId();
+
                         //If the event belongs to the user
-                        if (ev.User.ID == User.Identity.GetUserId()) 
+                        if (ev.User.ID == userID) 
                         {
                             //If an image file is selected
                             if (eventVM.ImageFile != null)
                             {
-                                var directory = Server.MapPath($"~/Images/{User.Identity.GetUserId()}/Events");
-                                Directory.CreateDirectory(directory);
-
-                                string extension = Path.GetExtension(eventVM.ImageFile.FileName);
-                                string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
-                                eventVM.ImagePath = imageFileName;
-                                
-                                imageFileName = Path.Combine(directory, imageFileName);
-                                eventVM.ImageFile.SaveAs(imageFileName);
+                                UploadImage(eventVM, userID);
                             }
-
-                            eventVM.SubmitChanges();
-                            return RedirectToAction("Event", new { id = eventVM.ID });
                         }
                         else
                         {
@@ -146,14 +139,7 @@ namespace KonneyTM.Controllers
                     {
                         if(eventVM.ImageFile != null)
                         {
-                            var directory = Server.MapPath($"~/Images/demo/Events");
-                            Directory.CreateDirectory(directory);
-
-                            string extension = Path.GetExtension(eventVM.ImageFile.FileName);
-                            string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
-                            eventVM.ImagePath = imageFileName;
-                            imageFileName = Path.Combine(directory, imageFileName);
-                            eventVM.ImageFile.SaveAs(imageFileName);
+                            UploadImage(eventVM, "demo");
                         }
 
                         eventVM.SubmitChanges();
@@ -163,6 +149,9 @@ namespace KonneyTM.Controllers
                     {
                         throw new Exception("Something went wrong...");
                     }
+
+                    eventVM.SubmitChanges();
+                    return RedirectToAction("Event", new { id = eventVM.ID });
                 }
             }
             return RedirectToAction("Event", new { id = eventVM.ID });
@@ -387,6 +376,15 @@ namespace KonneyTM.Controllers
             }
 
             return RedirectToAction("Event", new { id = eventID });
+        }
+
+        public void UploadImage(EventViewModel eventVM, string userID)
+        {
+            string extension = Path.GetExtension(eventVM.ImageFile.FileName);
+            string imageFileName = $"{userID}{DateTime.Now.ToString("yyyyMMddHHmmss")}{extension}";
+            eventVM.ImagePath = imageFileName;
+            imageFileName = Path.Combine(Server.MapPath($"~/Images/Events/") + imageFileName);
+            eventVM.ImageFile.SaveAs(imageFileName);
         }
     }
 }

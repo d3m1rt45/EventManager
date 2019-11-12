@@ -85,15 +85,15 @@ namespace KonneyTM.ViewModels
             using (var db = new KonneyContext())
             {
                 var user = db.Users.Single(u => u.ID == userID);
-                user.Venues.Add(new Venue
-                {
+                var venue = new Venue{
                     Name = this.Name,
                     Address = this.Address,
                     PostCode = this.PostCode,
                     PhoneNumber = this.PhoneNumber,
                     ImagePath = this.ImagePath
-                });
+                };
 
+                user.Venues.Add(venue);
                 db.SaveChanges();
             }
         }

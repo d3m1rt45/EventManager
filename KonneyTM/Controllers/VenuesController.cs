@@ -40,24 +40,19 @@ namespace KonneyTM.Controllers
             if (ModelState.IsValid)
             {
                 //Image Upload Logic
-                string extension = Path.GetExtension(venueVM.ImageFile.FileName);
-                string imageFileName = venueVM.PhoneNumber.RemoveWhitespace() + venueVM.PostCode.RemoveWhitespace() + extension;
-                venueVM.ImagePath = imageFileName;
-
                 if (User.Identity.IsAuthenticated)
                 {
                     var userID = User.Identity.GetUserId();
-                    imageFileName = Path.Combine(Server.MapPath($"~/Images/Venues/{userID}{imageFileName}"));
-                    venueVM.ImageFile.SaveAs(imageFileName);
+                    UploadImage(venueVM, userID);
                     venueVM.SaveToDB(userID);
                 }
                 else
                 {
-                    imageFileName = Path.Combine(Server.MapPath($"~/Images/Venues/demo{imageFileName}"));
-                    venueVM.ImageFile.SaveAs(imageFileName);
+                    UploadImage(venueVM, "demo");
                     venueVM.SaveToDB("demo");
                 }
 
+                
                 return RedirectToAction("Index");
             }
 
@@ -113,11 +108,7 @@ namespace KonneyTM.Controllers
                             //If an image file is selected
                             if (venueVM.ImageFile != null)
                             {
-                                string extension = Path.GetExtension(venueVM.ImageFile.FileName);
-                                string imageFileName = $"{userID}{DateTime.Now.ToString("yyyyMMddHHmmss")}{extension}";
-                                venueVM.ImagePath = imageFileName;
-                                imageFileName = Path.Combine(Server.MapPath($"~/Images/Venues") + imageFileName);
-                                venueVM.ImageFile.SaveAs(imageFileName);
+                                UploadImage(venueVM, userID);
                             }
                         }
                         else
@@ -130,11 +121,7 @@ namespace KonneyTM.Controllers
                     {
                         if (venueVM.ImageFile != null)
                         {
-                            string extension = Path.GetExtension(venueVM.ImageFile.FileName);
-                            string imageFileName = $"demo{DateTime.Now.ToString("yyyyMMddHHmmss")}{extension}";
-                            venueVM.ImagePath = imageFileName;
-                            imageFileName = Path.Combine(Server.MapPath($"~/Images/Venues/{imageFileName}"));
-                            venueVM.ImageFile.SaveAs(imageFileName);
+                            UploadImage(venueVM, "demo");
                         }
                     }
                     else
@@ -146,7 +133,7 @@ namespace KonneyTM.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return RedirectToAction("Event", new { id = venueVM.ID });
+            return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
@@ -177,6 +164,15 @@ namespace KonneyTM.Controllers
                 return RedirectToAction("Index");
             }
 
+        }
+
+        public void UploadImage(VenueViewModel venueVM, string userID)
+        {
+            string extension = Path.GetExtension(venueVM.ImageFile.FileName);
+            string imageFileName = $"{userID}{DateTime.Now.ToString("yyyyMMddHHmmss")}{extension}";
+            venueVM.ImagePath = imageFileName;
+            imageFileName = Path.Combine(Server.MapPath("~/Images/Venues/") + imageFileName);
+            venueVM.ImageFile.SaveAs(imageFileName);
         }
     }
 }
