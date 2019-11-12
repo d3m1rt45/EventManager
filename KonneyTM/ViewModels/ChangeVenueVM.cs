@@ -7,9 +7,9 @@ namespace KonneyTM.ViewModels
 {
     public class ChangeVenueVM
     {
-        public ChangeVenueVM()
+        public ChangeVenueVM(string userID)
         {
-            this.Venues = VenueViewModel.GetAllAsOrderedList();
+            this.Venues = VenueViewModel.GetAll(userID);
         }
 
         public int EventID { get; set; }

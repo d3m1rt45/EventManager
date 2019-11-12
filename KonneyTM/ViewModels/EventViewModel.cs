@@ -30,6 +30,8 @@ namespace KonneyTM.ViewModels
 
         public int ID { get; set; }
 
+        public string UserID { get; set; }
+
         [Required]
         [StringLength(30)]
         public string Title { get; set; }
@@ -67,6 +69,7 @@ namespace KonneyTM.ViewModels
             var eventVM = new EventViewModel
             {
                 ID = ev.ID,
+                UserID = ev.User.ID,
                 Title = ev.Title,
                 Place = VenueViewModel.FromVenue(ev.Place),
                 PlaceID = ev.Place.ID,
@@ -96,30 +99,32 @@ namespace KonneyTM.ViewModels
         //Returns all the Events in the Database as a List of EventViewModels ordered by date.
         public static List<EventViewModel> GetAll(string userID)
         {
-            var db = new KonneyContext();
-            var events = db.Events.Where(x => x.User.ID == userID).ToList();
+            using (var db = new KonneyContext())
+            { 
+                var events = db.Events.Where(x => x.User.ID == userID).ToList();
 
-            var eventsVM = new List<EventViewModel>();
-            foreach (var ev in events)
-            {
-                var eventVM = new EventViewModel
+                var eventsVM = new List<EventViewModel>();
+                foreach (var ev in events)
                 {
-                    ID = ev.ID,
-                    Title = ev.Title,
-                    Place = VenueViewModel.FromVenue(ev.Place),
-                    PlaceID = ev.Place.ID,
-                    Date = ev.Date,
-                    Time = ev.Time,
-                    PeopleAttending = PersonViewModel.FromPersonList(ev.PeopleAttending),
-                    InvitedPeopleIDs = GetIDsFromPersonList(ev.PeopleAttending),
-                    ImagePath = ev.ImagePath
-                };
+                    var eventVM = new EventViewModel
+                    {
+                        ID = ev.ID,
+                        UserID = ev.User.ID,
+                        Title = ev.Title,
+                        Place = VenueViewModel.FromVenue(ev.Place),
+                        PlaceID = ev.Place.ID,
+                        Date = ev.Date,
+                        Time = ev.Time,
+                        PeopleAttending = PersonViewModel.FromPersonList(ev.PeopleAttending),
+                        InvitedPeopleIDs = GetIDsFromPersonList(ev.PeopleAttending),
+                        ImagePath = ev.ImagePath
+                    };
 
-                eventsVM.Add(eventVM);
-            }
+                    eventsVM.Add(eventVM);
+                }
 
-            db.Dispose();
             return eventsVM.OrderBy(ev => ev.Date).ToList();
+            }
         }
 
         //Saves this EventViewModel object as an Event entity to the database.
@@ -142,7 +147,8 @@ namespace KonneyTM.ViewModels
                     newEvent.PeopleAttending.Add(db.People.First(p => p.ID == id));
                 }
 
-                db.Users.Single(x => x.ID == userID).Events.Add(newEvent);
+                var user = db.Users.Single(x => x.ID == userID);
+                user.Events.Add(newEvent);
                 db.SaveChanges();
             }
         }

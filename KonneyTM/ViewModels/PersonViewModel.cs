@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Authentication;
 using System.Web;
 
 namespace KonneyTM.ViewModels
@@ -12,6 +13,8 @@ namespace KonneyTM.ViewModels
     public class PersonViewModel
     {   
         public int ID { get; set; }
+
+        public string UserID { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -33,11 +36,11 @@ namespace KonneyTM.ViewModels
 
 
         //Returns all the Persons in the Database as a List of PersonViewModel objects ordered by FirstName
-        public static List<PersonViewModel> GetAllAsOrderedList()
+        public static List<PersonViewModel> GetAll(string userID)
         {
             using (var db = new KonneyContext())
             {
-                var people = db.People.ToList();
+                var people = db.People.Where(p => p.User.ID == userID).ToList();
                 var peopleVM = new List<PersonViewModel>();
 
                 foreach (var p in people)
@@ -62,6 +65,7 @@ namespace KonneyTM.ViewModels
             var personVM = new PersonViewModel
             {
                 ID = person.ID,
+                UserID = person.User.ID,
                 FirstName = person.FirstName,
                 LastName = person.LastName,
                 PhoneNumber = person.PhoneNumber,
@@ -80,6 +84,7 @@ namespace KonneyTM.ViewModels
                 personVMList.Add(new PersonViewModel
                 {
                     ID = p.ID,
+                    UserID = p.User.ID,
                     FirstName = p.FirstName,
                     LastName = p.LastName,
                     Email = p.Email,
@@ -91,11 +96,12 @@ namespace KonneyTM.ViewModels
         }
 
         //Saves this PersonViewModel object to the database as a Person entity
-        public void SaveToDB()
+        public void SaveToDB(string userID)
         {
             using (var db = new KonneyContext())
             {
-                db.People.Add(new Person
+                var user = db.Users.Single(u => u.ID == userID);
+                user.People.Add(new Person
                 {
                     FirstName = this.FirstName,
                     LastName = this.LastName,
@@ -108,18 +114,25 @@ namespace KonneyTM.ViewModels
         }
 
         //Updates the Person entity in the database that corresponds to this PersonViewModel object
-        public void SubmitChanges()
+        public void SubmitChanges(string userID)
         {
             using (var db = new KonneyContext())
             {
                 var person = db.People.First(p => p.ID == this.ID);
 
-                person.FirstName = this.FirstName;
-                person.LastName = this.LastName;
-                person.Email = this.Email;
-                person.PhoneNumber = this.PhoneNumber;
-
-                db.SaveChanges();
+                if (userID == person.User.ID)
+                {
+                    person.FirstName = this.FirstName;
+                    person.LastName = this.LastName;
+                    person.Email = this.Email;
+                    person.PhoneNumber = this.PhoneNumber;
+                    
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new AuthenticationException("You are not authorized to edit this person.");
+                }
             }
         }
     }

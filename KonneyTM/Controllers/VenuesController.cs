@@ -1,10 +1,12 @@
 ﻿using KonneyTM.DAL;
 using KonneyTM.ExtensionMethods;
 using KonneyTM.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Authentication;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,7 +16,15 @@ namespace KonneyTM.Controllers
     {
         public ActionResult Index()
         {
-            return View(VenueViewModel.GetAllAsOrderedList());
+            if(User.Identity.IsAuthenticated)
+            {
+                var userID = User.Identity.GetUserId();
+                return View(VenueViewModel.GetAll(userID));
+            }
+            else
+            {
+                return View(VenueViewModel.GetAll("demo"));
+            }
         }
 
         public ActionResult Create()
@@ -33,10 +43,21 @@ namespace KonneyTM.Controllers
                 string extension = Path.GetExtension(venueVM.ImageFile.FileName);
                 string imageFileName = venueVM.PhoneNumber.RemoveWhitespace() + venueVM.PostCode.RemoveWhitespace() + extension;
                 venueVM.ImagePath = imageFileName;
-                imageFileName = Path.Combine(Server.MapPath("~/Images/Venues"), imageFileName);
-                venueVM.ImageFile.SaveAs(imageFileName);
 
-                venueVM.SaveToDB();
+                if (User.Identity.IsAuthenticated)
+                {
+                    var userID = User.Identity.GetUserId();
+                    imageFileName = Path.Combine(Server.MapPath($"~/Images/Venues/{userID}{imageFileName}"));
+                    venueVM.ImageFile.SaveAs(imageFileName);
+                    venueVM.SaveToDB(userID);
+                }
+                else
+                {
+                    imageFileName = Path.Combine(Server.MapPath($"~/Images/Venues/demo{imageFileName}"));
+                    venueVM.ImageFile.SaveAs(imageFileName);
+                    venueVM.SaveToDB("demo");
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -47,7 +68,30 @@ namespace KonneyTM.Controllers
         {
             using (var db = new KonneyContext())
             {
-                return View(VenueViewModel.FromVenue(db.Venues.First(p => p.ID == id)));
+                var venue = db.Venues.First(e => e.ID == id);
+                var venueVM = VenueViewModel.FromVenue(venue);
+
+                if (User.Identity.IsAuthenticated)
+                {
+                    string userID = User.Identity.GetUserId();
+
+                    if (venueVM.UserID == userID)
+                    {
+                        return View(venueVM);
+                    }
+                    else
+                    {
+                        throw new AuthenticationException("You are not authorized to edit this event.");
+                    }
+                }
+                else if (venueVM.UserID == "demo")
+                {
+                    return View(venueVM);
+                }
+                else
+                {
+                    throw new Exception("Something went wrong...");
+                }
             }
         }
 
@@ -56,39 +100,83 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (venueVM.ImageFile != null)
+                using (var context = new KonneyContext())
                 {
-                    //Image Upload Logic
-                    string extension = Path.GetExtension(venueVM.ImageFile.FileName);
-                    string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
-                    venueVM.ImagePath = imageFileName;
-                    imageFileName = Path.Combine(Server.MapPath("~/Images/Venues"), imageFileName);
-                    venueVM.ImageFile.SaveAs(imageFileName);
-                }
+                    //If the user is logged in
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        var userID = User.Identity.GetUserId();
 
-                venueVM.SubmitChanges();
-                return RedirectToAction("Index");
+                        //If the venue belongs to the user
+                        if (venueVM.UserID == userID)
+                        {
+                            //If an image file is selected
+                            if (venueVM.ImageFile != null)
+                            {
+                                string extension = Path.GetExtension(venueVM.ImageFile.FileName);
+                                string imageFileName = $"{userID}{DateTime.Now.ToString("yyyyMMddHHmmss")}{extension}";
+                                venueVM.ImagePath = imageFileName;
+                                imageFileName = Path.Combine(Server.MapPath($"~/Images/Venues") + imageFileName);
+                                venueVM.ImageFile.SaveAs(imageFileName);
+                            }
+                        }
+                        else
+                        {
+                            throw new AuthenticationException("You are not authorized to edit this event.");
+                        }
+                    }
+                    //If the application is in demo mode
+                    else if (venueVM.UserID == "demo")
+                    {
+                        if (venueVM.ImageFile != null)
+                        {
+                            string extension = Path.GetExtension(venueVM.ImageFile.FileName);
+                            string imageFileName = $"demo{DateTime.Now.ToString("yyyyMMddHHmmss")}{extension}";
+                            venueVM.ImagePath = imageFileName;
+                            imageFileName = Path.Combine(Server.MapPath($"~/Images/Venues/{imageFileName}"));
+                            venueVM.ImageFile.SaveAs(imageFileName);
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Something went wrong...");
+                    }
+
+                    venueVM.SubmitChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            return View(venueVM);
+            return RedirectToAction("Event", new { id = venueVM.ID });
         }
 
         public ActionResult Delete(int id)
         {
             using (var db = new KonneyContext())
             {
-                //Remove the related events to make the deletion of Venue possible.
-                var relatedEvents = db.Events.Where(p => p.Place.ID == id).ToList();
-                foreach (var ev in relatedEvents)
+                var venue = db.Venues.First(e => e.ID == id);
+
+                //If the user is logged in
+                if (User.Identity.IsAuthenticated)
                 {
-                    db.Events.Remove(ev);
+                    var userID = User.Identity.GetUserId();
+
+                    //If the venue DOESN'T belong to the user
+                    if (venue.User.ID != userID)
+                    {
+                        throw new AuthenticationException("You are not authorized to delete this event.");   
+                    }
+                }
+                //If the venue DOESN'T belong to demo run
+                else if (venue.User.ID != "demo")
+                {
+                    throw new Exception("Something went wrong...");
                 }
 
-                var venue = db.Venues.First(v => v.ID == id);
                 db.Venues.Remove(venue);
                 db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
         }
     }
 }

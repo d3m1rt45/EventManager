@@ -17,6 +17,8 @@
 
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+            @Html.HiddenFor(m => m.UserID, new { value = Model.UserID })
 
             <div class="form-group col-md-4 offset-md-4 text-center">
                 <h4>Venue Name</h4>

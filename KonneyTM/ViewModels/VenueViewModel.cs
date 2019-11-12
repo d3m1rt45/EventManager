@@ -12,6 +12,8 @@ namespace KonneyTM.ViewModels
     {
         public int ID { get; set; }
 
+        public string UserID { get; set; }
+
         [StringLength(30)]
         public string Name { get; set; }
 
@@ -41,6 +43,7 @@ namespace KonneyTM.ViewModels
             var venueVM = new VenueViewModel
             {
                 ID = venue.ID,
+                UserID = venue.User.ID,
                 Name = venue.Name,
                 Address = venue.Address,
                 PostCode = venue.PostCode,
@@ -51,45 +54,48 @@ namespace KonneyTM.ViewModels
             return venueVM;
         }
 
-        public static List<VenueViewModel> GetAllAsOrderedList()
+        public static List<VenueViewModel> GetAll(string userID)
         {
-            var db = new KonneyContext();
-            var venues = db.Venues;
-            
-            var venuesVM = new List<VenueViewModel>();
-            foreach (var v in venues)
+            using (var db = new KonneyContext())
             {
-                venuesVM.Add(new VenueViewModel
-                {
-                    ID = v.ID,
-                    Name = v.Name,
-                    Address = v.Address,
-                    PostCode = v.PostCode,
-                    PhoneNumber = v.PhoneNumber,
-                    ImagePath = v.ImagePath
-                });
-            }
+                var venues = db.Venues.Where(v => v.User.ID == userID);
 
-            db.Dispose();
-            return venuesVM.OrderBy(v => v.Name).ToList();
+                var venuesVM = new List<VenueViewModel>();
+                foreach (var v in venues)
+                {
+                    venuesVM.Add(new VenueViewModel
+                    {
+                        ID = v.ID,
+                        UserID = v.User.ID,
+                        Name = v.Name,
+                        Address = v.Address,
+                        PostCode = v.PostCode,
+                        PhoneNumber = v.PhoneNumber,
+                        ImagePath = v.ImagePath
+                    });
+                }
+
+                return venuesVM.OrderBy(v => v.Name).ToList();
+            }
         }
 
         //Saves this VenueViewModel object to the database as a Venue entity
-        public void SaveToDB()
+        public void SaveToDB(string userID)
         {
-            var db = new KonneyContext();
-
-            db.Venues.Add(new Venue
+            using (var db = new KonneyContext())
             {
-                Name = this.Name,
-                Address = this.Address,
-                PostCode = this.PostCode,
-                PhoneNumber = this.PhoneNumber,
-                ImagePath = this.ImagePath
-            });
+                var user = db.Users.Single(u => u.ID == userID);
+                user.Venues.Add(new Venue
+                {
+                    Name = this.Name,
+                    Address = this.Address,
+                    PostCode = this.PostCode,
+                    PhoneNumber = this.PhoneNumber,
+                    ImagePath = this.ImagePath
+                });
 
-            db.SaveChanges();
-            db.Dispose();
+                db.SaveChanges();
+            }
         }
 
         //Updates the Venue entity in the database that corresponds to this VenueViewModel object

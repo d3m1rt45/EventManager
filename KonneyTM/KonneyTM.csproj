@@ -218,9 +218,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\SharedStyles.css" />
+    <Content Include="Images\demo\Events\20191111235632.JPG" />
+    <Content Include="Images\demo\Events\20191112000833.JPG" />
+    <Content Include="Images\demo\Events\20191112001048.JPG" />
     <Content Include="Images\Events\noreasonforthisparty.jpg" />
     <Content Include="Images\Events\whatlawnow.jpg" />
-    <Content Include="Images\Venues\02088016640N154JR.JPG" />
     <Content Include="Images\Welcome.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -339,7 +341,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Role\" />
+    <Folder Include="Images\Venues\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

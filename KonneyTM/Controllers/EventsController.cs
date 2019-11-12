@@ -48,13 +48,19 @@ namespace KonneyTM.Controllers
                 
                 if (User.Identity.IsAuthenticated)
                 {
-                    imageFileName = Path.Combine(Server.MapPath($"~/Images/{User.Identity.GetUserId()}/Events"), imageFileName);
+                    var directory = Server.MapPath($"~/Images/{User.Identity.GetUserId()}/Events");
+                    Directory.CreateDirectory(directory);
+
+                    imageFileName = Path.Combine(directory, imageFileName) ;
                     eventVM.ImageFile.SaveAs(imageFileName);
                     eventVM.SaveToDB(User.Identity.GetUserId());
                 }
                 else
                 {
-                    imageFileName = Path.Combine(Server.MapPath($"~/Images/demo/Events"), imageFileName);
+                    var directory = Server.MapPath($"~/Images/demo/Events");
+                    Directory.CreateDirectory(directory);
+
+                    imageFileName = Path.Combine(directory, imageFileName);
                     eventVM.ImageFile.SaveAs(imageFileName);
                     eventVM.SaveToDB("demo");
                 }
@@ -116,10 +122,14 @@ namespace KonneyTM.Controllers
                             //If an image file is selected
                             if (eventVM.ImageFile != null)
                             {
+                                var directory = Server.MapPath($"~/Images/{User.Identity.GetUserId()}/Events");
+                                Directory.CreateDirectory(directory);
+
                                 string extension = Path.GetExtension(eventVM.ImageFile.FileName);
                                 string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
                                 eventVM.ImagePath = imageFileName;
-                                imageFileName = Path.Combine(Server.MapPath($"~/Images/{User.Identity.GetUserId()}/Events"), imageFileName);
+                                
+                                imageFileName = Path.Combine(directory, imageFileName);
                                 eventVM.ImageFile.SaveAs(imageFileName);
                             }
 
@@ -136,10 +146,13 @@ namespace KonneyTM.Controllers
                     {
                         if(eventVM.ImageFile != null)
                         {
+                            var directory = Server.MapPath($"~/Images/demo/Events");
+                            Directory.CreateDirectory(directory);
+
                             string extension = Path.GetExtension(eventVM.ImageFile.FileName);
                             string imageFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
                             eventVM.ImagePath = imageFileName;
-                            imageFileName = Path.Combine(Server.MapPath($"~/Images/demo/Events"), imageFileName);
+                            imageFileName = Path.Combine(directory, imageFileName);
                             eventVM.ImageFile.SaveAs(imageFileName);
                         }
 
@@ -180,6 +193,7 @@ namespace KonneyTM.Controllers
                 {
                     db.Events.Remove(ev);
                     db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
             }
 
@@ -198,7 +212,7 @@ namespace KonneyTM.Controllers
 
                     if(relatedEvent.User.ID == userID)
                     {
-                        var changeVenue = new ChangeVenueVM { EventID = eventID };
+                        var changeVenue = new ChangeVenueVM(userID) { EventID = eventID };
                         return View(changeVenue);
                     }
                     else
@@ -208,7 +222,7 @@ namespace KonneyTM.Controllers
                 }
                 else if(relatedEvent.User.ID == "demo")
                 {
-                    var changeVenue = new ChangeVenueVM { EventID = eventID };
+                    var changeVenue = new ChangeVenueVM("demo") { EventID = eventID };
                     return View(changeVenue);
                 }
                 else
@@ -264,7 +278,7 @@ namespace KonneyTM.Controllers
                     if (relatedEvent.User.ID == userID)
                     {
                         var addPerson = new AddPersonVM { EventID = eventID };
-                        var allPeople = PersonViewModel.GetAllAsOrderedList();
+                        var allPeople = PersonViewModel.GetAll(userID);
                         var eventVM = EventViewModel.FromEvent(relatedEvent);
 
                         foreach (var p in allPeople)
@@ -285,7 +299,7 @@ namespace KonneyTM.Controllers
                 else if (relatedEvent.User.ID == "demo")
                 {
                     var addPerson = new AddPersonVM { EventID = eventID };
-                    var allPeople = PersonViewModel.GetAllAsOrderedList();
+                    var allPeople = PersonViewModel.GetAll("demo");
                     var eventVM = EventViewModel.FromEvent(relatedEvent);
 
                     foreach (var p in allPeople)
