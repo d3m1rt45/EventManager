@@ -12,6 +12,7 @@
                     @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
                     {
                         @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.UserID, new { value = Model.UserID })
                         @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
                         @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
                         @Html.HiddenFor(m => m.Time, new { value = Model.Time })
@@ -47,6 +48,7 @@
                     @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
                     {
                         @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.UserID, new { value = Model.UserID })
                         @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
                         @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
                         @Html.HiddenFor(m => m.Time, new { value = Model.Time })
@@ -86,6 +88,7 @@
                     @using (Html.BeginForm("Edit", "Events", FormMethod.Post))
                     {
                         @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.UserID, new { value = Model.UserID })
                         @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
                         @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
                         @Html.HiddenFor(m => m.Date, new { value = Model.Date })
@@ -121,6 +124,7 @@
                     @using (Html.BeginForm("Edit", "Events", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.HiddenFor(m => m.ID, new { value = Model.ID })
+                        @Html.HiddenFor(m => m.UserID, new { value = Model.UserID })
                         @Html.HiddenFor(m => m.ImagePath, new { value = Model.ImagePath })
                         @Html.HiddenFor(m => m.PlaceID, new { value = Model.PlaceID })
                         @Html.HiddenFor(m => m.Time, new { value = Model.Time })

@@ -98,8 +98,22 @@ namespace KonneyTM.ViewModels
             }
         }
 
+        //Deletes a venue from the database and all events set in it
+        public void Delete()
+        {
+            using (var db = new KonneyContext())
+            {
+                var venue = db.Venues.FirstOrDefault(v => v.ID == this.ID);
+                var events = db.Events.Where(e => e.Place.ID == this.ID).ToList();
+
+                events.ForEach(e => db.Events.Remove(e));
+                db.Venues.Remove(venue);
+                db.SaveChanges();
+            }
+        }
+
         //Updates the Venue entity in the database that corresponds to this VenueViewModel object
-        internal void SubmitChanges()
+        internal void Update()
         {
             using (var db = new KonneyContext())
             {
@@ -115,5 +129,6 @@ namespace KonneyTM.ViewModels
                 db.SaveChanges();
             }
         }
+
     }
 }

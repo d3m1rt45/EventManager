@@ -130,41 +130,39 @@ namespace KonneyTM.Controllers
                         throw new Exception("Something went wrong...");
                     }
 
-                    venueVM.SubmitChanges();
+                    venueVM.Update();
                     return RedirectToAction("Index");
                 }
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int venueID)
         {
             using (var db = new KonneyContext())
             {
-                var venue = db.Venues.First(e => e.ID == id);
-
+                var venueVM = VenueViewModel.FromVenue(db.Venues.SingleOrDefault(v => v.ID == venueID));
+                
                 //If the user is logged in
                 if (User.Identity.IsAuthenticated)
                 {
                     var userID = User.Identity.GetUserId();
 
                     //If the venue DOESN'T belong to the user
-                    if (venue.User.ID != userID)
+                    if (venueVM.UserID != userID)
                     {
                         throw new AuthenticationException("You are not authorized to delete this event.");   
                     }
                 }
                 //If the venue DOESN'T belong to demo run
-                else if (venue.User.ID != "demo")
+                else if (venueVM.UserID != "demo")
                 {
                     throw new Exception("Something went wrong...");
                 }
-
-                db.Venues.Remove(venue);
-                db.SaveChanges();
+                venueVM.Delete();
                 return RedirectToAction("Index");
-            }
 
+            }
         }
 
         public void UploadImage(VenueViewModel venueVM, string userID)

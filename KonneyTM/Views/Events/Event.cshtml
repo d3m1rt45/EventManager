@@ -94,7 +94,7 @@
                 }
                 @if (Model.PeopleAttending == null || Model.PeopleAttending.Count < Model.PeopleList.Count)
                 {
-                    <div class="NewPersonColumn col-2 pt-3">
+                    <div class="NewPersonColumn col-6 col-md-4 col-xl-3 pt-3">
                         <a class="NewPersonLink" href="@Url.Action("AddPerson", new { eventID = Model.ID })">
                             <div class="NewPerson">
                                 <i class="fas fa-plus fa-4x"></i>
