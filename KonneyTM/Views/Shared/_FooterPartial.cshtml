@@ -1,7 +1,7 @@
 ﻿
 @using Microsoft.AspNet.Identity
 
-@if (Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
+@if (Request.IsAuthenticated || Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
 {
     <div class="Footer DemoFooter d-flex w-100 justify-content-between fixed-bottom">
         <ul class="Back">

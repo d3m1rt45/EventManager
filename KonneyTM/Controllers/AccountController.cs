@@ -12,6 +12,7 @@ using KonneyTM.Models;
 
 namespace KonneyTM.Controllers
 {
+    [HandleError]
     [Authorize]
     public class AccountController : Controller
     {

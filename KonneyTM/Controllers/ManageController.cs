@@ -10,6 +10,7 @@ using KonneyTM.Models;
 
 namespace KonneyTM.Controllers
 {
+    [HandleError]
     [Authorize]
     public class ManageController : Controller
     {

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace KonneyTM.Controllers
 {
+    [HandleError]
     public class PeopleController : Controller
     {
         public ActionResult Index()

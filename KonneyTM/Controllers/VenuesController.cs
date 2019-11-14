@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace KonneyTM.Controllers
 {
+    [HandleError]
     public class VenuesController : Controller
     {
         public ActionResult Index()

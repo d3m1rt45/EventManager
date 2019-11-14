@@ -4,6 +4,15 @@
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+@Styles.Render("~/PanelStyles")
+
+    <section class="Error">
+        <div class="Header mb-4">
+            <h2>Error</h2>
+        </div><!--/.Header-->
+
+        <h1 class="ml-4 text-danger">We apologize.</h1>
+        <h2 class="ml-4 text-danger">Something went wrong.</h2>
+        <h2 class="ml-4 text-danger">Click <a href="@Url.Action("Index", "Home")">here</a> to return back to the home page.</h2>
+    </section>
 
