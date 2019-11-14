@@ -16,33 +16,45 @@ namespace KonneyTM.Controllers
     {
         public ActionResult Index()
         {
-            List<EventViewModel> eventVMs;
+            UserViewModel userVM = new UserViewModel();
 
             if (User.Identity.IsAuthenticated)
             {
+                var userID = User.Identity.GetUserId();
+
                 using (var db = new KonneyContext())
                 {
-                    var user = new User { ID = User.Identity.GetUserId() };
-                    if(!db.Users.Contains(user))
+                    if (db.Users.FirstOrDefault(x => x.ID == userID) == null)
                     {
-                        db.Users.Add(user);
+                        db.Users.Add(new User { ID = userID });
                         db.SaveChanges();
                     }
                 }
-                
-                eventVMs = EventViewModel.GetAll(User.Identity.GetUserId());
+
+                userVM.Fill(userID);
+                return View(userVM);
             }
             else
             {
-                eventVMs = EventViewModel.GetAll("demo");
+                userVM.Fill("demo");
+                return View(userVM);
             }
-
-            return View(eventVMs);
         }
         
         public ActionResult Create()
         {
-            var eventVM = new EventViewModel();
+            EventViewModel eventVM;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userID = User.Identity.GetUserId();
+                eventVM = new EventViewModel(userID);
+            }
+            else
+            {
+                eventVM = new EventViewModel("demo");
+            }
+
             return View(eventVM);
         }
 
@@ -52,8 +64,6 @@ namespace KonneyTM.Controllers
             if (ModelState.IsValid)
             {
                 //Image Upload Logic
-                
-
                 if (User.Identity.IsAuthenticated)
                 {
                     var userID = User.Identity.GetUserId();

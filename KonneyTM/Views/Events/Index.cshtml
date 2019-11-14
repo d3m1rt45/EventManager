@@ -1,18 +1,21 @@
-﻿@model IEnumerable<KonneyTM.ViewModels.EventViewModel>
+﻿@model KonneyTM.ViewModels.UserViewModel
 @{
     ViewBag.Title = "Events";
 }
 @Styles.Render("~/PanelStyles")
 
-    <section class="Events-Index">
+<section class="Events-Index">
 
-        <div class="Header">
-            <h2>Events</h2>
-        </div><!--/.Header-->
+    <div class="Header">
+        <h2>Events</h2>
+    </div><!--/.Header-->
 
-        <article class="EventsContainer container-fluid">
-            <div class="OuterRow row">
-                @foreach (var item in Model)
+    <article class="EventsContainer container-fluid">
+        <div class="OuterRow row">
+
+            @if(Model.Events != null)
+            {
+                foreach (var item in Model.Events)
                 {
                     <div class="OuterColumn col-12 col-md-6">
                         <div class="EventCard" style="background-image:url(/Images/Events/@item.ImagePath)">
@@ -30,6 +33,10 @@
                         </div><!--/.EventCard-->
                     </div><!--/.OuterColumn-->
                 }
+            }
+
+            @if (Model.Venues.Any() && Model.People.Any())
+            {
                 <div class="NewEventColumn col-12 col-md-6 pt-md-4">
                     <a class="NewEventLink" href="@Url.Action("Create")">
                         <div class="NewEvent">
@@ -37,7 +44,15 @@
                         </div>
                     </a><!--/.NewEventLink-->
                 </div><!--/.NewEventColumn-->
-            </div><!--/.OuterRow-->
-        </article><!--/.EventsContainer-->
+            }
+            else
+            {
+                <div class="OuterColumn col-12 text-center">
+                    <h3 class="text-danger">To create an event, you must have at least one Person in your People list and one Venue in your Venues</h3>
+                </div><!--/.OuterColumn-->
+            }
 
-    </section>
+        </div><!--/.OuterRow-->
+    </article><!--/.EventsContainer-->
+
+</section>
