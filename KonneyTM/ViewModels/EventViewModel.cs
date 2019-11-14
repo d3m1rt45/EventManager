@@ -13,11 +13,6 @@ namespace KonneyTM.ViewModels
 {
     public class EventViewModel
     {
-        public EventViewModel()
-        {
-
-        }
-
         public EventViewModel(string userID)
         {
             using (var db = new KonneyContext())
@@ -72,7 +67,7 @@ namespace KonneyTM.ViewModels
         //Converts an Event object to an EventViewModel object
         public static EventViewModel FromEvent(Event ev)
         {
-            var eventVM = new EventViewModel
+            var eventVM = new EventViewModel(ev.User.ID)
             {
                 ID = ev.ID,
                 UserID = ev.User.ID,
@@ -112,7 +107,7 @@ namespace KonneyTM.ViewModels
                 var eventsVM = new List<EventViewModel>();
                 foreach (var ev in events)
                 {
-                    var eventVM = new EventViewModel
+                    var eventVM = new EventViewModel(ev.User.ID)
                     {
                         ID = ev.ID,
                         UserID = ev.User.ID,
