@@ -9,22 +9,22 @@ namespace KonneyTM
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-3.3.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate.min.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                        "~/Scripts/modernizr-2.8.3.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/SharedStyles").Include(
-                      "~/Content/Bootstrap/bootstrap.css",
-                      "~/Content/Fontawesome/all.css",
+                      "~/Content/Bootstrap/bootstrap.min.css",
+                      "~/Content/Fontawesome/all.min.css",
                       "~/Content/SharedStyles.css"));
 
             bundles.Add(new StyleBundle("~/HomeStyles").Include("~/Content/HomeStyles.css"));
