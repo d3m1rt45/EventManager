@@ -127,7 +127,7 @@ namespace KonneyTM.Models
         // Saves a new Person to the database based on an PersonViewModel object
         public static void NewByViewModel(KonneyContext db, PersonViewModel personVM)
         {
-            var user = db.Users.Single(u => u.ID == personVM.UserID);
+            var user = db.Users.Find(personVM.UserID);
             user.People.Add(new Person
             {
                 FirstName = personVM.FirstName,

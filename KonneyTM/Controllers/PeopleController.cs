@@ -35,18 +35,25 @@ namespace KonneyTM.Controllers
         // Navigate to Create Person page
         public ActionResult Create()
         {
-            return View(new PersonViewModel());
+            string userID = "demo";
+
+            if (User.Identity.IsAuthenticated)
+                userID = User.Identity.GetUserId();
+
+            return View(new PersonViewModel { UserID = userID });
         }
 
         // Submit the new Person to the user's people table
         [HttpPost]
         public ActionResult Create(PersonViewModel personVM)
         {
+            if (User.Identity.IsAuthenticated)
+                personVM.UserID = User.Identity.GetUserId();
+            else
+                personVM.UserID = "demo";
+
             if (ModelState.IsValid)
             {
-                if (!User.Identity.IsAuthenticated)
-                    personVM.UserID = "demo";
-
                 Person.NewByViewModel(db, personVM);
                 return RedirectToAction("Index");
             }

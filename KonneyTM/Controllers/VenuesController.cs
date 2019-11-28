@@ -37,7 +37,13 @@ namespace KonneyTM.Controllers
         // Navigate to Create Venue page
         public ActionResult Create()
         {
-            return View(new VenueViewModel());
+            string userID = "demo";
+
+            if (User.Identity.IsAuthenticated)
+                userID = User.Identity.GetUserId();
+
+
+            return View(new VenueViewModel { UserID = userID });
         }
 
         // Submit the new Venue to the user's venues table

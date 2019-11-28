@@ -11,7 +11,7 @@ using System.Web;
 namespace KonneyTM.ViewModels
 {
     public class PersonViewModel
-    {   
+    {
         public int ID { get; set; }
 
         public string UserID { get; set; }

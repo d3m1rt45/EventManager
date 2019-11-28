@@ -60,6 +60,9 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (User.Identity.IsAuthenticated)
+                    eventVM.UserID = User.Identity.GetUserId();
+
                 UploadImage(eventVM, eventVM.UserID);
                 Models.Event.NewByViewModel(db, eventVM);
 
