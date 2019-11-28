@@ -15,27 +15,20 @@ namespace KonneyTM.Controllers
     [HandleError]
     public class EventsController : Controller
     {
+        KonneyContext db = new KonneyContext();
+
         public ActionResult Index()
         {
             UserViewModel userVM = new UserViewModel();
 
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated) //IF the user is authenticated
             {
                 var userID = User.Identity.GetUserId();
-
-                using (var db = new KonneyContext())
-                {
-                    if (db.Users.FirstOrDefault(x => x.ID == userID) == null)
-                    {
-                        db.Users.Add(new User { ID = userID });
-                        db.SaveChanges();
-                    }
-                }
-
+                Models.User.FindOrCreate(db, userID);
                 userVM.Fill(userID);
                 return View(userVM);
             }
-            else
+            else //and IF NOT:
             {
                 userVM.Fill("demo");
                 return View(userVM);
@@ -85,34 +78,27 @@ namespace KonneyTM.Controllers
 
         public ActionResult Event(int id)
         {
-            using (var db = new KonneyContext())
-            {
-                var ev = db.Events.First(e => e.ID == id);
+            var ev = db.Events.First(e => e.ID == id);
                 
-                if (User.Identity.IsAuthenticated)
-                {
-                    string userID = User.Identity.GetUserId();
+            if (User.Identity.IsAuthenticated)
+            {
+                string userID = User.Identity.GetUserId();
 
-                    if (userID == ev.User.ID)
-                    {
-                        var eventVM = EventViewModel.FromEvent(ev);
-                        return View(eventVM);
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to edit this event.");
-                    }
-                }
-                else if (ev.User.ID == "demo")
+                if (userID == ev.User.ID)
                 {
                     var eventVM = EventViewModel.FromEvent(ev);
                     return View(eventVM);
                 }
                 else
-                {
-                    throw new Exception("Something went wrong...");
-                }
+                    throw new AuthenticationException("You are not authorized to edit this event.");
             }
+            else if (ev.User.ID == "demo")
+            {
+                var eventVM = EventViewModel.FromEvent(ev);
+                return View(eventVM);
+            }
+            else
+                throw new Exception("Something went wrong...");
         }
 
         [HttpPost]
@@ -120,81 +106,65 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new KonneyContext())
+                //Get the related event
+                var ev = db.Events.Single(e => e.ID == eventVM.ID);
+
+                //If the user is logged in
+                if (User.Identity.IsAuthenticated)
                 {
-                    //Get the related event
-                    var ev = context.Events.Single(e => e.ID == eventVM.ID);
+                    //Get User ID
+                    var userID = User.Identity.GetUserId();
 
-                    //If the user is logged in
-                    if (User.Identity.IsAuthenticated)
+                    //If the event belongs to the user
+                    if (ev.User.ID == userID) 
                     {
-                        //Get User ID
-                        var userID = User.Identity.GetUserId();
-
-                        //If the event belongs to the user
-                        if (ev.User.ID == userID) 
-                        {
-                            //If an image file is selected
-                            if (eventVM.ImageFile != null)
-                            {
-                                UploadImage(eventVM, userID);
-                            }
-                        }
-                        else
-                        {
-                            throw new AuthenticationException("You are not authorized to edit this event.");
-                        }
-                    }
-                    //If the application is in demo mode
-                    else if (ev.User.ID == "demo")
-                    {
-                        if(eventVM.ImageFile != null)
-                        {
-                            UploadImage(eventVM, "demo");
-                        }
-
-                        eventVM.SubmitChanges();
-                        return RedirectToAction("Event", new { id = eventVM.ID });
+                        //If an image file is selected
+                        if (eventVM.ImageFile != null)
+                            UploadImage(eventVM, userID);
                     }
                     else
-                    {
-                        throw new Exception("Something went wrong...");
-                    }
+                        throw new AuthenticationException("You are not authorized to edit this event.");
+                }
+                //If the application is in demo mode
+                else if (ev.User.ID == "demo")
+                {
+                    if(eventVM.ImageFile != null)
+                        UploadImage(eventVM, "demo");
 
                     eventVM.SubmitChanges();
                     return RedirectToAction("Event", new { id = eventVM.ID });
                 }
+                else
+                    throw new Exception("Something went wrong...");
+
+                eventVM.SubmitChanges();
+                return RedirectToAction("Event", new { id = eventVM.ID });
             }
             return RedirectToAction("Event", new { id = eventVM.ID });
         }
 
         public ActionResult Delete(int id)
         {
-            using (var db = new KonneyContext())
+            var ev = db.Events.First(e => e.ID == id);
+
+            if (User.Identity.IsAuthenticated)
             {
-                var ev = db.Events.First(e => e.ID == id);
+                string userID = User.Identity.GetUserId();
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    string userID = User.Identity.GetUserId();
-
-                    if (userID == ev.User.ID)
-                    {
-                        db.Events.Remove(ev);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to delete this event.");
-                    }
-                }
-                else if (ev.User.ID == "demo")
+                if (userID == ev.User.ID)
                 {
                     db.Events.Remove(ev);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+                else
+                    throw new AuthenticationException("You are not authorized to delete this event.");
+            }
+            else if (ev.User.ID == "demo")
+            {
+                db.Events.Remove(ev);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             throw new Exception("Something went wrong...");
@@ -202,64 +172,52 @@ namespace KonneyTM.Controllers
 
         public ActionResult ChangeVenue(int eventID)
         {
-            using (var context = new KonneyContext())
-            {
-                var relatedEvent = context.Events.Single(e => e.ID == eventID);
+            var relatedEvent = db.Events.Single(e => e.ID == eventID);
                 
-                if(User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
+            if(User.Identity.IsAuthenticated)
+            {
+                var userID = User.Identity.GetUserId();
 
-                    if(relatedEvent.User.ID == userID)
-                    {
-                        var changeVenue = new ChangeVenueVM(userID) { EventID = eventID };
-                        return View(changeVenue);
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to change the venue of this event.");
-                    }
-                }
-                else if(relatedEvent.User.ID == "demo")
+                if(relatedEvent.User.ID == userID)
                 {
-                    var changeVenue = new ChangeVenueVM("demo") { EventID = eventID };
+                    var changeVenue = new ChangeVenueVM(userID) { EventID = eventID };
                     return View(changeVenue);
                 }
                 else
-                {
-                    throw new Exception("Something went wrong.");
-                }
+                    throw new AuthenticationException("You are not authorized to change the venue of this event.");
             }
+            else if(relatedEvent.User.ID == "demo")
+            {
+                var changeVenue = new ChangeVenueVM("demo") { EventID = eventID };
+                return View(changeVenue);
+            }
+            else
+                throw new Exception("Something went wrong.");
         }
 
         public ActionResult SubmitVenueChange(int eventID, int venueID)
         {
-            using (var db = new KonneyContext())
-            {
-                var relatedEvent = db.Events.First(e => e.ID == eventID);
+            var relatedEvent = db.Events.First(e => e.ID == eventID);
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
-                    if (relatedEvent.User.ID == userID)
-                    {
-                        relatedEvent.Place = db.Venues.First(v => v.ID == venueID);
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to change the venue of this event.");
-                    }
-                }
-                else if (relatedEvent.User.ID == "demo")
+            if (User.Identity.IsAuthenticated)
+            {
+                var userID = User.Identity.GetUserId();
+                if (relatedEvent.User.ID == userID)
                 {
                     relatedEvent.Place = db.Venues.First(v => v.ID == venueID);
                     db.SaveChanges();
                 }
                 else
-                {
-                    throw new Exception("Something went wrong...");
-                }
+                    throw new AuthenticationException("You are not authorized to change the venue of this event.");
+            }
+            else if (relatedEvent.User.ID == "demo")
+            {
+                relatedEvent.Place = db.Venues.First(v => v.ID == venueID);
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Something went wrong...");
             }
 
             return RedirectToAction("Event", new { id = eventID });
@@ -267,89 +225,45 @@ namespace KonneyTM.Controllers
 
         public ActionResult AddPerson(int eventID)
         {
-            using (var db = new KonneyContext())
-            {
-                var relatedEvent = db.Events.First(e => e.ID == eventID);
+            var relatedEvent = db.Events.First(e => e.ID == eventID);
+            AddPersonVM addPersonVM;
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
+            if (User.Identity.IsAuthenticated)
+                addPersonVM = Person.ReturnAddPersonVMIfIDsMatch(relatedEvent, User.Identity.GetUserId());
+            else
+                addPersonVM = Person.ReturnAddPersonVMIfIDsMatch(relatedEvent, "demo");
 
-                    if (relatedEvent.User.ID == userID)
-                    {
-                        var addPerson = new AddPersonVM { EventID = eventID };
-                        var allPeople = PersonViewModel.GetAll(userID);
-                        var eventVM = EventViewModel.FromEvent(relatedEvent);
-
-                        foreach (var p in allPeople)
-                        {
-                            if (!eventVM.InvitedPeopleIDs.Contains(p.ID))
-                            {
-                                addPerson.People.Add(p);
-                            }
-                        }
-
-                        return View(addPerson);
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to add people to this event.");
-                    }
-                }
-                else if (relatedEvent.User.ID == "demo")
-                {
-                    var addPerson = new AddPersonVM { EventID = eventID };
-                    var allPeople = PersonViewModel.GetAll("demo");
-                    var eventVM = EventViewModel.FromEvent(relatedEvent);
-
-                    foreach (var p in allPeople)
-                    {
-                        if (!eventVM.InvitedPeopleIDs.Contains(p.ID))
-                        {
-                            addPerson.People.Add(p);
-                        }
-                    }
-
-                    return View(addPerson);
-                }
-                else
-                {
-                    throw new Exception("Something went wrong.");
-                }
-            }
+            return View(addPersonVM);
         }
 
         public ActionResult SubmitPerson(int eventID, int personID)
         {
-            using (var db = new KonneyContext())
-            { 
-                var relatedEvent = db.Events.First(e => e.ID == eventID);
-                var relatedPerson = db.People.First(p => p.ID == personID);
-                var eventVM = EventViewModel.FromEvent(relatedEvent);
+            var relatedEvent = db.Events.First(e => e.ID == eventID);
+            var relatedPerson = db.People.First(p => p.ID == personID);
+            var eventVM = EventViewModel.FromEvent(relatedEvent);
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
+            if (User.Identity.IsAuthenticated)
+            {
+                var userID = User.Identity.GetUserId();
 
-                    if(userID == relatedEvent.User.ID && userID == relatedPerson.User.ID)
-                    {
-                        eventVM.InvitedPeopleIDs.Add(relatedPerson.ID);
-                        eventVM.SubmitChanges();
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to add people to this event.");
-                    }
-                }
-                else if (relatedPerson.User.ID == "demo" && relatedEvent.User.ID == "demo")
+                if(userID == relatedEvent.User.ID && userID == relatedPerson.User.ID)
                 {
                     eventVM.InvitedPeopleIDs.Add(relatedPerson.ID);
                     eventVM.SubmitChanges();
                 }
                 else
                 {
-                    throw new Exception("Something went wrong.");
+                    throw new AuthenticationException("You are not authorized to add people to this event.");
                 }
+            }
+            else if (relatedPerson.User.ID == "demo" && relatedEvent.User.ID == "demo")
+            {
+                eventVM.InvitedPeopleIDs.Add(relatedPerson.ID);
+                eventVM.SubmitChanges();
+            }
+            else
+            {
+                throw new Exception("Something went wrong.");
             }
 
             return RedirectToAction("Event", new { id = eventID });
@@ -357,33 +271,30 @@ namespace KonneyTM.Controllers
 
         public ActionResult RemovePerson(int eventID, int personID)
         {
-            using (var db = new KonneyContext())
-            { 
-                var relatedEvent = db.Events.First(e => e.ID == eventID);
-                var eventVM = EventViewModel.FromEvent(relatedEvent);
+            var relatedEvent = db.Events.First(e => e.ID == eventID);
+            var eventVM = EventViewModel.FromEvent(relatedEvent);
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
-                    if (relatedEvent.User.ID == userID)
-                    {
-                        eventVM.InvitedPeopleIDs.RemoveAll(i => i == personID);
-                        eventVM.SubmitChanges();
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to remove people from this event.");
-                    }
-                }
-                else if (relatedEvent.User.ID == "demo")
+            if (User.Identity.IsAuthenticated)
+            {
+                var userID = User.Identity.GetUserId();
+                if (relatedEvent.User.ID == userID)
                 {
                     eventVM.InvitedPeopleIDs.RemoveAll(i => i == personID);
                     eventVM.SubmitChanges();
                 }
                 else
                 {
-                    throw new Exception("Something went wrong");
+                    throw new AuthenticationException("You are not authorized to remove people from this event.");
                 }
+            }
+            else if (relatedEvent.User.ID == "demo")
+            {
+                eventVM.InvitedPeopleIDs.RemoveAll(i => i == personID);
+                eventVM.SubmitChanges();
+            }
+            else
+            {
+                throw new Exception("Something went wrong");
             }
 
             return RedirectToAction("Event", new { id = eventID });
