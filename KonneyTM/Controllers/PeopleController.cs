@@ -10,140 +10,103 @@ using System.Web.Mvc;
 
 namespace KonneyTM.Controllers
 {
+    // <summary>
+    // This class deals with all functionality in the application that has to
+    // do with people. I have used a similar method of checking whether an item in
+    // question belongs to the user trying to make the change, all throughout the app.
+    // </summary>
+
     [HandleError]
     public class PeopleController : Controller
     {
+        // Entity Framework Database Context
+        readonly KonneyContext db = new KonneyContext();
+
+        // Return people belonging to the user
         public ActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
-            {
-                var userID = User.Identity.GetUserId();
-                return View(PersonViewModel.GetAll(userID));
-            }
+                return View(PersonViewModel.GetAll(User.Identity.GetUserId()));
             else
-            {
                 return View(PersonViewModel.GetAll("demo"));
-            }
         }
 
+        // Navigate to Create Person page
         public ActionResult Create()
         {
-            var person = new PersonViewModel();
-            return View(person);
+            return View(new PersonViewModel());
         }
 
+        // Submit the new Person to the user's people table
         [HttpPost]
         public ActionResult Create(PersonViewModel personVM)
         {
             if (ModelState.IsValid)
             {
                 if(User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
-                    personVM.SaveToDB(userID);
-                }
+                    personVM.SaveToDB(User.Identity.GetUserId());
                 else
-                {
                     personVM.SaveToDB("demo");
-                }
 
                 return RedirectToAction("Index");
             }
             return View(personVM);
         }
 
-        public ActionResult Edit(int id)
+        // Navigate to Edit Person page
+        public ActionResult Edit(int personID)
         {
-            using (var db = new KonneyContext())
-            {
-                var personVM = PersonViewModel.FromPerson(db.People.First(p => p.ID == id));
+            var personVM = PersonViewModel.FromPerson(db.People.First(p => p.ID == personID));
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
-                    if (personVM.UserID == userID)
-                    {
-                        return View(personVM);
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to edit this person.");
-                    }
-                }
-                else if(personVM.UserID == "demo")
-                {
-                    return View(personVM);
-                }
-                else
-                {
-                    throw new Exception("Something went wrong...");
-                }
+            if (User.Identity.IsAuthenticated)
+            {
+                if (personVM.UserID != User.Identity.GetUserId())
+                    throw new AuthenticationException("You are not authorized to edit this person.");
             }
+            else if(personVM.UserID != "demo")
+                throw new Exception("Something went wrong...");
+
+            return View(personVM);
         }
 
+        // Submit changes for Person
         [HttpPost]
         public ActionResult Edit(PersonViewModel personVM)
         {
             if (ModelState.IsValid)
             {
+                string userID = "demo";
+
                 if (User.Identity.IsAuthenticated)
                 {
-                    var userID = User.Identity.GetUserId();
-                    if (personVM.UserID == userID)
-                    {
-                        personVM.SubmitChanges(userID);
-                        
-                    }
-                    else
-                    {
+                    userID = User.Identity.GetUserId();
+                    if (personVM.UserID != userID)
                         throw new AuthenticationException("You are not authorized to edit this person.");
-                    }
                 }
-                else if (personVM.UserID == "demo")
-                {
-                    personVM.SubmitChanges("demo");
-                }
-                else
-                {
+                else if (personVM.UserID != "demo")
                     throw new Exception("Something went wrong...");
-                }
 
+                personVM.SubmitChanges(userID);
                 return RedirectToAction("Index");
             }
             return View(personVM);
         }
 
+        // Delete a person from the User's people list
         public ActionResult Delete(int id)
         {
-            using (var db = new KonneyContext())
+            var person = db.People.First(p => p.ID == id);
+
+            if (User.Identity.IsAuthenticated)
             {
-                var person = db.People.First(p => p.ID == id);
-
-                if (User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
-                    if (person.User.ID == userID)
-                    {
-                        db.People.Remove(person);
-
-                    }
-                    else
-                    {
-                        throw new AuthenticationException("You are not authorized to delete this person.");
-                    }
-                }
-                else if (person.User.ID == "demo")
-                {
-                    db.People.Remove(person);
-                    
-                }
-                else
-                {
-                    throw new Exception("Something went wrong...");
-                }
-
-                db.SaveChanges();
+                if (person.User.ID != User.Identity.GetUserId())
+                    throw new AuthenticationException("You are not authorized to delete this person.");
             }
+            else if (person.User.ID != "demo")
+                throw new Exception("Something went wrong...");
+
+            db.People.Remove(person);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

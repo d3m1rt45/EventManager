@@ -11,7 +11,10 @@ namespace KonneyTM.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Events");
+            else
+                return View();
         }
     }
 }
