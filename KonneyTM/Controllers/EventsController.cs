@@ -34,10 +34,10 @@ namespace KonneyTM.Controllers
             {
                 var userID = User.Identity.GetUserId();
                 Models.User.FindOrCreate(db, userID);
-                userVM.Fill(userID);
+                userVM.Fill(db, userID);
             }
             else
-                userVM.Fill("demo");
+                userVM.Fill(db, "demo");
 
             return View(userVM); 
         }
@@ -48,9 +48,9 @@ namespace KonneyTM.Controllers
             EventViewModel eventVM;
 
             if (User.Identity.IsAuthenticated)
-                eventVM = new EventViewModel(User.Identity.GetUserId());
+                eventVM = new EventViewModel(db, User.Identity.GetUserId());
             else
-                eventVM = new EventViewModel("demo");
+                eventVM = new EventViewModel(db, "demo");
 
             return View(eventVM);
         }
@@ -81,7 +81,7 @@ namespace KonneyTM.Controllers
             else if (subjectEvent.User.ID != "demo")
                 throw new Exception("Something went wrong...");
 
-            return View(EventViewModel.FromEvent(subjectEvent));
+            return View(EventViewModel.FromEvent(db, subjectEvent));
         }
 
         // Activate up a submit click on any of the edit modals.
@@ -145,7 +145,7 @@ namespace KonneyTM.Controllers
             else if(relatedEvent.User.ID != "demo")
                 throw new Exception("Something went wrong.");
 
-            return View(new ChangeVenueVM(userID) { EventID = eventID });
+            return View(new ChangeVenueVM(db, userID) { EventID = eventID });
         }
 
         // Makes the subjected event's venue the venue that was clicked
@@ -175,7 +175,7 @@ namespace KonneyTM.Controllers
             if (User.Identity.IsAuthenticated)
                 userID = User.Identity.GetUserId();
 
-            return View(Person.ReturnAddPersonVMIfIDsMatch(relatedEvent, User.Identity.GetUserId()));
+            return View(Person.ReturnAddPersonVMIfIDsMatch(db, relatedEvent, User.Identity.GetUserId()));
         }
 
         // Add the person who was clicked on the AddPerson view to the subject event
@@ -194,7 +194,7 @@ namespace KonneyTM.Controllers
             else if (person.User.ID != "demo" || person.User.ID != "demo")
                 throw new Exception("Something went wrong.");
 
-            var eventVM = EventViewModel.FromEvent(subjectEvent);
+            var eventVM = EventViewModel.FromEvent(db, subjectEvent);
             eventVM.InvitedPeopleIDs.Add(person.ID);
             eventVM.SubmitChanges();
             return RedirectToAction("Event", new { id = eventID });
@@ -204,7 +204,7 @@ namespace KonneyTM.Controllers
         public ActionResult RemovePerson(int eventID, int personID)
         {
             var relatedEvent = db.Events.First(e => e.ID == eventID);
-            var eventVM = EventViewModel.FromEvent(relatedEvent);
+            var eventVM = EventViewModel.FromEvent(db, relatedEvent);
 
             if (User.Identity.IsAuthenticated)
             {

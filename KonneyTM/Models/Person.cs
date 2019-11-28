@@ -31,14 +31,14 @@ namespace KonneyTM.Models
         public virtual User User { get; set; }
         public virtual ICollection<Event> Events { get; set; }
 
-        public static AddPersonVM ReturnAddPersonVMIfIDsMatch(Event relatedEvent, string userID)
+        public static AddPersonVM ReturnAddPersonVMIfIDsMatch(KonneyContext db, Event relatedEvent, string userID)
         {
             var addPerson = new AddPersonVM { EventID = relatedEvent.ID };
-            var eventVM = EventViewModel.FromEvent(relatedEvent);
+            var eventVM = EventViewModel.FromEvent(db, relatedEvent);
             List<PersonViewModel> allPeople;
 
             if (relatedEvent.User.ID == userID)
-                allPeople = PersonViewModel.GetAll(userID);
+                allPeople = PersonViewModel.GetAll(db, userID);
             else
                 throw new AuthenticationException("You are not authorized to add people to this event.");
 

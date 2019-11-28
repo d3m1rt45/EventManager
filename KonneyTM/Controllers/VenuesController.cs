@@ -28,9 +28,9 @@ namespace KonneyTM.Controllers
         public ActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
-                return View(VenueViewModel.GetAll(User.Identity.GetUserId()));
+                return View(VenueViewModel.GetAll(db, User.Identity.GetUserId()));
             else
-                return View(VenueViewModel.GetAll("demo"));
+                return View(VenueViewModel.GetAll(db, "demo"));
         }
 
         // Navigate to Create Venue page
@@ -50,7 +50,7 @@ namespace KonneyTM.Controllers
                     userID = User.Identity.GetUserId();
 
                 UploadImage(venueVM, userID);
-                venueVM.SaveToDB(userID);
+                venueVM.SaveToDB(db, userID);
 
                 return RedirectToAction("Index");
             }
@@ -90,7 +90,7 @@ namespace KonneyTM.Controllers
 
                 if (venueVM.ImageFile != null)
                     UploadImage(venueVM, userID);
-                venueVM.Update();
+                venueVM.Update(db);
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
@@ -113,7 +113,7 @@ namespace KonneyTM.Controllers
                 else if (venueVM.UserID != "demo")
                     throw new Exception("Something went wrong...");
 
-                venueVM.Delete();
+                venueVM.DeleteFrom(db);
                 return RedirectToAction("Index");
             }
         }

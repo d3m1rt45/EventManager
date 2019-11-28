@@ -13,15 +13,12 @@ namespace KonneyTM.ViewModels
         public List<VenueViewModel> Venues { get; set; }
         public List<EventViewModel> Events { get; set; }
 
-        public void Fill(string userID)
+        public void Fill(KonneyContext db, string userID)
         {
-            using (var db = new KonneyContext())
-            {
-                this.ID = userID;
-                this.Events = EventViewModel.GetAll(userID);
-                this.People = PersonViewModel.GetAll(userID);
-                this.Venues = VenueViewModel.GetAll(userID);
-            }
+            this.ID = userID;
+            this.Events = EventViewModel.GetAll(db, userID);
+            this.People = PersonViewModel.GetAll(db, userID);
+            this.Venues = VenueViewModel.GetAll(db, userID);
         }
     }
 }

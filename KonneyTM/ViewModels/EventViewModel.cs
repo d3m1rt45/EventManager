@@ -13,34 +13,28 @@ namespace KonneyTM.ViewModels
 {
     public class EventViewModel
     {
-        public EventViewModel()
+        public EventViewModel(KonneyContext db)
         {
-            using (var db = new KonneyContext())
-            {
-                this.VenueList = db.Venues.ToList();
-                this.PeopleList = new List<SelectListItem>();
-                this.PeopleAttending = new List<PersonViewModel>();
+            this.VenueList = db.Venues.ToList();
+            this.PeopleList = new List<SelectListItem>();
+            this.PeopleAttending = new List<PersonViewModel>();
 
-                foreach (var p in db.People)
-                {
-                    this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
-                }
+            foreach (var p in db.People)
+            {
+                this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
             }
         }
 
-        public EventViewModel(string userID)
+        public EventViewModel(KonneyContext db, string userID)
         {
-            using (var db = new KonneyContext())
-            {
-                this.UserID = userID;
-                this.VenueList = db.Venues.Where(v => v.User.ID == userID).ToList();
-                this.PeopleList = new List<SelectListItem>();
-                this.PeopleAttending = new List<PersonViewModel>();
+            this.UserID = userID;
+            this.VenueList = db.Venues.Where(v => v.User.ID == userID).ToList();
+            this.PeopleList = new List<SelectListItem>();
+            this.PeopleAttending = new List<PersonViewModel>();
 
-                foreach (var p in db.People.Where(p => p.User.ID == userID))
-                {
-                    this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
-                }
+            foreach (var p in db.People.Where(p => p.User.ID == userID))
+            {
+                this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
             }
         }
 
@@ -80,9 +74,9 @@ namespace KonneyTM.ViewModels
 
 
         //Converts an Event object to an EventViewModel object
-        public static EventViewModel FromEvent(Event ev)
+        public static EventViewModel FromEvent(KonneyContext db, Event ev)
         {
-            var eventVM = new EventViewModel(ev.User.ID)
+            var eventVM = new EventViewModel(db, ev.User.ID)
             {
                 ID = ev.ID,
                 UserID = ev.User.ID,
@@ -105,42 +99,37 @@ namespace KonneyTM.ViewModels
             var ids = new List<int>();
 
             foreach (var p in people)
-            {
                 ids.Add(p.ID);
-            }
 
             return ids;
         }
 
         //Returns all the Events in the Database as a List of EventViewModels ordered by date.
-        public static List<EventViewModel> GetAll(string userID)
+        public static List<EventViewModel> GetAll(KonneyContext db, string userID)
         {
-            using (var db = new KonneyContext())
-            { 
-                var events = db.Events.Where(x => x.User.ID == userID).ToList();
+            var events = db.Events.Where(x => x.User.ID == userID).ToList();
 
-                var eventsVM = new List<EventViewModel>();
-                foreach (var ev in events)
+            var eventsVM = new List<EventViewModel>();
+            foreach (var ev in events)
+            {
+                var eventVM = new EventViewModel(db, userID)
                 {
-                    var eventVM = new EventViewModel(userID)
-                    {
-                        ID = ev.ID,
-                        UserID = ev.User.ID,
-                        Title = ev.Title,
-                        Place = VenueViewModel.FromVenue(ev.Place),
-                        PlaceID = ev.Place.ID,
-                        Date = ev.Date,
-                        Time = ev.Time,
-                        PeopleAttending = PersonViewModel.FromPersonList(ev.PeopleAttending),
-                        InvitedPeopleIDs = GetIDsFromPersonList(ev.PeopleAttending),
-                        ImagePath = ev.ImagePath
-                    };
+                    ID = ev.ID,
+                    UserID = ev.User.ID,
+                    Title = ev.Title,
+                    Place = VenueViewModel.FromVenue(ev.Place),
+                    PlaceID = ev.Place.ID,
+                    Date = ev.Date,
+                    Time = ev.Time,
+                    PeopleAttending = PersonViewModel.FromPersonList(ev.PeopleAttending),
+                    InvitedPeopleIDs = GetIDsFromPersonList(ev.PeopleAttending),
+                    ImagePath = ev.ImagePath
+                };
 
-                    eventsVM.Add(eventVM);
-                }
+                eventsVM.Add(eventVM);
+            }
 
             return eventsVM.OrderBy(ev => ev.Date).ToList();
-            }
         }
 
         //Saves this EventViewModel object as an Event entity to the database.

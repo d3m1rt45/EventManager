@@ -54,80 +54,68 @@ namespace KonneyTM.ViewModels
             return venueVM;
         }
 
-        public static List<VenueViewModel> GetAll(string userID)
+        public static List<VenueViewModel> GetAll(KonneyContext db, string userID)
         {
-            using (var db = new KonneyContext())
+            var venues = db.Venues.Where(v => v.User.ID == userID);
+
+            var venuesVM = new List<VenueViewModel>();
+            foreach (var v in venues)
             {
-                var venues = db.Venues.Where(v => v.User.ID == userID);
-
-                var venuesVM = new List<VenueViewModel>();
-                foreach (var v in venues)
+                venuesVM.Add(new VenueViewModel
                 {
-                    venuesVM.Add(new VenueViewModel
-                    {
-                        ID = v.ID,
-                        UserID = v.User.ID,
-                        Name = v.Name,
-                        Address = v.Address,
-                        PostCode = v.PostCode,
-                        PhoneNumber = v.PhoneNumber,
-                        ImagePath = v.ImagePath
-                    });
-                }
-
-                return venuesVM.OrderBy(v => v.Name).ToList();
+                    ID = v.ID,
+                    UserID = v.User.ID,
+                    Name = v.Name,
+                    Address = v.Address,
+                    PostCode = v.PostCode,
+                    PhoneNumber = v.PhoneNumber,
+                    ImagePath = v.ImagePath
+                });
             }
+
+            return venuesVM.OrderBy(v => v.Name).ToList();
         }
 
         //Saves this VenueViewModel object to the database as a Venue entity
-        public void SaveToDB(string userID)
+        public void SaveToDB(KonneyContext db, string userID)
         {
-            using (var db = new KonneyContext())
-            {
-                var user = db.Users.Single(u => u.ID == userID);
-                var venue = new Venue{
-                    Name = this.Name,
-                    Address = this.Address,
-                    PostCode = this.PostCode,
-                    PhoneNumber = this.PhoneNumber,
-                    ImagePath = this.ImagePath
-                };
+            var user = db.Users.Single(u => u.ID == userID);
+            var venue = new Venue{
+                Name = this.Name,
+                Address = this.Address,
+                PostCode = this.PostCode,
+                PhoneNumber = this.PhoneNumber,
+                ImagePath = this.ImagePath
+            };
 
-                user.Venues.Add(venue);
-                db.SaveChanges();
-            }
+            user.Venues.Add(venue);
+            db.SaveChanges();
         }
 
         //Deletes a venue from the database and all events set in it
-        public void Delete()
+        public void DeleteFrom(KonneyContext db)
         {
-            using (var db = new KonneyContext())
-            {
-                var venue = db.Venues.FirstOrDefault(v => v.ID == this.ID);
-                var events = db.Events.Where(e => e.Place.ID == this.ID).ToList();
+            var venue = db.Venues.FirstOrDefault(v => v.ID == this.ID);
+            var events = db.Events.Where(e => e.Place.ID == this.ID).ToList();
 
-                events.ForEach(e => db.Events.Remove(e));
-                db.Venues.Remove(venue);
-                db.SaveChanges();
-            }
+            events.ForEach(e => db.Events.Remove(e));
+            db.Venues.Remove(venue);
+            db.SaveChanges();
         }
 
         //Updates the Venue entity in the database that corresponds to this VenueViewModel object
-        internal void Update()
+        internal void Update(KonneyContext db)
         {
-            using (var db = new KonneyContext())
-            {
-                var venue = db.Venues.First(p => p.ID == this.ID);
+            var venue = db.Venues.First(p => p.ID == this.ID);
 
-                venue.Name = this.Name;
-                venue.PhoneNumber = this.PhoneNumber;
-                venue.Address = this.Address;
-                venue.PostCode = this.PostCode;
-                if(this.ImagePath != null)
-                    venue.ImagePath = this.ImagePath;
+            venue.Name = this.Name;
+            venue.PhoneNumber = this.PhoneNumber;
+            venue.Address = this.Address;
+            venue.PostCode = this.PostCode;
+            if(this.ImagePath != null)
+                venue.ImagePath = this.ImagePath;
 
-                db.SaveChanges();
-            }
+            db.SaveChanges();
         }
 
     }

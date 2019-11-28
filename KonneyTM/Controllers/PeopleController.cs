@@ -26,9 +26,9 @@ namespace KonneyTM.Controllers
         public ActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
-                return View(PersonViewModel.GetAll(User.Identity.GetUserId()));
+                return View(PersonViewModel.GetAll(db, User.Identity.GetUserId()));
             else
-                return View(PersonViewModel.GetAll("demo"));
+                return View(PersonViewModel.GetAll(db, "demo"));
         }
 
         // Navigate to Create Person page
@@ -44,9 +44,9 @@ namespace KonneyTM.Controllers
             if (ModelState.IsValid)
             {
                 if(User.Identity.IsAuthenticated)
-                    personVM.SaveToDB(User.Identity.GetUserId());
+                    personVM.SaveToDB(db, User.Identity.GetUserId());
                 else
-                    personVM.SaveToDB("demo");
+                    personVM.SaveToDB(db, "demo");
 
                 return RedirectToAction("Index");
             }
@@ -86,7 +86,7 @@ namespace KonneyTM.Controllers
                 else if (personVM.UserID != "demo")
                     throw new Exception("Something went wrong...");
 
-                personVM.SubmitChanges(userID);
+                personVM.SubmitChanges(db, userID);
                 return RedirectToAction("Index");
             }
             return View(personVM);

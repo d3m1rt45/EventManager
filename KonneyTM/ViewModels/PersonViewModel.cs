@@ -36,27 +36,24 @@ namespace KonneyTM.ViewModels
 
 
         //Returns all the Persons in the Database as a List of PersonViewModel objects ordered by FirstName
-        public static List<PersonViewModel> GetAll(string userID)
+        public static List<PersonViewModel> GetAll(KonneyContext db, string userID)
         {
-            using (var db = new KonneyContext())
+            var people = db.People.Where(p => p.User.ID == userID).ToList();
+            var peopleVM = new List<PersonViewModel>();
+
+            foreach (var p in people)
             {
-                var people = db.People.Where(p => p.User.ID == userID).ToList();
-                var peopleVM = new List<PersonViewModel>();
-
-                foreach (var p in people)
+                peopleVM.Add(new PersonViewModel
                 {
-                    peopleVM.Add(new PersonViewModel
-                    {
-                        ID = p.ID,
-                        FirstName = p.FirstName,
-                        LastName = p.LastName,
-                        PhoneNumber = p.PhoneNumber,
-                        Email = p.Email
-                    });
-                }
-
-                return peopleVM.OrderBy(p => p.FirstName).ToList();
+                    ID = p.ID,
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    PhoneNumber = p.PhoneNumber,
+                    Email = p.Email
+                });
             }
+
+            return peopleVM.OrderBy(p => p.FirstName).ToList();
         }
 
         //Converts a Person object to a PersonViewModel object
@@ -96,43 +93,37 @@ namespace KonneyTM.ViewModels
         }
 
         //Saves this PersonViewModel object to the database as a Person entity
-        public void SaveToDB(string userID)
+        public void SaveToDB(KonneyContext db, string userID)
         {
-            using (var db = new KonneyContext())
+            var user = db.Users.Single(u => u.ID == userID);
+            user.People.Add(new Person
             {
-                var user = db.Users.Single(u => u.ID == userID);
-                user.People.Add(new Person
-                {
-                    FirstName = this.FirstName,
-                    LastName = this.LastName,
-                    PhoneNumber = this.PhoneNumber,
-                    Email = this.Email
-                });
+                FirstName = this.FirstName,
+                LastName = this.LastName,
+                PhoneNumber = this.PhoneNumber,
+                Email = this.Email
+            });
 
-                db.SaveChanges();
-            }
+            db.SaveChanges();
         }
 
         //Updates the Person entity in the database that corresponds to this PersonViewModel object
-        public void SubmitChanges(string userID)
+        public void SubmitChanges(KonneyContext db, string userID)
         {
-            using (var db = new KonneyContext())
-            {
-                var person = db.People.First(p => p.ID == this.ID);
+            var person = db.People.First(p => p.ID == this.ID);
 
-                if (userID == person.User.ID)
-                {
-                    person.FirstName = this.FirstName;
-                    person.LastName = this.LastName;
-                    person.Email = this.Email;
-                    person.PhoneNumber = this.PhoneNumber;
+            if (userID == person.User.ID)
+            {
+                person.FirstName = this.FirstName;
+                person.LastName = this.LastName;
+                person.Email = this.Email;
+                person.PhoneNumber = this.PhoneNumber;
                     
-                    db.SaveChanges();
-                }
-                else
-                {
-                    throw new AuthenticationException("You are not authorized to edit this person.");
-                }
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new AuthenticationException("You are not authorized to edit this person.");
             }
         }
     }

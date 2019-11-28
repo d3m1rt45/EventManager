@@ -8,11 +8,7 @@ namespace KonneyTM.ViewModels
 {
     public class AddPersonVM
     {
-        public AddPersonVM()
-        {
-            People = new List<PersonViewModel>();
-        }
-
+        public AddPersonVM() { People = new List<PersonViewModel>(); }
         public int EventID { get; set; }
         public List<PersonViewModel> People { get; set; }
     }
