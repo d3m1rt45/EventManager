@@ -31,6 +31,10 @@ namespace KonneyTM.Models
         public virtual User User { get; set; }
         public virtual ICollection<Event> Events { get; set; }
 
+
+        /*METHODS*/
+
+        // Return AddPersonViewModel based on the subject Event and User ID
         public static AddPersonVM ReturnAddPersonVMIfIDsMatch(KonneyContext db, Event relatedEvent, string userID)
         {
             var addPerson = new AddPersonVM { EventID = relatedEvent.ID };

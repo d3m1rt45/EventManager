@@ -19,7 +19,7 @@
                 <div class="VenueCard" style="background-image: url(/Images/Venues/@item.ImagePath)">
                     <div class="overlay text-center d-flex justify-content-center align-items-center">
                         <div class="Align">
-                            <a class="EditButton" href="@Url.Action("Edit", new { id = item.ID })">
+                            <a class="EditButton" href="@Url.Action("Edit", new { venueID = item.ID })">
                                 <i class="EditVenue fas fa-edit fa-2x"></i>
                             </a><!--/.EditButton-->
                             <a class="DeleteButton" data-toggle="modal" data-target="#ConfirmModal"

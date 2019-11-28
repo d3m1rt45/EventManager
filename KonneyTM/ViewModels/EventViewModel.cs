@@ -17,7 +17,10 @@ namespace KonneyTM.ViewModels
         {
             using(var db = new KonneyContext())
             {
-                VenueList = db.Venues.Where(v=>v.User.ID == UserID).ToList();
+                if (this.UserID == null)
+                    this.UserID = "demo";
+
+                VenueList = db.Venues.Where(v => v.User.ID == this.UserID).ToList();
                 PeopleList = new List<SelectListItem>();
                 PeopleAttending = new List<PersonViewModel>();
 

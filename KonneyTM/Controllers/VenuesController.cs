@@ -1,5 +1,6 @@
 ﻿using KonneyTM.DAL;
 using KonneyTM.ExtensionMethods;
+using KonneyTM.Models;
 using KonneyTM.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
@@ -28,9 +29,9 @@ namespace KonneyTM.Controllers
         public ActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
-                return View(VenueViewModel.GetAll(db, User.Identity.GetUserId()));
+                return View(Venue.GetAllAsViewModelList(db, User.Identity.GetUserId()));
             else
-                return View(VenueViewModel.GetAll(db, "demo"));
+                return View(Venue.GetAllAsViewModelList(db, "demo"));
         }
 
         // Navigate to Create Venue page
@@ -50,7 +51,7 @@ namespace KonneyTM.Controllers
                     userID = User.Identity.GetUserId();
 
                 UploadImage(venueVM, userID);
-                venueVM.SaveToDB(db, userID);
+                Venue.NewByViewModel(db, venueVM);
 
                 return RedirectToAction("Index");
             }
@@ -58,10 +59,9 @@ namespace KonneyTM.Controllers
         }
 
         // Navigate to Edit Venue page
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int venueID)
         {
-            var venue = db.Venues.First(e => e.ID == id);
-            var venueVM = VenueViewModel.FromVenue(venue);
+            var venueVM = db.Venues.Find(venueID).ToViewModel();
 
             if (User.Identity.IsAuthenticated && venueVM.UserID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to edit this event.");
@@ -90,7 +90,8 @@ namespace KonneyTM.Controllers
 
                 if (venueVM.ImageFile != null)
                     UploadImage(venueVM, userID);
-                venueVM.Update(db);
+
+                Venue.UpdateByViewModel(db, venueVM);
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
@@ -101,7 +102,7 @@ namespace KonneyTM.Controllers
         {
             using (var db = new KonneyContext())
             {
-                var venueVM = VenueViewModel.FromVenue(db.Venues.SingleOrDefault(v => v.ID == venueID));
+                var venueVM = db.Venues.Find(venueID).ToViewModel();
 
                 if (User.Identity.IsAuthenticated)
                 {
@@ -113,7 +114,7 @@ namespace KonneyTM.Controllers
                 else if (venueVM.UserID != "demo")
                     throw new Exception("Something went wrong...");
 
-                venueVM.DeleteFrom(db);
+                Venue.DeleteByViewModel(db, venueVM);
                 return RedirectToAction("Index");
             }
         }

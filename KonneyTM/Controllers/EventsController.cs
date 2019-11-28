@@ -65,6 +65,7 @@ namespace KonneyTM.Controllers
 
                 return RedirectToAction("Index");
             }
+
             return View(eventVM);
         }
 

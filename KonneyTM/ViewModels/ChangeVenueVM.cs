@@ -1,4 +1,5 @@
 ﻿using KonneyTM.DAL;
+using KonneyTM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace KonneyTM.ViewModels
 {
     public class ChangeVenueVM
     {
-        public ChangeVenueVM(KonneyContext db, string userID) { Venues = VenueViewModel.GetAll(db, userID); }
+        public ChangeVenueVM(KonneyContext db, string userID) { Venues = Venue.GetAllAsViewModelList(db, userID); }
         public int EventID { get; set; }
         public List<VenueViewModel> Venues { get; set; }
     }
