@@ -34,7 +34,7 @@ namespace KonneyTM.Models
         public static AddPersonVM ReturnAddPersonVMIfIDsMatch(KonneyContext db, Event relatedEvent, string userID)
         {
             var addPerson = new AddPersonVM { EventID = relatedEvent.ID };
-            var eventVM = EventViewModel.FromEvent(db, relatedEvent);
+            var eventVM = relatedEvent.ToEventViewModel(db);
             List<PersonViewModel> allPeople;
 
             if (relatedEvent.User.ID == userID)
@@ -49,6 +49,18 @@ namespace KonneyTM.Models
             }
 
             return addPerson;
+        }
+
+
+        //Creates a list of int based on the ID properties of a List of Person
+        public static List<int> GetIDsFromPersonList(ICollection<Person> people)
+        {
+            var ids = new List<int>();
+
+            foreach (var p in people)
+                ids.Add(p.ID);
+
+            return ids;
         }
     }
 }

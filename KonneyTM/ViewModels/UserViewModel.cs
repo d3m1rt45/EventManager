@@ -1,4 +1,5 @@
 ﻿using KonneyTM.DAL;
+using KonneyTM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace KonneyTM.ViewModels
         public void Fill(KonneyContext db, string userID)
         {
             this.ID = userID;
-            this.Events = EventViewModel.GetAll(db, userID);
+            this.Events = Event.GetAllAsViewModelList(db, userID);
             this.People = PersonViewModel.GetAll(db, userID);
             this.Venues = VenueViewModel.GetAll(db, userID);
         }

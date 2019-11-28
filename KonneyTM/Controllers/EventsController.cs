@@ -61,7 +61,7 @@ namespace KonneyTM.Controllers
             if (ModelState.IsValid)
             {
                 UploadImage(eventVM, eventVM.UserID);
-                eventVM.SaveToDB(eventVM.UserID);
+                Models.Event.SaveByViewModel(db, eventVM);
 
                 return RedirectToAction("Index");
             }
@@ -81,7 +81,7 @@ namespace KonneyTM.Controllers
             else if (subjectEvent.User.ID != "demo")
                 throw new Exception("Something went wrong...");
 
-            return View(EventViewModel.FromEvent(db, subjectEvent));
+            return View(subjectEvent.ToEventViewModel(db));
         }
 
         // Activate up a submit click on any of the edit modals.
@@ -106,7 +106,7 @@ namespace KonneyTM.Controllers
                 if (eventVM.ImageFile != null)
                     UploadImage(eventVM, userID);
 
-                eventVM.SubmitChanges();
+                Models.Event.SubmitChangesByViewModel(db, eventVM);
             }
 
             return RedirectToAction("Event", new { id = eventVM.ID });
@@ -194,28 +194,28 @@ namespace KonneyTM.Controllers
             else if (person.User.ID != "demo" || person.User.ID != "demo")
                 throw new Exception("Something went wrong.");
 
-            var eventVM = EventViewModel.FromEvent(db, subjectEvent);
+            var eventVM = subjectEvent.ToEventViewModel(db);
             eventVM.InvitedPeopleIDs.Add(person.ID);
-            eventVM.SubmitChanges();
+            Models.Event.SubmitChangesByViewModel(db, eventVM);
             return RedirectToAction("Event", new { id = eventID });
         }
 
         // Remove a person from the event
         public ActionResult RemovePerson(int eventID, int personID)
         {
-            var relatedEvent = db.Events.First(e => e.ID == eventID);
-            var eventVM = EventViewModel.FromEvent(db, relatedEvent);
+            var subjectEvent = db.Events.First(e => e.ID == eventID);
+            var eventVM = subjectEvent.ToEventViewModel(db);
 
             if (User.Identity.IsAuthenticated)
             {
-                if (relatedEvent.User.ID != User.Identity.GetUserId())
+                if (subjectEvent.User.ID != User.Identity.GetUserId())
                     throw new AuthenticationException("You are not authorized to remove people from this event.");
             }
-            else if (relatedEvent.User.ID != "demo")
+            else if (subjectEvent.User.ID != "demo")
                 throw new Exception("Something went wrong...");
 
             eventVM.InvitedPeopleIDs.RemoveAll(i => i == personID);
-            eventVM.SubmitChanges();
+            Models.Event.SubmitChangesByViewModel(db, eventVM);
             return RedirectToAction("Event", new { id = eventID });
         }
 
