@@ -219,7 +219,7 @@ namespace KonneyTM.Controllers
             return RedirectToAction("Event", new { id = eventID });
         }
 
-        // Uploading an image for an event.
+        // Uploading image for event.
         public void UploadImage(EventViewModel eventVM, string userID)
         {
             string extension = Path.GetExtension(eventVM.ImageFile.FileName);
