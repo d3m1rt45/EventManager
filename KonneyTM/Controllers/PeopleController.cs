@@ -1,4 +1,5 @@
 ﻿using KonneyTM.DAL;
+using KonneyTM.Models;
 using KonneyTM.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
@@ -26,9 +27,9 @@ namespace KonneyTM.Controllers
         public ActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
-                return View(PersonViewModel.GetAll(db, User.Identity.GetUserId()));
+                return View(Person.GetAllAsViewModelList(db, User.Identity.GetUserId()));
             else
-                return View(PersonViewModel.GetAll(db, "demo"));
+                return View(Person.GetAllAsViewModelList(db, "demo"));
         }
 
         // Navigate to Create Person page
@@ -43,11 +44,10 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(User.Identity.IsAuthenticated)
-                    personVM.SaveToDB(db, User.Identity.GetUserId());
-                else
-                    personVM.SaveToDB(db, "demo");
+                if (!User.Identity.IsAuthenticated)
+                    personVM.UserID = "demo";
 
+                Person.NewByViewModel(db, personVM);
                 return RedirectToAction("Index");
             }
             return View(personVM);
@@ -56,17 +56,17 @@ namespace KonneyTM.Controllers
         // Navigate to Edit Person page
         public ActionResult Edit(int personID)
         {
-            var personVM = PersonViewModel.FromPerson(db.People.First(p => p.ID == personID));
+            var person = db.People.Find(personID);
 
             if (User.Identity.IsAuthenticated)
             {
-                if (personVM.UserID != User.Identity.GetUserId())
+                if (person.User.ID != User.Identity.GetUserId())
                     throw new AuthenticationException("You are not authorized to edit this person.");
             }
-            else if(personVM.UserID != "demo")
+            else if(person.User.ID != "demo")
                 throw new Exception("Something went wrong...");
 
-            return View(personVM);
+            return View(person.ToViewModel());
         }
 
         // Submit changes for Person
@@ -75,27 +75,21 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                string userID = "demo";
+                if (User.Identity.IsAuthenticated && personVM.UserID != User.Identity.GetUserId())
+                    throw new UnauthorizedAccessException("You are not authorized to edit this Person.");
+                else if(!User.Identity.IsAuthenticated)
+                    personVM.UserID = "demo";
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    userID = User.Identity.GetUserId();
-                    if (personVM.UserID != userID)
-                        throw new AuthenticationException("You are not authorized to edit this person.");
-                }
-                else if (personVM.UserID != "demo")
-                    throw new Exception("Something went wrong...");
-
-                personVM.SubmitChanges(db, userID);
+                Person.UpdateByViewModel(db, personVM);
                 return RedirectToAction("Index");
             }
             return View(personVM);
         }
 
         // Delete a person from the User's people list
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int personID)
         {
-            var person = db.People.First(p => p.ID == id);
+            var person = db.People.Find(personID);
 
             if (User.Identity.IsAuthenticated)
             {

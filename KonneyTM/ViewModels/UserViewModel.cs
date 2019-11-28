@@ -18,7 +18,7 @@ namespace KonneyTM.ViewModels
         {
             this.ID = userID;
             this.Events = Event.GetAllAsViewModelList(db, userID);
-            this.People = PersonViewModel.GetAll(db, userID);
+            this.People = Person.GetAllAsViewModelList(db, userID);
             this.Venues = VenueViewModel.GetAll(db, userID);
         }
     }

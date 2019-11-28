@@ -61,7 +61,7 @@ namespace KonneyTM.Controllers
             if (ModelState.IsValid)
             {
                 UploadImage(eventVM, eventVM.UserID);
-                Models.Event.SaveByViewModel(db, eventVM);
+                Models.Event.NewByViewModel(db, eventVM);
 
                 return RedirectToAction("Index");
             }
@@ -175,7 +175,8 @@ namespace KonneyTM.Controllers
             if (User.Identity.IsAuthenticated)
                 userID = User.Identity.GetUserId();
 
-            return View(Person.ReturnAddPersonVMIfIDsMatch(db, relatedEvent, User.Identity.GetUserId()));
+            var addPersonVM = Person.ReturnAddPersonVMIfIDsMatch(db, relatedEvent, userID);
+            return View(addPersonVM);
         }
 
         // Add the person who was clicked on the AddPerson view to the subject event

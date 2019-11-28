@@ -47,7 +47,7 @@ namespace KonneyTM.Models
                 PlaceID = this.Place.ID,
                 Date = this.Date,
                 Time = this.Time,
-                PeopleAttending = PersonViewModel.FromPersonList(this.PeopleAttending),
+                PeopleAttending = Person.ToViewModelList(this.PeopleAttending),
                 InvitedPeopleIDs = Person.GetIDsFromPersonList(this.PeopleAttending),
                 ImagePath = this.ImagePath
             };
@@ -72,7 +72,7 @@ namespace KonneyTM.Models
                     PlaceID = ev.Place.ID,
                     Date = ev.Date,
                     Time = ev.Time,
-                    PeopleAttending = PersonViewModel.FromPersonList(ev.PeopleAttending),
+                    PeopleAttending = Person.ToViewModelList(ev.PeopleAttending),
                     InvitedPeopleIDs = Person.GetIDsFromPersonList(ev.PeopleAttending),
                     ImagePath = ev.ImagePath
                 };
@@ -84,7 +84,7 @@ namespace KonneyTM.Models
         }
 
         // Saves a new Event to the database based on an EventViewModel object
-        public static void SaveByViewModel(KonneyContext db, EventViewModel eventVM)
+        public static void NewByViewModel(KonneyContext db, EventViewModel eventVM)
         {
             var newEvent = new Event
             {
