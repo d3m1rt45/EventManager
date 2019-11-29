@@ -20,6 +20,10 @@ section {
     color: #0F410D;
 }
 
+input#Title {
+    text-align: center !important;
+}
+
 .EventCard {
     height: 16rem;
     background-size: cover;

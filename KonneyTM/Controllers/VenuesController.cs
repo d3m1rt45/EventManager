@@ -15,8 +15,14 @@ namespace KonneyTM.Controllers
 {
     // <summary>
     // This class deals with all functionality in the application that has to
-    // do with venues. I have used a similar method of checking whether an item in
+    // do with Venues. I have used a similar method of checking whether an item in
     // question belongs to the user trying to make the change, all throughout the app.
+    // Because of this duplication I have later optimized to make the code as concise
+    // as possible. The result was something a little harder to understand.
+    // You'll find that they're all structured the same way though:
+    //
+    // IF user is logged in AND if the userID doesn't match the entity's User ID, THROW an exception.
+    // ELSE IF the entity's user ID is not "demo" THROW an exception.
     // </summary>
 
     [HandleError]
@@ -42,7 +48,6 @@ namespace KonneyTM.Controllers
             if (User.Identity.IsAuthenticated)
                 userID = User.Identity.GetUserId();
 
-
             return View(new VenueViewModel { UserID = userID });
         }
 
@@ -52,13 +57,12 @@ namespace KonneyTM.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userID = "demo";
                 if (User.Identity.IsAuthenticated)
-                    userID = User.Identity.GetUserId();
+                    UploadImage(venueVM, User.Identity.GetUserId());
+                else
+                    UploadImage(venueVM, "demo");
 
-                UploadImage(venueVM, userID);
                 Venue.NewByViewModel(db, venueVM);
-
                 return RedirectToAction("Index");
             }
             return View(venueVM);
@@ -110,13 +114,8 @@ namespace KonneyTM.Controllers
             {
                 var venueVM = db.Venues.Find(venueID).ToViewModel();
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    var userID = User.Identity.GetUserId();
-
-                    if (venueVM.UserID != userID)
-                        throw new AuthenticationException("You are not authorized to delete this event.");   
-                }
+                if (User.Identity.IsAuthenticated && venueVM.UserID != User.Identity.GetUserId())
+                    throw new AuthenticationException("You are not authorized to delete this event.");
                 else if (venueVM.UserID != "demo")
                     throw new Exception("Something went wrong...");
 

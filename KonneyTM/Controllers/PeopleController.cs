@@ -13,8 +13,14 @@ namespace KonneyTM.Controllers
 {
     // <summary>
     // This class deals with all functionality in the application that has to
-    // do with people. I have used a similar method of checking whether an item in
+    // do with People. I have used a similar method of checking whether an item in
     // question belongs to the user trying to make the change, all throughout the app.
+    // Because of this duplication I have later optimized to make the code as concise
+    // as possible. The result was something a little harder to understand.
+    // You'll find that they're all structured the same way though:
+    //
+    // IF user is logged in AND if the userID doesn't match the entity's User ID, THROW an exception.
+    // ELSE IF the entity's user ID is not "demo" THROW an exception.
     // </summary>
 
     [HandleError]
@@ -35,12 +41,10 @@ namespace KonneyTM.Controllers
         // Navigate to Create Person page
         public ActionResult Create()
         {
-            string userID = "demo";
-
             if (User.Identity.IsAuthenticated)
-                userID = User.Identity.GetUserId();
-
-            return View(new PersonViewModel { UserID = userID });
+                return View(new PersonViewModel { UserID = User.Identity.GetUserId() });
+            else
+                return View(new PersonViewModel { UserID = "demo" });
         }
 
         // Submit the new Person to the user's people table
@@ -57,6 +61,7 @@ namespace KonneyTM.Controllers
                 Person.NewByViewModel(db, personVM);
                 return RedirectToAction("Index");
             }
+            
             return View(personVM);
         }
 
@@ -65,14 +70,11 @@ namespace KonneyTM.Controllers
         {
             var person = db.People.Find(personID);
 
-            if (User.Identity.IsAuthenticated)
-            {
-                if (person.User.ID != User.Identity.GetUserId())
-                    throw new AuthenticationException("You are not authorized to edit this person.");
-            }
+            if (User.Identity.IsAuthenticated && person.User.ID != User.Identity.GetUserId())
+                throw new AuthenticationException("You are not authorized to edit this person.");
             else if(person.User.ID != "demo")
                 throw new Exception("Something went wrong...");
-
+            
             return View(person.ToViewModel());
         }
 
@@ -98,11 +100,8 @@ namespace KonneyTM.Controllers
         {
             var person = db.People.Find(personID);
 
-            if (User.Identity.IsAuthenticated)
-            {
-                if (person.User.ID != User.Identity.GetUserId())
-                    throw new AuthenticationException("You are not authorized to delete this person.");
-            }
+            if (User.Identity.IsAuthenticated && person.User.ID != User.Identity.GetUserId())
+                throw new AuthenticationException("You are not authorized to delete this person.");
             else if (person.User.ID != "demo")
                 throw new Exception("Something went wrong...");
 

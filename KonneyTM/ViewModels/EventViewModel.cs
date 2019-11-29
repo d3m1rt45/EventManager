@@ -15,23 +15,22 @@ namespace KonneyTM.ViewModels
     {
         public EventViewModel()
         {
-            using(var db = new KonneyContext())
-            {
-                if (this.UserID == null)
-                    this.UserID = "demo";
+            if (this.UserID == null)
+                this.UserID = "demo";
 
+            PeopleList = new List<SelectListItem>();
+            PeopleAttending = new List<PersonViewModel>();
+            
+            using (var db = new KonneyContext())
+            {
                 VenueList = db.Venues.Where(v => v.User.ID == this.UserID).ToList();
-                PeopleList = new List<SelectListItem>();
-                PeopleAttending = new List<PersonViewModel>();
 
                 foreach (var p in db.People.Where(x => x.User.ID == this.UserID ))
-                {
                     this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
-                }
             }
         }
 
-        public EventViewModel(KonneyContext db, string userID)
+        public EventViewModel(KonneyContext db, string userID = "demo")
         {
             this.UserID = userID;
             this.VenueList = db.Venues.Where(v => v.User.ID == userID).ToList();
@@ -39,9 +38,7 @@ namespace KonneyTM.ViewModels
             this.PeopleAttending = new List<PersonViewModel>();
 
             foreach (var p in db.People.Where(p => p.User.ID == userID))
-            {
                 this.PeopleList.Add(new SelectListItem { Text = $"{p.FirstName} {p.LastName}", Value = p.ID.ToString() });
-            }
         }
 
         public int ID { get; set; }

@@ -38,7 +38,7 @@ namespace KonneyTM.Models
         //Converts this Event object to an EventViewModel object
         public EventViewModel ToEventViewModel(KonneyContext db)
         {
-            var eventVM = new EventViewModel(db, this.User.ID)
+            var eventVM = new EventViewModel(db, User.ID)
             {
                 ID = this.ID,
                 UserID = this.User.ID,
