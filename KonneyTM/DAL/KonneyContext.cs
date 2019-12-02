@@ -11,6 +11,7 @@ namespace KonneyTM.DAL
     {
         public KonneyContext() : base("name=KonneyContext")
         {
+            Database.SetInitializer(new KonneyInitializer());
         }
 
         public DbSet<Person> People { get; set; }
