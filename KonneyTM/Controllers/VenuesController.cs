@@ -114,6 +114,9 @@ namespace KonneyTM.Controllers
             {
                 var venueVM = db.Venues.Find(venueID).ToViewModel();
 
+                if (venueVM.UserID == "demo")
+                    return RedirectToAction("Index");
+
                 if (User.Identity.IsAuthenticated && venueVM.UserID != User.Identity.GetUserId())
                     throw new AuthenticationException("You are not authorized to delete this event.");
                 else if (venueVM.UserID != "demo")

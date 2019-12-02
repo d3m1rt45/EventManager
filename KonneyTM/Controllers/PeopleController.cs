@@ -100,6 +100,9 @@ namespace KonneyTM.Controllers
         {
             var person = db.People.Find(personID);
 
+            if (person.User.ID == "demo")
+                return RedirectToAction("Index");
+
             if (User.Identity.IsAuthenticated && person.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to delete this person.");
             else if (person.User.ID != "demo")

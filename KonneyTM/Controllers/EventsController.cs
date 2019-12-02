@@ -117,6 +117,9 @@ namespace KonneyTM.Controllers
         public ActionResult Delete(int id)
         {
             var ev = db.Events.First(e => e.ID == id);
+            
+            if(ev.User.ID == "demo")
+                return RedirectToAction("Index");
 
             if (User.Identity.IsAuthenticated && ev.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to delete this event.");
@@ -191,6 +194,10 @@ namespace KonneyTM.Controllers
         public ActionResult RemovePerson(int eventID, int personID)
         {
             var subjectEvent = db.Events.First(e => e.ID == eventID);
+
+            if (subjectEvent.User.ID == "demo")
+                return RedirectToAction("Index");
+
             var eventVM = subjectEvent.ToEventViewModel(db);
 
             if (User.Identity.IsAuthenticated && subjectEvent.User.ID != User.Identity.GetUserId())
