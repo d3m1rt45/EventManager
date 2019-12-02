@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KonneyTM.DAL
 {
-    public class KonneyInitializer : System.Data.Entity.CreateDatabaseIfNotExists<KonneyContext>
+    public class KonneyInitializer : System.Data.Entity.DropCreateDatabaseAlways<KonneyContext>
     {
         protected override void Seed(KonneyContext context)
         {
