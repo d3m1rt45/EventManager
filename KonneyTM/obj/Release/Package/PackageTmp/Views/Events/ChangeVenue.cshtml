@@ -1,0 +1,35 @@
+﻿@model KonneyTM.ViewModels.ChangeVenueVM
+
+@{
+    ViewBag.Title = "Select New Venue for Event";
+}
+
+@Styles.Render("~/PanelStyles")
+
+<section class="Events-ChangeVenue">
+
+    <div class="Header">
+        <h2>Select Venue</h2>
+    </div><!--/.Header-->
+
+    <article class="VenueRow row">
+        @foreach (var item in Model.Venues)
+        {
+            <div class="VenueCol col-md-4">
+                <a href="@Url.Action("SubmitVenueChange", new { eventID = Model.EventID, venueID = item.ID })">
+                    <div class="VenueCard" id="@item.ID" style="background-image: url(/Images/Venues/@item.ImagePath)">
+                        <div class="overlay text-center d-flex justify-content-center align-items-center">
+                            <div class="Align">
+                                <h4 class="VenueName d-block">@item.Name</h4>
+                                <h5 class="VenuePhone lead d-block">@item.PhoneNumber</h5>
+                                <h5 class="VenueAddress lead d-block">@item.Address</h5>
+                                <h5 class="VenuePostCode lead d-block">@item.PostCode</h5>
+                            </div>
+                        </div><!--/.Align-->
+                    </div><!--/.VenueCard-->
+                </a>
+            </div><!--/.VenueCol-->
+        }
+    </article><!--/.VenueRow-->
+
+</section>

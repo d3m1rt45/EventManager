@@ -1,0 +1,44 @@
+﻿@model KonneyTM.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+@Styles.Render("~/AccountStyles")
+
+<section class="Register">
+    
+    <div class="Container">
+
+        <h2>Register</h2>
+
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Create a new <u class="Logo">Konney</u><span class="tm">™</span> account</h4>
+            <hr />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+            <div class="Last form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <div class="ButtonOut ml-auto">
+                    <input type="submit" class="ButtonIn" value="Done!" />
+                </div>
+            </div>
+        }
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</section>

@@ -1,0 +1,40 @@
+﻿
+
+@using Microsoft.AspNet.Identity
+
+
+<nav class="NavbarOuter navbar navbar-expand-lg navbar-light">
+    <a class="Brand navbar-brand d-flex" href="@Url.Action("Index", "Home")">
+        <h1 class="d-inline"><u>Konney</u></h1>
+    </a><!--/.Brand-->
+    <button class="NavbarToggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button><!--/.NavbarToggler-->
+    <div class="NavbarInner collapse navbar-collapse" id="navbarNav">
+        <ul class="ml-auto navbar-nav">
+            @if (Request.IsAuthenticated || Request.Path.Contains("Events") || Request.Path.Contains("People") || Request.Path.Contains("Venues"))
+            {
+                <li class="Events nav-item">
+                    @Html.ActionLink("Events", "Index", "Events", null, new { @class = "nav-link text-light" })
+                </li>
+                <li class="Venues nav-item">
+                    @Html.ActionLink("Venues", "Index", "Venues", null, new { @class = "nav-link text-light" })
+                </li>
+                <li class="People nav-item">
+                    @Html.ActionLink("People", "Index", "People", null, new { @class = "nav-link text-light" })
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    @Html.ActionLink("Demo", "Index", "Events", null, new { @class = "nav-link text-light" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link text-light" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-light" })
+                </li>
+            }
+    </div><!--/.NavbarInner-->
+</nav><!--/.NavbarOuter-->

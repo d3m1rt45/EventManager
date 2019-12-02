@@ -1,0 +1,32 @@
+﻿@model KonneyTM.ViewModels.AddPersonVM
+
+@{
+    ViewBag.Title = "Add a New Person to Event";
+}
+
+@Styles.Render("~/PanelStyles")
+
+<section class="Events-AddPerson">
+
+    <div class="Header">
+        <h2>Select Person</h2>
+    </div><!--/.Header-->
+
+    <article class="PeopleRow row">
+        @foreach (var item in Model.People)
+        {
+            <div class="PersonCol col-2">
+                <a href="@Url.Action("SubmitPerson", new { eventID = Model.EventID, personID = item.ID })">
+                    <div class="PersonCard text-center pt-4">
+                        <h4 class="PersonName d-block">@item.FirstName</h4>
+                        <h4 class="PersonName d-block">@item.LastName</h4>
+                        <h5 class="PersonEmail lead d-block">@item.Email</h5>
+                        <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
+                    </div><!--/.PersonCard-->
+                </a>
+            </div><!--/.PersonCol-->
+
+        }
+    </article><!--/.PeopleRow-->
+
+</section>

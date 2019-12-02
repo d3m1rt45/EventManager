@@ -1,0 +1,422 @@
+﻿/* EVENTS */
+section {
+    padding-right: 1rem;
+}
+
+.Header {
+    width: 100%;
+    background: rgb(15,65,13);
+    background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(238,251,238,1) 100%);
+    margin: -1rem 0 2rem 1rem;
+}
+
+.Header h2 {
+    margin-left: 0.3rem;
+    color: #EEFBEE;
+}
+
+.Danger {
+    font-weight: 700;
+    color: #0F410D;
+}
+
+input#Title {
+    text-align: center !important;
+}
+
+.EventCard {
+    height: 16rem;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+}
+
+.EventCard h3, .EventDetailsCard h3 {
+    color: #EEFBEE;
+    margin-bottom: 2rem;
+}
+
+.EventCard h4, .EventDetailsCard h4 {
+    color: #EEFBEE;
+    display: inline;
+    margin-right: 1rem;
+}
+
+.nav-item {
+    font-family: 'Overlock SC', sans-serif;
+    margin: 0 0.5rem 0 0.5rem;
+    border: #00EBC3 0.2rem solid;
+    width: 10rem;
+    height: 2.7rem;
+    text-align: center;
+    font-size: 19pt;
+    background-color: #0F410D;
+    border-bottom-right-radius: 3rem;
+    border-top-left-radius: 3rem;
+    box-shadow: black 0.1rem 0.3rem 0.4rem;
+}
+
+span {
+    color: #EEFBEE;
+    font-family: Overlock, sans-serif;
+    font-size: 15pt;
+}
+
+.InnerRow {
+    height: 100%;
+}
+
+.Info {
+    margin-bottom: 1rem;
+}
+
+.NewEventColumn, .NewPersonColumn, .NewVenueColumn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 1em;
+}
+
+.EventDetails {
+    color: #00fffb;
+}
+
+.NewEvent {
+    margin-top: 0.5rem;
+    height: 9rem;
+    width: 9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background: rgb(15,65,13);
+    background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(12,53,11,1) 64%, rgba(0,0,0,1) 100%);
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+    transition-duration: 0.5s;
+}
+
+.NewEventLink, .NewPersonLink, .NewVenueLink {
+    text-decoration: none !important;
+}
+
+.NewEvent i, .NewPerson i, .NewVenue i {
+    color: #EEFBEE;
+}
+
+.EventDetailsTitle {
+    font-weight: 900;
+}
+
+.EventDetailsCard {
+    height: 12rem;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+}
+
+
+.EventVenueCard {
+    background-position: center !important;
+    background-size: cover !important;
+    height: 12rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+    transition-duration: 1s;
+}
+
+.Edit {
+    color: #00fffb;
+    cursor: pointer;
+}
+
+.ChangeImage {
+    position: absolute;
+    color: #00fffb;
+    right: 1em;
+    top: 2em;
+    cursor: pointer;
+}
+
+.ChangeVenue {
+    position: absolute;
+    color: #00fffb;
+    right: 1.07em;
+    top: 2em;
+    cursor: pointer;
+}
+
+.RemovePerson {
+    z-index: 2 !important;
+    position: absolute;
+    color: #00fffb;
+    right: 1.1em;
+    top: 0.5em;
+    cursor: pointer;
+}
+
+.DeleteEvent .DeleteButton {
+    margin: 1rem 0.5rem 3rem 0.5rem;
+    border: #00EBC3 0.2rem solid;
+    width: 14rem;
+    height: 3rem;
+    text-align: center;
+    background-color: #0F410D;
+    border-top-right-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    box-shadow: black 0.1rem 0.3rem 0.4rem;
+    align-items: center;
+    padding-top: 0.2rem;
+}
+.DeleteEvent a {
+    font-family: 'Overlock SC', sans-serif;
+    font-size: 19pt;
+    color: #EEFBEE;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+    .DeleteEvent a:hover {
+        color: #CED9CE;
+        text-decoration: none;
+    }
+
+.ButtonOut {
+    margin: 0 0.5rem 0 0.5rem;
+    border: #00EBC3 0.2rem solid;
+    width: 10rem;
+    height: 2.7rem;
+    text-align: center;
+    background-color: #0F410D;
+    border-bottom-right-radius: 3rem;
+    border-top-left-radius: 3rem;
+    box-shadow: black 0.1rem 0.3rem 0.4rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+.form-control {
+    font-family: Overlock, sans-serif;
+    font-size: 14pt;
+    font-weight: 700;
+}
+
+.ButtonIn {
+    font-family: 'Overlock SC', sans-serif;
+    font-size: 19pt;
+    color: #EEFBEE;
+    padding: 0;
+    background: none;
+    border: none;
+}
+    .ButtonIn:hover {
+        color: #CED9CE; 
+        text-decoration: none;
+    }
+
+th {
+    font-family: 'Overlock SC', sans-serif;
+    font-size: 16pt;
+}
+
+.PeopleRow {
+    padding-left: 1rem;
+    padding-right: 0.8rem;
+}
+
+.PersonCol {
+    margin-bottom: 1rem;
+}
+
+.PersonCard {
+    height: 12rem;
+    border-radius: 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    background: rgb(15,65,13);
+    margin-bottom: 3rem;
+    border: #00EBC3 0.2rem solid;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+}
+
+    .PersonCard h4 {
+        font-size: 18pt;
+    }
+    
+    .PersonCard h5 {
+        font-size: 12pt;
+        font-family: Overlock important!important;
+    }
+
+.PersonName {
+    color: #EEFBEE;
+}
+
+.PersonPhone {
+    color: #EEFBEE;
+}
+
+.PersonEmail {
+    color: #EEFBEE;
+    font-size: 12pt;
+}
+
+.InnerRow{
+    z-index: 1 !important;
+}
+
+.EditPerson {
+    position: absolute;
+    color: #00fffb;
+    right: 0.8em;
+    top: 0.4em;
+}
+
+.DeletePerson {
+    z-index: 2 !important;
+    position: absolute;
+    color: #ff2200;
+    right: 1.07em;
+    bottom: 2em;
+    cursor: pointer;
+}
+
+.NewPerson {
+    height: 7em;
+    width: 7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background: rgb(15,65,13);
+    background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(12,53,11,1) 64%, rgba(0,0,0,1) 100%);
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+    transition-duration: 0.5s;
+}
+
+.VenueRow {
+    padding-left: 1rem;
+    padding-right: 0.8rem;
+}
+
+.VenueCol {
+    margin-bottom: 1rem;
+}
+
+.VenueCard {
+    background-position: center !important;
+    background-size: cover !important;
+    height: 15rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+    transition-duration: 1s;
+}
+.overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    border-radius: 1rem;
+}
+
+.VenueName, .VenuePhone, .VenueAddress, .VenuePostCode {
+    color: #EEFBEE;
+}
+
+.ChangeVenueImage {
+    position: absolute;
+    color: #00fffb;
+    left: 1.2em;
+    top: 0.7em;
+    cursor: pointer;
+}
+
+.EditVenue {
+    position: absolute;
+    color: #00fffb;
+    right: 1.2em;
+    top: 0.7em;
+}
+
+.DeleteVenue {
+    position: absolute;
+    color: #ff2200;
+    right: 1.5em;
+    bottom: 2.3em;
+    cursor: pointer;
+}
+
+.Edit {
+    font-size: 14pt;
+}
+
+.NewVenue {
+    height: 8em;
+    width: 8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background: rgb(15,65,13);
+    background: linear-gradient(90deg, rgba(15,65,13,1) 0%, rgba(12,53,11,1) 64%, rgba(0,0,0,1) 100%);
+    box-shadow: black 0.1rem 0.5rem 0.4rem;
+    border: #00EBC3 0.2rem solid;
+    transition-duration: 0.5s;
+}
+
+div.col-3 {
+    font-family: Overlock, sans-serif;
+    font-size: 16pt;
+}
+
+.checkbox label {
+    font-family: Overlock, sans-serif;
+    font-size: 16pt;
+}
+
+@media only screen and (max-width:900px){
+
+    .EventCard span {
+        font-size: 12pt;
+    }
+
+    .EventCard h4, .EventDetailsCard h4, .VenueCard h4 {
+        font-size: 14pt !important;
+        margin-right: 0.4rem;
+    }
+
+    .PersonCard {
+        height: 12rem;
+        padding: 1rem 1rem 1rem 1rem;
+        margin-bottom: 3rem;
+    }
+    
+    .PersonCard h4 {
+        font-size: 12pt !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .nav-item {
+        margin: 0.5rem auto 0.5rem auto;
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-item {
+        width: 60%;
+    }
+}

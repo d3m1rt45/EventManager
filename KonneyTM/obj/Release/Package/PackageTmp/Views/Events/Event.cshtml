@@ -1,0 +1,123 @@
+﻿@model KonneyTM.ViewModels.EventViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
+@Styles.Render("~/PanelStyles")
+
+    <section class="Events-Event">
+
+        <div class="Header">
+            <h2>Event Details</h2>
+        </div><!--/.Header-->
+
+        <div class="container-fluid">
+            <div class="row text-center">
+
+                <article class="Event col-12 col-xl-6">
+                    <h2>Event</h2>
+                    <div class="EventDetailsCard" style="background-image:url(/Images/Events/@Model.ImagePath)">
+                        <div class="overlay text-center d-flex justify-content-center align-items-center">
+                            <div class="Align w-100">
+                                <h4 class="Title mr-0">
+                                    <a data-target="#EditTitleModal" data-toggle="modal"><i class="Edit fas fa-edit mr-1"></i></a><!--/.EditTitle-->
+                                    @Model.Title
+                                </h4><!--/.Title-->
+                                <br/>
+                                <br/>
+                                <h4 class="DateLabel mr-2">
+                                    <a data-target="#EditDateModal" data-toggle="modal"><i class="Edit fas fa-edit mr-1"></i></a><!--/.EditDate-->
+                                    Date:
+                                </h4><!--/.DateLabel-->
+                                <span class="DateValue">@Model.Date.ToLongDateString()</span><!--/.DateValue-->
+                                <br/>
+                                <br/>
+                                <h4 class="TimeLabel mr-2">
+                                    <a data-target="#EditTimeModal" data-toggle="modal"><i class="Edit fas fa-edit mr-1"></i></a><!--/.EditTime-->
+                                    Time:
+                                </h4><!--/.TimeLabel-->
+                                <span class="TimeValue">@Model.Time.ToShortTimeString()</span><!--/.TimeValue-->
+                            </div><!--/.Align-->
+                        </div><!--/.overlay-->
+                        <a class="ChangeImageButton" data-toggle="modal" data-target="#ChangeImageModal">
+                            <i class="ChangeImage fas fa-file-image mr-1 fa-2x"></i>
+                        </a><!--/.EditTitleButton-->
+                    </div><!--/.EventCard-->
+                </article><!--/.Event-->
+
+                <article class="Venue col-12 col-xl-6">
+                    <h2>Venue</h2>
+                    <div class="EventVenueCard" style="background-image: url(/Images/Venues/@Model.Place.ImagePath)">
+                        <div class="overlay text-center d-flex justify-content-center align-items-center">
+                            <div class="Align">
+                                <h4 class="VenueName d-block">@Model.Place.Name</h4>
+                                <h5 class="VenuePhone lead d-block">@Model.Place.PhoneNumber</h5>
+                                <h5 class="VenueAddress lead d-block">@Model.Place.Address</h5>
+                                <h5 class="VenuePostCode lead d-block">@Model.Place.PostCode</h5>
+                                <a class="ChangeVenueButton" data-toggle="modal" data-target="#ConfirmModal"
+                                   onclick="$('#ConfirmModal .modal-body').html('Change venue for this event?');
+                                            $('#ConfirmModal .modal-title').html('Venue Change');
+                                            $('#ConfirmModal .Confirm').attr('href', '@Url.Action("ChangeVenue", new { eventID = Model.ID })')">
+                                    <i class="ChangeVenue fas fa-exchange-alt fa-2x"></i>
+                                </a><!--/.ChangeVenueButton-->
+                            </div>
+                        </div><!--/.Align-->
+                    </div><!--/.VenueCard-->
+                </article><!--/.Venue-->
+                
+                <h2 class="PeopleAttending mb-3 mt-3 col-xl-12">People Attending</h2>
+                @foreach (var item in Model.PeopleAttending)
+                {
+                    <div class="PersonCol col-6 col-md-4 col-xl-3">
+                        <div class="PersonCard text-center pt-4 d-flex justify-content-center align-items-center">
+                            <div class="Align">
+                                <h4 class="PersonName d-block">@item.FirstName</h4>
+                                <h4 class="PersonName d-block">@item.LastName</h4>
+                                @if (item.Email.Length > 15)
+                                {
+                                    <h5 class="PersonEmail lead d-lg-none">@item.Email.Substring(0, 15)...</h5>
+                                    <h5 class="PersonEmail lead d-none d-lg-block">@item.Email</h5>
+                                }
+                                else
+                                {
+                                    <h5 class="PersonEmail lead d-md-block">@item.Email</h5>
+                                }
+                                <h5 class="PersonPhone lead d-block">@item.PhoneNumber</h5>
+                            </div>
+                            <a class="RemoveButton" data-toggle="modal" data-target="#ConfirmModal"
+                                onclick="$('#ConfirmModal .modal-body').html('@item.FirstName @item.LastName will be removed from this event.');
+                                        $('#ConfirmModal .modal-title').html('Remove Person');
+                                        $('#ConfirmModal .Confirm').attr('href', '@Url.Action("RemovePerson", new { eventID = Model.ID, personID = item.ID })')">
+                                <i class="RemovePerson fas fa-times text-danger fa-2x"></i>
+                            </a><!--/.DeleteButton-->
+                        </div><!--/.PersonCard-->
+                    </div><!--/.PersonCol-->
+                }
+                @if (Model.PeopleAttending == null || Model.PeopleAttending.Count < Model.PeopleList.Count)
+                {
+                    <div class="NewPersonColumn col-6 col-md-4 col-xl-3 pt-3">
+                        <a class="NewPersonLink" href="@Url.Action("AddPerson", new { eventID = Model.ID })">
+                            <div class="NewPerson">
+                                <i class="fas fa-plus fa-4x"></i>
+                            </div><!--/.NewPerson-->
+                        </a><!--/.NewPersonLink-->
+                    </div><!--/.NewPersonColumn-->
+                }
+
+            <article class="DeleteEvent w-100 col-12 d-flex justify-content-center">
+                <div class="DeleteButton">
+                    <a class="DeleteButtonIn btn btn-default text-light" data-toggle="modal" data-target="#ConfirmModal"
+                       onclick="$('#ConfirmModal .modal-body').html('This event will be deleted and all people in its list will be discarded.');
+                                $('#ConfirmModal .modal-title').html('Delete Event');
+                                $('#ConfirmModal .Confirm').attr('href', '@Url.Action("Delete", "Events", new { id = Model.ID })')">
+                        Delete Event
+                    </a>
+                </div>
+            </article><!--/.DeleteEvent-->
+
+            </div><!--/.row-->
+        </div><!--/.container-->
+
+        @Html.Partial("_EditModalsPartial")
+        @Html.Partial("_ConfirmModalPartial")
+
+    </section>
