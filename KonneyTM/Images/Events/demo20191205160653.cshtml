@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Seneca Online Bookstore</title>
+    @Styles.Render("~/Content/external-libraries")
+    @Styles.Render("~/Content/project-specific")
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700,900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Images/favicon-16x16.png">
+</head>
+<body>
+
+    <nav class="Navigation navbar navbar-expand-lg navbar-light fixed-top container">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home", null)"><h1 class="mb-0">Seneca Bookstore</h1></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item pt-2 px-1">
+                    <a class="nav-link" href="@Url.Action("Index", "Home", null)"><h4>Home</h4><span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item pt-2 px-1">
+                    <a class="nav-link" href="@Url.Action("Index", "Books", null)"><h4>Books</h4></a>
+                </li>
+                <li class="nav-item pt-2 px-1">
+                    <a class="nav-link" href="@Url.Action("Index", "Genres", null)"><h4>Genres</h4></a>
+                </li>
+                <li class="nav-item pt-2 px-1">
+                    <a class="nav-link" href="@Url.Action("Index", "Authors", null)"><h4>Authors</h4></a>
+                </li>
+            </ul>
+            
+        </div>
+    </nav>
+
+    <section class="Render container body-content">
+        @RenderBody()
+    </section><!--/.Render-->
+
+    <section class="Footer container">
+        <article class="row">
+            <div class="Left col-6 text-left">
+                <h4 class="font-weight-bold mb-1">DISCLAIMER</h4>
+                <h5 class="text-danger mt-0 pt-0 font-weight-bold">
+                    <p class="mb-1">This is a Demo App designed for a software development portfolio.</p>
+                </h5>
+            </div>
+            <div class="Right col-6 text-right">
+                <h4 class="font-weight-bold mb-1">LINKS</h4>
+                <a href="#" class="h5 mb-4 font-weight-bold">Code for this Demo</a> <br />
+                <a href="#" class="h5 font-weight-bold">Portfolio Landing Page</a> <br />
+            </div>
+        </article>
+        
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script class="SortByScript">
+        function SortBy() {
+            window.location.href = document.getElementById("UrlList").value;
+        }
+    </script><!--/.SortByScript-->
+    <script class="NavigationScript">
+        $(document).ready(function () {
+            var url = window.location;
+            $('ul a[href="' + url + '"]').parent().addClass('active')
+            $('ul a').filter(function () {
+                return this.href == url;
+            }).parent().addClass('active');
+        })
+    </script><!---->
+</body>
+</html>

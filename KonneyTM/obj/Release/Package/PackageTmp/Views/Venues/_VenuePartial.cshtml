@@ -1,0 +1,46 @@
+﻿@model KonneyTM.ViewModels.VenueViewModel
+
+@if (Model.ID > 3)
+{
+    <div class="VenueCol col-md-4">
+        <div class="VenueCard" style="background-image: url(/Images/Venues/@Model.ImagePath)">
+            <div class="overlay text-center d-flex justify-content-center align-items-center">
+                <div class="Align">
+                    <a class="EditButton" href="@Url.Action("Edit", new { venueID = Model.ID })">
+                        <i class="EditVenue fas fa-edit fa-2x"></i>
+                    </a><!--/.EditButton-->
+                    <a class="DeleteButton" data-toggle="modal" data-target="#ConfirmModal"
+                       onclick="$('#ConfirmModal .modal-body').html('@Model.Name and all events scheduled here will be deleted. Are you sure?');
+                                                    $('#ConfirmModal .Confirm').attr('href', '@Url.Action("Delete", new { venueID = Model.ID })')">
+                        <i class="DeleteVenue fas fa-trash-alt fa-2x"></i>
+                    </a><!--/.DeleteButton-->
+                    <h4 class="VenueName d-block">@Model.Name</h4>
+                    <h5 class="VenuePhone lead d-block">@Model.PhoneNumber</h5>
+                    <h5 class="VenueAddress lead d-block">@Model.Address</h5>
+                    <h5 class="VenuePostCode lead d-block">@Model.PostCode</h5>
+                </div>
+            </div><!--/.Align-->
+        </div><!--/.VenueCard-->
+    </div><!--/.VenueCol-->
+}
+else
+{
+    <div class="VenueCol col-md-4">
+        <div class="VenueCard" style="background-image: url(/Images/Venues/@Model.ImagePath)">
+            <div class="overlay text-center d-flex justify-content-center align-items-center">
+                <div class="Align">
+                    <a class="EditButton" data-toggle="modal" href="#RestrictModal">
+                        <i class="EditVenue fas fa-edit fa-2x"></i>
+                    </a><!--/.EditButton-->
+                    <a class="DeleteButton" data-toggle="modal" data-target="#RestrictModal">
+                        <i class="DeleteVenue fas fa-trash-alt fa-2x"></i>
+                    </a><!--/.DeleteButton-->
+                    <h4 class="VenueName d-block">@Model.Name</h4>
+                    <h5 class="VenuePhone lead d-block">@Model.PhoneNumber</h5>
+                    <h5 class="VenueAddress lead d-block">@Model.Address</h5>
+                    <h5 class="VenuePostCode lead d-block">@Model.PostCode</h5>
+                </div>
+            </div><!--/.Align-->
+        </div><!--/.VenueCard-->
+    </div><!--/.VenueCol-->
+}

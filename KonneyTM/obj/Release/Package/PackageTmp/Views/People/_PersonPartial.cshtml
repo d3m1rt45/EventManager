@@ -1,0 +1,59 @@
+﻿@model KonneyTM.ViewModels.PersonViewModel
+
+
+@if (Model.ID > 8)
+{
+    <div class="PersonCol col-6 col-md-4 col-xl-3">
+        <div class="PersonCard text-center pt-4 d-flex align-items-center justify-content-center pb-4">
+            <a class="EditButton" href="@Url.Action("Edit", new { personID = Model.ID})">
+                <i class="EditPerson fas fa-edit fa-2x"></i>
+            </a><!--/.EditButton-->
+            <a class="DeleteButton" data-toggle="modal" data-target="#ConfirmModal"
+               onclick="$('#ConfirmModal .modal-body').html('@Model.FirstName @Model.LastName will be deleted from your people list.');
+                                                    $('#ConfirmModal .Confirm').attr('href', '@Url.Action("Delete", new { personID = Model.ID })')">
+                <i class="DeletePerson fas fa-trash-alt fa-2x"></i>
+            </a><!--/.DeleteButton-->
+            <div class="Align">
+                <h4 class="PersonName d-block">@Model.FirstName</h4>
+                <h4 class="PersonName d-block">@Model.LastName</h4>
+                @if (Model.Email.Length > 15)
+                {
+                    <h5 class="PersonEmail lead d-lg-none">@Model.Email.Substring(0, 15)...</h5>
+                    <h5 class="PersonEmail lead d-none d-lg-block">@Model.Email</h5>
+                }
+                else
+                {
+                    <h5 class="PersonEmail lead d-md-block">@Model.Email</h5>
+                }
+                <h5 class="PersonPhone lead d-block">@Model.PhoneNumber</h5>
+            </div>
+        </div><!--/.PersonCard-->
+    </div><!--/.PersonCol-->
+}
+else
+{
+    <div class="PersonCol col-6 col-md-4 col-xl-3">
+        <div class="PersonCard text-center pt-4 d-flex align-items-center justify-content-center pb-4">
+            <a class="EditButton" href="#RestrictModal" data-toggle="modal">
+                <i class="EditPerson fas fa-edit fa-2x"></i>
+            </a><!--/.EditButton-->
+            <a class="DeleteButton" href="#RestrictModal" data-toggle="modal">
+                <i class="DeletePerson fas fa-trash-alt fa-2x"></i>
+            </a><!--/.DeleteButton-->
+            <div class="Align">
+                <h4 class="PersonName d-block">@Model.FirstName</h4>
+                <h4 class="PersonName d-block">@Model.LastName</h4>
+                @if (Model.Email.Length > 15)
+                {
+                    <h5 class="PersonEmail lead d-lg-none">@Model.Email.Substring(0, 15)...</h5>
+                    <h5 class="PersonEmail lead d-none d-lg-block">@Model.Email</h5>
+                }
+                else
+                {
+                    <h5 class="PersonEmail lead d-md-block">@Model.Email</h5>
+                }
+                <h5 class="PersonPhone lead d-block">@Model.PhoneNumber</h5>
+            </div>
+        </div><!--/.PersonCard-->
+    </div><!--/.PersonCol-->
+}

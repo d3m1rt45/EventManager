@@ -10,250 +10,250 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/KonneyTM.dll">
-      <publishTime>12/02/2019 17:00:29</publishTime>
+      <publishTime>12/05/2019 16:09:02</publishTime>
     </File>
     <File Include="bin/KonneyTM.pdb">
-      <publishTime>12/02/2019 17:00:29</publishTime>
+      <publishTime>12/05/2019 16:09:02</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Facebook.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Google.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.MicrosoftAccount.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe.config">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/csc.rsp">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe.config">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/csi.rsp">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Console.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Compression.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Pipes.AccessControl.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Pipes.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.AccessControl.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Claims.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Principal.Windows.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.ValueTuple.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XPath.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe.config">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.rsp">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Content/AccountStyles.css">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Content/Bootstrap/bootstrap.min.css">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Content/Fontawesome/all.min.css">
       <publishTime>11/11/2019 19:10:15</publishTime>
     </File>
     <File Include="Content/HomeStyles.css">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Content/PanelStyles.css">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Content/SharedStyles.css">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Content/webfonts/fa-brands-400.eot">
       <publishTime>11/11/2019 19:10:15</publishTime>
@@ -301,31 +301,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2019 19:10:15</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>12/02/2019 16:26:42</publishTime>
+      <publishTime>12/02/2019 19:26:30</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Images/Events/noreasonforthisparty.jpg">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Images/Events/whatlawnow.jpg">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
+    </File>
+    <File Include="Images/favicon-16x16.png">
+      <publishTime>12/05/2019 12:36:53</publishTime>
+    </File>
+    <File Include="Images/favicon-32x32.png">
+      <publishTime>12/05/2019 12:36:53</publishTime>
     </File>
     <File Include="Images/Venues/0207452000SE19PX.jpg">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Images/Venues/02077067700W1G9DT.jpg">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Images/Venues/02078360291WC2N4HS.jpg">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Images/Welcome.jpg">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.min.js">
       <publishTime>10/22/2019 16:03:14</publishTime>
@@ -334,145 +340,154 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/22/2019 16:03:18</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/ExternalLoginConfirmation.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/ExternalLoginFailure.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/ForgotPassword.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/ForgotPasswordConfirmation.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/ResetPassword.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/ResetPasswordConfirmation.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:28</publishTime>
     </File>
     <File Include="Views/Account/SendCode.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Account/VerifyCode.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Account/_ExternalLoginsListPartial.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Demo/AddPerson.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 14:37:10</publishTime>
     </File>
     <File Include="Views/Demo/ChangeVenue.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 14:37:10</publishTime>
     </File>
     <File Include="Views/Demo/CreateEvent.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 14:37:10</publishTime>
     </File>
     <File Include="Views/Demo/CreatePerson.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 14:37:10</publishTime>
     </File>
     <File Include="Views/Demo/Event.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 14:37:10</publishTime>
     </File>
     <File Include="Views/Demo/Index.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 14:37:10</publishTime>
     </File>
     <File Include="Views/Events/AddPerson.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Events/ChangeVenue.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Events/Create.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Events/Event.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 15:38:18</publishTime>
     </File>
     <File Include="Views/Events/Index.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
+    </File>
+    <File Include="Views/Events/_EventPartial.cshtml">
+      <publishTime>12/05/2019 15:38:18</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Manage/ChangePassword.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Manage/Index.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Manage/ManageLogins.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Manage/SetPassword.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Manage/VerifyPhoneNumber.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/People/Create.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/People/Edit.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/People/Index.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 15:38:18</publishTime>
+    </File>
+    <File Include="Views/People/_PersonPartial.cshtml">
+      <publishTime>12/05/2019 15:38:18</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Shared/_ConfirmModalPartial.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 15:38:18</publishTime>
     </File>
     <File Include="Views/Shared/_EditModalsPartial.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Shared/_FooterPartial.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 12:35:19</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/02/2019 16:32:55</publishTime>
+      <publishTime>12/05/2019 12:36:53</publishTime>
     </File>
     <File Include="Views/Shared/_NavbarPartial.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Venues/Create.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Venues/Edit.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Views/Venues/Index.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/05/2019 15:38:18</publishTime>
+    </File>
+    <File Include="Views/Venues/_VenuePartial.cshtml">
+      <publishTime>12/05/2019 15:38:18</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/03/2019 15:46:45</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>12/02/2019 16:26:41</publishTime>
+      <publishTime>12/02/2019 19:26:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/02/2019 17:00:18</publishTime>
+      <publishTime>12/05/2019 16:09:03</publishTime>
     </File>
   </ItemGroup>
 </Project>

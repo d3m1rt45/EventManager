@@ -108,7 +108,7 @@ namespace KonneyTM.Controllers
                 Venue.UpdateByViewModel(db, venueVM);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(venueVM);
         }
 
         // Delete venue from the User's Venues list
