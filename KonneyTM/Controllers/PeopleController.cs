@@ -72,8 +72,10 @@ namespace KonneyTM.Controllers
 
             if (User.Identity.IsAuthenticated && person.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to edit this person.");
-            else if(person.User.ID != "demo")
+            else if (person.User.ID != "demo")
                 throw new Exception("Something went wrong...");
+            else if (personID <= 8)
+                return RedirectToAction("Index");
             
             return View(person.ToViewModel());
         }
@@ -88,6 +90,8 @@ namespace KonneyTM.Controllers
                     throw new UnauthorizedAccessException("You are not authorized to edit this Person.");
                 else if(!User.Identity.IsAuthenticated)
                     personVM.UserID = "demo";
+                else if (personVM.ID <= 8)
+                    return RedirectToAction("Index");
 
                 Person.UpdateByViewModel(db, personVM);
                 return RedirectToAction("Index");
@@ -100,13 +104,12 @@ namespace KonneyTM.Controllers
         {
             var person = db.People.Find(personID);
 
-            if (person.User.ID == "demo")
-                return RedirectToAction("Index");
-
             if (User.Identity.IsAuthenticated && person.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to delete this person.");
             else if (person.User.ID != "demo")
                 throw new Exception("Something went wrong...");
+            else if (person.ID <= 8)
+                return RedirectToAction("Index");
 
             db.People.Remove(person);
             db.SaveChanges();
