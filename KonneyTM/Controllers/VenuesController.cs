@@ -77,6 +77,8 @@ namespace KonneyTM.Controllers
                 throw new AuthenticationException("You are not authorized to edit this event.");
             else if (venueVM.UserID != "demo")
                 throw new Exception("Something went wrong...");
+            if (venueVM.ID <= 3)
+                return RedirectToAction("Index");
 
             return View(venueVM);
         }
@@ -97,6 +99,8 @@ namespace KonneyTM.Controllers
                 }
                 else if (venueVM.UserID != "demo")
                     throw new Exception("Something went wrong...");
+                if (venueVM.ID <= 3)
+                    return RedirectToAction("Index");
 
                 if (venueVM.ImageFile != null)
                     UploadImage(venueVM, userID);
@@ -114,13 +118,12 @@ namespace KonneyTM.Controllers
             {
                 var venueVM = db.Venues.Find(venueID).ToViewModel();
 
-                if (venueVM.UserID == "demo")
-                    return RedirectToAction("Index");
-
                 if (User.Identity.IsAuthenticated && venueVM.UserID != User.Identity.GetUserId())
                     throw new AuthenticationException("You are not authorized to delete this event.");
                 else if (venueVM.UserID != "demo")
                     throw new Exception("Something went wrong...");
+                if (venueVM.ID <= 3)
+                    return RedirectToAction("Index");
 
                 Venue.DeleteByViewModel(db, venueVM);
                 return RedirectToAction("Index");

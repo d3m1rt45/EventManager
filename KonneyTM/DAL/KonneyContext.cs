@@ -23,5 +23,7 @@ namespace KonneyTM.DAL
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<KonneyTM.ViewModels.PersonViewModel> PersonViewModels { get; set; }
     }
 }
