@@ -118,7 +118,7 @@ namespace KonneyTM.Controllers
         {
             var ev = db.Events.First(e => e.ID == id);
             
-            if(ev.User.ID == "demo")
+            if(ev.ID <= 2)
                 return RedirectToAction("Index");
 
             if (User.Identity.IsAuthenticated && ev.User.ID != User.Identity.GetUserId())
@@ -136,8 +136,11 @@ namespace KonneyTM.Controllers
         {
             var relatedEvent = db.Events.Single(e => e.ID == eventID);
             string userID = "demo";
-                
-            if(User.Identity.IsAuthenticated && relatedEvent.User.ID != User.Identity.GetUserId())
+
+            if (relatedEvent.ID <= 2)
+                return RedirectToAction("Index");
+
+            if (User.Identity.IsAuthenticated && relatedEvent.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to change the venue of this event.");
             else if(relatedEvent.User.ID != "demo")
                 throw new Exception("Something went wrong.");
@@ -149,6 +152,9 @@ namespace KonneyTM.Controllers
         public ActionResult SubmitVenueChange(int eventID, int venueID)
         {
             var subjectEvent = db.Events.First(e => e.ID == eventID);
+
+            if (subjectEvent.ID <= 2)
+                return RedirectToAction("Index");
 
             if (User.Identity.IsAuthenticated && User.Identity.GetUserId() != subjectEvent.User.ID)
                 throw new AuthenticationException("You are not authorized to change the venue of this event.");
@@ -163,13 +169,16 @@ namespace KonneyTM.Controllers
         // Return list of venues for the user to choose which one to add to the Event
         public ActionResult AddPerson(int eventID)
         {
-            var relatedEvent = db.Events.First(e => e.ID == eventID);
+            var subjectEvent = db.Events.First(e => e.ID == eventID);
             string userID = "demo";
+
+            if (subjectEvent.ID <= 2)
+                return RedirectToAction("Index");
 
             if (User.Identity.IsAuthenticated)
                 userID = User.Identity.GetUserId();
 
-            var addPersonVM = Person.ReturnAddPersonVMIfIDsMatch(db, relatedEvent, userID);
+            var addPersonVM = Person.ReturnAddPersonVMIfIDsMatch(db, subjectEvent, userID);
             return View(addPersonVM);
         }
 
@@ -178,6 +187,9 @@ namespace KonneyTM.Controllers
         {
             var subjectEvent = db.Events.First(e => e.ID == eventID);
             var person = db.People.First(p => p.ID == personID);
+
+            if (subjectEvent.ID <= 2)
+                return RedirectToAction("Index");
 
             if (User.Identity.IsAuthenticated && (subjectEvent.User.ID != User.Identity.GetUserId() || subjectEvent.User.ID != User.Identity.GetUserId()))
                     throw new AuthenticationException("You are not authorized to add people to this event.");
@@ -195,7 +207,7 @@ namespace KonneyTM.Controllers
         {
             var subjectEvent = db.Events.First(e => e.ID == eventID);
 
-            if (subjectEvent.User.ID == "demo")
+            if (subjectEvent.ID <= 2)
                 return RedirectToAction("Index");
 
             var eventVM = subjectEvent.ToEventViewModel(db);
