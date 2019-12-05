@@ -71,7 +71,7 @@ namespace KonneyTM.Controllers
                 if (User.Identity.IsAuthenticated)
                     eventVM = new EventViewModel(db, User.Identity.GetUserId());
                 else
-                    eventVM = new EventViewModel(db);
+                    eventVM = new EventViewModel(db, Request.UserHostAddress);
 
                 return View(eventVM);
             }
@@ -84,7 +84,7 @@ namespace KonneyTM.Controllers
             
             if (User.Identity.IsAuthenticated && subjectEvent.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to edit this event.");
-            else if (subjectEvent.User.ID != "demo")
+            else if (subjectEvent.User.ID != Request.UserHostAddress && subjectEvent.User.ID != "demo")
                 throw new Exception("Something went wrong...");
 
             return View(subjectEvent.ToEventViewModel(db));
@@ -97,10 +97,15 @@ namespace KonneyTM.Controllers
             if (ModelState.IsValid)
             {
                 var subjectEvent = db.Events.Single(e => e.ID == eventVM.ID);
-                string userID = "demo";
+                string userID = Request.UserHostAddress;
 
-                if (User.Identity.IsAuthenticated && subjectEvent.User.ID != User.Identity.GetUserId())
-                    throw new AuthenticationException("You are not authorized to edit this event.");
+                if(User.Identity.IsAuthenticated)
+                {
+                    userID = User.Identity.GetUserId();
+                    if(subjectEvent.User.ID != userID)
+                        throw new AuthenticationException("You are not authorized to edit this event.");
+                }
+                    
                 else if (subjectEvent.User.ID != userID)
                     throw new Exception("Something went wrong...");    
 
@@ -118,12 +123,9 @@ namespace KonneyTM.Controllers
         {
             var ev = db.Events.First(e => e.ID == id);
             
-            if(ev.User.ID == "demo")
-                return RedirectToAction("Index");
-
             if (User.Identity.IsAuthenticated && ev.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to delete this event.");
-            else if (ev.User.ID != "demo")
+            else if (ev.User.ID != "demo" && ev.User.ID != Request.UserHostAddress)
                 throw new Exception("Something went wrong...");
 
             db.Events.Remove(ev);
@@ -134,12 +136,12 @@ namespace KonneyTM.Controllers
         // Return list of venues for the user to choose which one to set as the new venue
         public ActionResult ChangeVenue(int eventID)
         {
-            var relatedEvent = db.Events.Single(e => e.ID == eventID);
-            string userID = "demo";
+            var subjectEvent = db.Events.Single(e => e.ID == eventID);
+            string userID = Request.UserHostAddress;
                 
-            if(User.Identity.IsAuthenticated && relatedEvent.User.ID != User.Identity.GetUserId())
+            if(User.Identity.IsAuthenticated && subjectEvent.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to change the venue of this event.");
-            else if(relatedEvent.User.ID != "demo")
+            else if(subjectEvent.User.ID != userID && subjectEvent.User.ID != "demo")
                 throw new Exception("Something went wrong.");
 
             return View(new ChangeVenueVM(db, userID) { EventID = eventID });
@@ -152,7 +154,7 @@ namespace KonneyTM.Controllers
 
             if (User.Identity.IsAuthenticated && User.Identity.GetUserId() != subjectEvent.User.ID)
                 throw new AuthenticationException("You are not authorized to change the venue of this event.");
-            else if (subjectEvent.User.ID != "demo")
+            else if (subjectEvent.User.ID != Request.UserHostAddress && subjectEvent.User.ID != "demo")
                 throw new Exception("Something went wrong...");
 
             subjectEvent.Place = db.Venues.First(v => v.ID == venueID);
@@ -164,10 +166,12 @@ namespace KonneyTM.Controllers
         public ActionResult AddPerson(int eventID)
         {
             var relatedEvent = db.Events.First(e => e.ID == eventID);
-            string userID = "demo";
+            string userID;
 
             if (User.Identity.IsAuthenticated)
                 userID = User.Identity.GetUserId();
+            else
+                userID = Request.UserHostAddress;
 
             var addPersonVM = Person.ReturnAddPersonVMIfIDsMatch(db, relatedEvent, userID);
             return View(addPersonVM);
@@ -179,10 +183,13 @@ namespace KonneyTM.Controllers
             var subjectEvent = db.Events.First(e => e.ID == eventID);
             var person = db.People.First(p => p.ID == personID);
 
-            if (User.Identity.IsAuthenticated && (subjectEvent.User.ID != User.Identity.GetUserId() || subjectEvent.User.ID != User.Identity.GetUserId()))
-                    throw new AuthenticationException("You are not authorized to add people to this event.");
-            else if (person.User.ID != "demo" || person.User.ID != "demo")
-                throw new Exception("Something went wrong.");
+
+            if (User.Identity.IsAuthenticated && person.User.ID != User.Identity.GetUserId())
+                throw new AuthenticationException("You are not authorized to add people to this event.");
+            else if (person.User.ID != Request.UserHostAddress)
+                throw new Exception("You are not authorized to add this person to an event.");
+            else if (subjectEvent.User.ID != person.User.ID)
+                    throw new Exception("Two entities' users do not match.");
 
             var eventVM = subjectEvent.ToEventViewModel(db);
             eventVM.InvitedPeopleIDs.Add(person.ID);
@@ -195,14 +202,11 @@ namespace KonneyTM.Controllers
         {
             var subjectEvent = db.Events.First(e => e.ID == eventID);
 
-            if (subjectEvent.User.ID == "demo")
-                return RedirectToAction("Index");
-
             var eventVM = subjectEvent.ToEventViewModel(db);
 
             if (User.Identity.IsAuthenticated && subjectEvent.User.ID != User.Identity.GetUserId())
                 throw new AuthenticationException("You are not authorized to remove people from this event.");
-            else if (subjectEvent.User.ID != "demo")
+            else if (subjectEvent.User.ID != Request.UserHostAddress)
                 throw new Exception("Something went wrong...");
 
             eventVM.InvitedPeopleIDs.RemoveAll(i => i == personID);

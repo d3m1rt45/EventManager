@@ -266,12 +266,6 @@
     <Content Include="Views\Events\AddPerson.cshtml" />
     <Content Include="Views\Shared\_EditModalsPartial.cshtml" />
     <Content Include="Views\Shared\_ConfirmModalPartial.cshtml" />
-    <Content Include="Views\Demo\AddPerson.cshtml" />
-    <Content Include="Views\Demo\ChangeVenue.cshtml" />
-    <Content Include="Views\Demo\CreateEvent.cshtml" />
-    <Content Include="Views\Demo\Event.cshtml" />
-    <Content Include="Views\Demo\Index.cshtml" />
-    <Content Include="Views\Demo\CreatePerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
